@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.4.1.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .wrapper {
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(13, 38, 71);
+        }
+        .wrapper .top{
+            height: 10vh;
+        }
+        .wrapper .middle{
+            height: 10vh;
+        }
+        .wrapper .middle .middle-content{
+            width: 88vw;
+            margin-left: 10vw;
+            color: white;
+        }
+
+        .wrapper .bottom{
+            clear: both;
+        }
+        
+
+        .wrapper .bottom .bottom-left{
+            height: 80vh;
+            float: left;
+            margin:0 10px;
+        }
+        .wrapper .bottom .bottom-left .card{
+            width: 110px;
+            height: 51px;
+            border: 1px solid red;
+            margin-bottom: 10px;
+            color: white;
+            text-align: center;
+            padding-top:20px;
+        }
+        .wrapper .bottom table{
+
+            margin:0 auto;
+            width:70vw;
+            border:solid #add9c0; 
+            border-width:1px 0px 0px 1px;
+            color: white;
+        }
+        .wrapper .bottom table td{
+            border:solid #add9c0; 
+            border-width:0px 1px 1px 0px; 
+            padding:10px 0px
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="top">
+            <h2 style="color: white;text-align: center;">经济调度系统</h2>
+        </div>
+        <div class="middle">
+            <div class="middle-content">
+                <h3 style="float: left;">宏观指标</h3>
+                <div class="search" style="float: right;">
+                    
+                        <span>选择时间:</span>
+                        <input type="date" name="input_date"/>
+                        <input type="button" value="查询" id="getinput"/>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <!-- <div class="bottom-left">
+                <div class="card">全局主要经济情况指标表</div>
+                <div class="card">全局主要经济情况指标表</div>
+                <div class="card">全局主要经济情况指标表</div>
+            </div> -->
+            <div class="bottom-right">
+                <table border="1">
+                    <tr>
+                      <th rowspan="2">指标名称</th>
+                      <th rowspan="2">预期增长目标</th>
+                      <th colspan="2">实际完成</th>
+                    </tr>
+                    <tr>
+                        <td>总量</td>
+                        <td>增速</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>地区生产总值</td>
+                        <td>7亿元</td>
+                        <td>2123.74</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>地区生产总值</td>
+                        <td>7亿元</td>
+                        <td>2123.74</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>地区生产总值</td>
+                        <td>7亿元</td>
+                        <td>2123.74</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>地区生产总值</td>
+                        <td>7亿元</td>
+                        <td>2123.74</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>地区生产总值</td>
+                        <td>7亿元</td>
+                        <td>2123.74</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>地区生产总值</td>
+                        <td>7亿元</td>
+                        <td>2123.74</td>
+                        <td>6</td>
+                    </tr>
+                  </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $("#getinput").click(function(e){
+        console.log($("input[name='input_date']").attr("value"))
+    });
+</script>
+</html>

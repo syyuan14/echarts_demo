@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+    <script src="jquery-3.4.1.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100%;
+        }
+
+        .wrapper {
+            width: 100vw;
+            background-color: rgba(13, 38, 71);
+        }
+
+        .wrapper .top {
+            height: 10vh;
+        }
+
+        .wrapper .bottom {
+            width: 100%;
+        }
+
+        .wrapper .bottom .first,.second,.third {
+            width: 90vw;
+            height: 25vh;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            border: 1px solid red;
+        }
+
+        .wrapper .bottom .four{
+
+            width: 90vw;
+            height: 40vh;
+            margin: 0 auto;
+            border: 1px solid red;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="top">
+            <h2 style="color: white;text-align: center;">经济预测系统</h2>
+        </div>
+
+        <div class="bottom">
+            <div class="first"></div>
+            <div class="second"></div>
+            <div class="third"></div>
+            <div class="four"></div>
+        </div>
+
+    </div>
+</body>
+
+<script type="text/javascript">
+    // 画第一产业图表
+    var myChart1 = echarts.init(document.querySelector("div.first"));
+    
+    // 指定图表的配置项和数据
+
+    var option1 = {
+        tooltip: {
+            trigger: 'axis',
+        },
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            axisLine:{
+                lineStyle:{
+                    color:'white',
+                    width:1,//这里是为了突出显示加上的
+                }
+            },
+            axisLabel:{
+                  interval:0,
+                  rotate:45,//倾斜度 -90 至 90 默认为0
+                  margin:2,
+                  textStyle:{
+                    fontWeight:"bolder",
+                    color:"white",
+                    fontSize:"30%",
+                  }
+            },
+        },
+        yAxis: {
+            type: 'value',
+            axisLine:{
+                lineStyle:{
+                    color:'white',
+                    width:1,//这里是为了突出显示加上的
+                }
+            },
+            axisLabel:{
+                textStyle:{
+                    fontWeight:"bolder",
+                    color:"white",
+                    fontSize:"30%",
+                }
+            }
+        },
+        series: [{
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line'
+        }],
+        title:{
+            left:'center',
+            //默认为10
+            //2.主副标题之间的间距
+            itemGap:20,
+            text:'第一产业',
+            textStyle:{
+                //文字颜色
+                color:'#ccc',
+                //字体风格,'normal','italic','oblique'
+                fontStyle:'normal',
+                //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
+                fontWeight:'bold',
+                //字体系列
+                fontFamily:'sans-serif',
+                //字体大小
+        　　　　 fontSize:18
+            }
+        }
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    $.getJSON("http://125.208.29.20:10062/indexmanager/industry/forecast/findSynthesis/PRIMARY_INDUSTRY?t=0.8855584597914254&nsukey=KGDK1O6EcYKCbjAjt0dS8f90AXoRjOFHa1sIv5pGwgnuuH5dRWiQ854W7BxcMcRMql%2BV0It3Ic4wJwz1Oul1koB8YAXQ%2Bo0wDPRgXRHWGQRLp5QNlITkiM%2BortJQeLLLsxkoN2Qv3Hz%2BA8sclIyhMoUCg4DqSGjV3jm824caRz5BiogQGlJuegEqlSFaoONXcVeWdl3vQfo9FvJRedKToA%3D%3D").done(
+        function(result){
+            option1["xAxis"]["data"] = result.data["lineChart"]["timeLine"]
+            option1["series"][0]["data"] = result.data["lineChart"]["data"]["增速"]["value"]
+            myChart1.setOption(option1);
+            window.onresize = myChart1.resize;
+        }
+    )
+    
+
+
+    
+    //画第二产业图表
+    var myChart2 = echarts.init(document.querySelector("div.second"));
+    // 指定图表的配置项和数据
+    var option2 = {
+        tooltip: {
+            trigger: 'axis',
+        },
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            axisLine:{
+                lineStyle:{
+                    color:'white',
+                    width:1,//这里是为了突出显示加上的
+                }
+            },
+            axisLabel:{
+                  interval:0,
+                  rotate:45,//倾斜度 -90 至 90 默认为0
+                  margin:2,
+                  textStyle:{
+                    fontWeight:"bolder",
+                    color:"white",
+                    fontSize:"30%",
+                  }
+            },
+
+        },
+        yAxis: {
+            type: 'value',
+            axisLine:{
+                lineStyle:{
+                    color:'white',
+                    width:1,//这里是为了突出显示加上的
+                }
+            },
+            axisLabel:{
+                textStyle:{
+                    fontWeight:"bolder",
+                    color:"white",
+                    fontSize:"30%",
+                }
+            },
+        },
+        series: [{
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line'
+        }],
+        title:{
+            left:'center',
+            //默认为10
+            //2.主副标题之间的间距
+            itemGap:20,
+            text:'第二产业',
+            textStyle:{
+                //文字颜色
+                color:'#ccc',
+                //字体风格,'normal','italic','oblique'
+                fontStyle:'normal',
+                //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
+                fontWeight:'bold',
+                //字体系列
+                fontFamily:'sans-serif',
+                //字体大小
+        　　　　 fontSize:18
+            }
+        }
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    $.getJSON("http://125.208.29.20:10062/indexmanager/industry/forecast/findSynthesis/SECONDARY_INDUSTRY?t=0.34088511751358075&nsukey=DBm5HUMf3M3P3nw3%2B9C%2Frf6TllPJvExsNcub3KYE6joLxMgGSI%2BuKdFYU5Ju7RVCRGwxGaTR3IlGvPhsZcUzbV1Se5%2Byi9KKjda%2F%2FqPQyfaB%2F1HA8MfWjo7H9OIfBGYNdRVfcaD%2BJV7689toGVqPOa34PC64%2B%2B2FK4tJLh68e6I0WwY0TPNV%2F8qS9baWy82nTOWeUgubw5wsUEPS2R0OEw%3D%3D").done(
+        function(result){
+            option2["xAxis"]["data"] = result.data["lineChart"]["timeLine"]
+            option2["series"][0]["data"] = result.data["lineChart"]["data"]["增速"]["value"]
+            //console.log(option2)
+            myChart2.setOption(option2);
+        }
+    )
+    
+
+    //画第三产业图表
+
+    var myChart3 = echarts.init(document.querySelector("div.third"));
+    // 指定图表的配置项和数据
+    var option3 = {
+        tooltip: {
+            trigger: 'axis',
+        },
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            axisLine:{
+                lineStyle:{
+                    color:'white',
+                    width:1,//这里是为了突出显示加上的
+                }
+            },
+            axisLabel:{
+                  interval:0,
+                  rotate:45,//倾斜度 -90 至 90 默认为0
+                  margin:2,
+                  textStyle:{
+                    fontWeight:"bolder",
+                    color:"white",
+                    fontSize:"30%",
+                  }
+            },
+
+        },
+        yAxis: {
+            type: 'value',
+            axisLine:{
+                lineStyle:{
+                    color:'white',
+                    width:1,//这里是为了突出显示加上的
+                }
+            },
+            axisLabel:{
+                textStyle:{
+                    fontWeight:"bolder",
+                    color:"white",
+                    fontSize:"30%",
+                }
+            }
+        },
+        series: [{
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line'
+        }],
+        title:{
+            left:'center',
+            //默认为10
+            //2.主副标题之间的间距
+            itemGap:20,
+            text:'第三产业',
+            textStyle:{
+                //文字颜色
+                color:'#ccc',
+                //字体风格,'normal','italic','oblique'
+                fontStyle:'normal',
+                //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
+                fontWeight:'bold',
+                //字体系列
+                fontFamily:'sans-serif',
+                //字体大小
+        　　　　 fontSize:18
+            }
+        }
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    $.getJSON("http://125.208.29.20:10062/indexmanager/industry/forecast/findSynthesis/TERTIARY_INDUSTRY?t=0.3433335880165884&nsukey=PROF%2FURciOfycwZfnvLTRd%2BK3CY2w7fByzwVIEhMmtn15iJ%2FmnvcJeFlnjp2ZKqqZte7LvGhXq7FHYOR389rExCcxxTJj5gy7CCl5Kv2tcdZcGuVCPYTtw97NwzjVpvPbgxVig3TgoPHUNUTDhUIFGRu%2B2NAGwVQG3x23zeteLvJR%2FfHk8VakxxEok2vLxYPE%2BeQ%2FhKE3f%2B3eJesG%2F4BRQ%3D%3D").done(
+        function(result){
+            option3["xAxis"]["data"] = result.data["lineChart"]["timeLine"]
+            option3["series"][0]["data"] = result.data["lineChart"]["data"]["增速"]["value"]
+            //console.log(option3)
+            myChart3.setOption(option3);
+        }
+    )
+    
+
+
+    //地区生产总值图表
+    var myChart4 = echarts.init(document.querySelector("div.four"));
+    option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                crossStyle: {
+                    color: '#999'
+                }
+            }
+        },
+        // toolbox: {
+        //     feature: {
+        //         dataView: {show: true, readOnly: false},
+        //         magicType: {show: true, type: ['line', 'bar']},
+        //         restore: {show: true},
+        //         saveAsImage: {show: true}
+        //     }
+        // },
+        title:{
+            left:'center',
+            //默认为10
+            //2.主副标题之间的间距
+            itemGap:20,
+            text:'地区生产总值',
+            textStyle:{
+                //文字颜色
+                color:'#ccc',
+                //字体风格,'normal','italic','oblique'
+                fontStyle:'normal',
+                //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
+                fontWeight:'bold',
+                //字体系列
+                fontFamily:'sans-serif',
+                //字体大小
+        　　　　 fontSize:18
+            }
+        },
+        legend: {
+            show:true,
+            data: [{
+                name: '系列1',
+                // 强制设置图形为圆。
+                icon: 'circle',
+                // 设置文本为红色
+                textStyle: {
+                    color: 'red'
+                }
+            },]
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: ["2016Q1","2016Q2","2016Q3","2016Q4","2017Q1","2017Q2","2017Q3","2017Q4","2018Q1","2018Q2","2018Q3","2018Q4","2019Q1","2019Q2","2019Q3","2019Q4","2020Q1"],
+                axisPointer: {
+                    type: 'shadow'
+                },
+                axisLabel:{
+                  interval:0,
+                  rotate:45,//倾斜度 -90 至 90 默认为0
+                  margin:2,
+                  textStyle:{
+                    fontWeight:"bolder",
+                    color:"white",
+                    fontSize:"30%"
+                  }
+                },
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '亿元',
+                min: 3000,
+                max: 24000,
+                interval: 3000,
+                axisLabel: {
+                    formatter: '{value}',
+                    color:"white",
+                    textStyle:{
+                        fontWeight:"bolder",
+                        color:"white",
+                        fontSize:"30%",
+                  }
+                }
+            },
+            {
+                type: 'value',
+                name: '%',
+                min: 4,
+                max: 7.5,
+                interval: 0.5,
+                axisLabel: {
+                    formatter: '{value}',
+                    textStyle:{
+                        fontWeight:"bolder",
+                        color:"white",
+                        fontSize:"30%",
+                    }
+                }
+            }
+        ],
+        series: [
+            {
+                name: '蒸发量',
+                type: 'bar',
+                data: [
+                        3480.32,
+                        7311.64,
+                        11345.5,
+                        18245.1,
+                        3909.53,
+                        8179.81,
+                        12757.9,
+                        20396.2,
+                        4271.31,
+                        8762.63,
+                        13345.8,
+                        20352.51,
+                        4225.32,
+                        8906.01,
+                        13588.5,
+                        21237.14,
+                        ""
+                    ]
+            },
+            {
+                name: '平均温度',
+                type: 'line',
+                yAxisIndex: 1,
+                data: [
+                        7,
+                        7.2,
+                        7,
+                        7.3,
+                        6.3,
+                        7.2,
+                        7,
+                        7.3,
+                        7.1,
+                        6.2,
+                        7,
+                        6.8,
+                        6.4,
+                        5.9,
+                        5.5,
+                        6,
+                        5
+                    ],
+            }
+        ]
+    };
+    
+    // $.getJSON("http://125.208.29.20:10062/indexmanager/server/jingjiyuce/gdpAndZengshuByPro?t=0.6494441070465966&nsukey=DbArq3nYB4UOa4Rfwc5Q5dHeGqxeryoWgiawWOdGkU%2FS%2Bpe4F1Y2Lu9DvzOMNQZFXQSN5AUIN%2Fl%2BgydOfcREmBI6fRUcEsZqHe8vrC1SPEwe7W07J8Vt13MRllste1TaIkolybvNqD%2Bg8THLS%2Fevl93Mop3wixDhRYT5oFZwKe8fcuZvkXp5HA6N%2FKU1k23pDMQMbCHheBLXixYEu%2F2oYA%3D%3D").done(
+    //     function(result){
+    //         console.log(result["data"])
+    //         option4["xAxis"][0]["data"] = result.data["lineChart"]["timeLine"]
+    //         option4["series"][0]["data"] = result.data["lineChart"]["data"]["增速"]["value"]
+    //         console.log(option3)
+    //         //myChart3.setOption(option3);
+    //     }
+    // )
+    myChart4.setOption(option, true);
+    
+
+</script>
+
+</html>
