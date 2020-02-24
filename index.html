@@ -22,13 +22,35 @@
         }
         .wrapper .second,.third,.four{
             width: 80vw;
-            height:28vh;
+            height:16vh;
             margin:10px auto;
             background-color: rgba(21, 56, 241);
-            border-radius: 20%;
+            border-radius: 46px;
         }
         .wrapper a{
             color: white;
+        }
+        .wrapper .second  ul{
+            padding: 0;
+            position: relative;
+            /* width: 80vw; */
+        }
+        .wrapper .second  ul li{
+            
+            /* height: 500px; */
+            font-size: 15px;
+            color: white;
+            text-align: center;
+            /* line-height: 500px; */
+            list-style: none;
+            position:absolute;
+            left: 20vw;
+
+            opacity: 0;
+            transition: all 0.6s;
+        }
+        .wrapper .second ul li.active{
+            opacity: 1;
         }
         .wrapper a:hover{
             cursor: pointer;
@@ -38,17 +60,67 @@
 <body>
     <div class="wrapper">
         <div class="first">
-            <h2 style="color: white;text-align: center;line-height: 28vh;">项目云</h2>
+            <h2 style="color: white;text-align: center;line-height: 16vh;">项目云</h2>
         </div>
         <div class="second">
-            <h2 style="color: white;text-align: center;line-height: 28vh;"> <a href="demo1.html" >复工复产要情</a></h2>
+            <h2 style="color: white;text-align: center;line-height: 10vh;"> 
+                <a href="demo1.html" >复工复产要情</a>
+            </h2>
+            <ul>
+                <li class="active">11111</li>
+                <li>22222</li>
+                <li>3333</li>
+            </ul>
         </div>
         <div class="third">
-            <h2 style="color: white;text-align: center;line-height: 28vh;"> <a href="demo1.html" >宏观经济预测</a></h2>
+            <h2 style="color: white;text-align: center;line-height: 10vh;"> <a href="demo1.html" >宏观经济预测</a></h2>
+            <ul>
+                <li class="active">11111</li>
+                <li>22222</li>
+                <li>3333</li>
+            </ul>
         </div>
         <div class="four">
-            <h2 style="color: white;text-align: center;line-height: 28vh;"> <a href="demo2.html" >宏观经济查询</a></h2>
+            <h2 style="color: white;text-align: center;line-height: 10vh;"> <a href="demo2.html" >宏观经济查询</a></h2>
+            <ul>
+                <li class="active">11111</li>
+                <li>22222</li>
+                <li>3333</li>
+            </ul>
         </div>
     </div>
 </body>
+<script>
+    let index = 0;
+    let time = 0;
+    let lis = document.querySelectorAll("li");
+    let clearActive = function (){
+        for (let i=0;i<lis.length;i++){
+            lis[i].className = "";
+        }
+    }
+    let goIndex = function(){
+        clearActive();
+        time  = 0;
+        lis[index].className="active";
+    }
+
+    let goNext = function(){
+        if(index<3){
+            index++;
+        }else{
+            index =0;
+        }
+        goIndex()
+    }
+
+
+    setInterval(() => {
+        time++
+        if(time === 20){
+            goNext();
+            time = 0;
+        }
+    }, 100);
+</script>
 </html>
