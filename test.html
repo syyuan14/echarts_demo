@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>bootstrap3 月份选择器——演示</title>
+    <script src="./external_js/jquery-3.4.1.min.js"></script>
+    <style>
+        body {
+            margin-top: 50px;
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        //当前月份之前的年月
+        var last_year_month = function () {
+            var d = new Date();
+            var num = d.getMonth() + 1;
+            var result = [];
+            for (var i = 1; i < num; i++) {
+                d.setMonth(d.getMonth() - 1);
+                var m = d.getMonth() + 1;
+                m = m < 10 ? "0" + m : m;
+                result.push(d.getFullYear() + m);
+
+            }
+            return result;
+        }
+        $(document).ready(function () {
+            //将值插入到下拉框
+            for (var allinfo = last_time(), i = 0; i < allinfo.length; i++) {
+                $("#queryDate").append("<option value='" + allinfo[i] + "'>" + allinfo[i] + "</option>");
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+
+    <select id="queryDate" name="queryDate">
+        <option>请选择年月</option>
+    </select>
+    <a class="sbtn sbtn01" οnclick="querySysj()" href="#">查询历史数据</a>
+
+
+</body>
+
+
+</html>

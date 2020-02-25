@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="./external_js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./external_css/month-picker.min.css" />
     <style>
         * {
             margin: 0;
@@ -20,53 +22,59 @@
             width: 100vw;
             background-color: #3374EB;
         }
-        .wrapper .top{
+
+        .wrapper .top {
             height: 10vh;
         }
-        .wrapper .middle{
+
+        .wrapper .middle {
             height: 10vh;
         }
-        .wrapper .middle .middle-content{
+
+        .wrapper .middle .middle-content {
             width: 95vw;
             padding-left: 2.5vw;
             color: white;
         }
 
-        .wrapper .bottom{
+        .wrapper .bottom {
             clear: both;
         }
-        
 
-        .wrapper .bottom .bottom-left{
+
+        .wrapper .bottom .bottom-left {
             height: 80vh;
             float: left;
-            margin:0 10px;
+            margin: 0 10px;
         }
-        .wrapper .bottom .bottom-left .card{
+
+        .wrapper .bottom .bottom-left .card {
             width: 110px;
             height: 51px;
             border: 1px solid red;
             margin-bottom: 10px;
             color: white;
             text-align: center;
-            padding-top:20px;
+            padding-top: 20px;
         }
-        .wrapper .bottom table{
 
-            margin:0 auto;
-            width:95vw;
-            border:solid #add9c0; 
-            border-width:1px 0px 0px 1px;
+        .wrapper .bottom table {
+
+            margin: 0 auto;
+            width: 95vw;
+            border: solid #add9c0;
+            border-width: 1px 0px 0px 1px;
             color: white;
         }
-        .wrapper .bottom table td{
-            border:solid #add9c0; 
-            border-width:0px 1px 1px 0px; 
-            padding:10px 0px
-        }
 
+        .wrapper .bottom table td {
+            border: solid #add9c0;
+            border-width: 0px 1px 1px 0px;
+            padding: 10px 0px
+        }
     </style>
 </head>
+
 <body>
     <div class="wrapper">
         <div class="top">
@@ -75,14 +83,14 @@
         <div class="middle">
             <div class="middle-content">
                 <h3 class="search">
-                    
-                        <span>选择时间:</span>
-                        <input type="month" name="input_date" value="2019-12"/>
-                        <span id="getinput"> 查询</span>
-                    
+
+                    <span>选择时间:</span>
+                    <input name="input_date" value="2019-12" />
+                    <span id="getinput"> 查询</span>
+
                 </h3>
                 <h3 style="padding-top: 1vh">宏观指标</h3>
-                
+
             </div>
         </div>
         <div class="bottom">
@@ -95,9 +103,9 @@
                 <table border="1">
                     <thead>
                         <tr>
-                          <th rowspan="2">指标名称</th>
-                          <th rowspan="2">预期增长目标</th>
-                          <th colspan="2">实际完成</th>
+                            <th rowspan="2">指标名称</th>
+                            <th rowspan="2">预期增长目标</th>
+                            <th colspan="2">实际完成</th>
                         </tr>
                         <tr>
                             <td>总量</td>
@@ -105,35 +113,48 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                     </tbody>
-                  </table>
+                </table>
             </div>
         </div>
     </div>
+
 </body>
 <script>
 
-    function getDataAndRender(date){
+    function getDataAndRender(date) {
+        if (date.length == '2019-12'.length) {
+            date = date + '-01';
+        }
         $.getJSON("http://47.94.216.106/api/gdps" + '?date=' + date).done(
-                function(result){
-                    if(result && result.data){
-                        let tbodyStr = '';
-                        result.data.forEach(function(item){
-                            tbodyStr = tbodyStr+ "<tr><td>"+ item.zbName+"</td><td>"+ item.zbDataValueId+ item.unit +"</td><td>"+ item.realZbId+"</td><td>"+ item.targetZbId+"</td></tr>";
-                        });
-                        $('tbody').html(tbodyStr)
-                    }
-                    
+            function (result) {
+                if (result && result.data) {
+                    let tbodyStr = '';
+                    result.data.forEach(function (item) {
+                        tbodyStr = tbodyStr + "<tr><td>" + item.zbName + "</td><td>" + (item.targetValue ? (item.targetValue + item.unit) : '--') + "</td><td>" + (item.zbValue ? item.zbValue : '--') + "</td><td>" + item.realValue + "</td></tr>";
+                    });
+                    $('tbody').html(tbodyStr)
                 }
+
+            }
         )
     }
-    getDataAndRender('2020-02-20');
-    $("#getinput").click(function(e){
-        let currDate = $("input[name='input_date']").val();
-        if(currDate){
-           getDataAndRender(currDate) 
-        }    
+    getDataAndRender('2019-12-01');
+    $("#getinput").click(function (e) {
+        let currDate = $("input[name='input_date']").val().split("至")[1];
+        if (currDate) {
+            getDataAndRender(currDate)
+        }
     });
 </script>
+<script type="text/javascript" src="./external_js/month-picker.js"></script>
+<script type="text/javascript" charset="utf-8">
+    $(function () {
+        $("input[name='input_date']").MonthPicker();
+        
+    });
+    
+</script>
+
 </html>
