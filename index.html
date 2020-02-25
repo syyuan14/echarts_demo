@@ -18,24 +18,24 @@
             width: 80vw;
             height:28vh;
             margin:10px auto;
-            background-color: rgba(21, 56, 241);;
+            background-color: #3378EB;
         }
         .wrapper .second,.third,.four{
             width: 80vw;
             height:16vh;
             margin:10px auto;
-            background-color: rgba(21, 56, 241);
+            background-color: #3378EB;
             border-radius: 46px;
         }
         .wrapper a{
             color: white;
         }
-        .wrapper .second  ul{
+        .wrapper  ul{
             padding: 0;
             position: relative;
             /* width: 80vw; */
         }
-        .wrapper .second  ul li{
+        .wrapper ul li{
             
             /* height: 500px; */
             font-size: 15px;
@@ -49,7 +49,7 @@
             opacity: 0;
             transition: all 0.6s;
         }
-        .wrapper .second ul li.active{
+        .wrapper ul li.active{
             opacity: 1;
         }
         .wrapper a:hover{
@@ -67,25 +67,25 @@
                 <a href="demo1.html" >复工复产要情</a>
             </h2>
             <ul>
-                <li class="active">11111</li>
-                <li>22222</li>
-                <li>3333</li>
+                <li class="active">复工复产要情: 数据1</li>
+                <li>复工复产要情: 数据2</li>
+                <li>复工复产要情: 数据3</li>
             </ul>
         </div>
         <div class="third">
             <h2 style="color: white;text-align: center;line-height: 10vh;"> <a href="demo1.html" >宏观经济预测</a></h2>
             <ul>
-                <li class="active">11111</li>
-                <li>22222</li>
-                <li>3333</li>
+                <li class="active">宏观经济预测: 数据1</li>
+                <li>宏观经济预测: 数据2</li>
+                <li>宏观经济预测: 数据3</li>
             </ul>
         </div>
         <div class="four">
             <h2 style="color: white;text-align: center;line-height: 10vh;"> <a href="demo2.html" >宏观经济查询</a></h2>
             <ul>
-                <li class="active">11111</li>
-                <li>22222</li>
-                <li>3333</li>
+                <li class="active">宏观经济查询: 数据1</li>
+                <li>宏观经济查询: 数据2</li>
+                <li>宏观经济查询: 数据3</li>
             </ul>
         </div>
     </div>
@@ -93,16 +93,26 @@
 <script>
     let index = 0;
     let time = 0;
-    let lis = document.querySelectorAll("li");
+    let lisSecond = document.querySelectorAll(".second li");
+    let lisThird = document.querySelectorAll(".third li");
+    let lisFour = document.querySelectorAll(".four li");
     let clearActive = function (){
-        for (let i=0;i<lis.length;i++){
-            lis[i].className = "";
+        for (let i=0;i<lisSecond.length;i++){
+            lisSecond[i].className = "";
+        }
+        for (let i=0;i<lisThird.length;i++){
+            lisThird[i].className = "";
+        }
+        for (let i=0;i<lisFour.length;i++){
+            lisFour[i].className = "";
         }
     }
     let goIndex = function(){
         clearActive();
         time  = 0;
-        lis[index].className="active";
+        lisSecond[index].className="active";
+        lisThird[index].className="active";
+        lisFour[index].className="active";
     }
 
     let goNext = function(){

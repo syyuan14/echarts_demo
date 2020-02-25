@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+    <script src="echarts.min.js"></script>
     <script src="jquery-3.4.1.min.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
+            color: #3378EB;
         }
 
         body {
@@ -19,7 +20,7 @@
 
         .wrapper {
             width: 100vw;
-            background-color: rgba(13, 38, 71);
+            /*background-color: rgba(13, 38, 71);*/
         }
 
         .wrapper .top {
@@ -32,10 +33,10 @@
 
         .wrapper .bottom .first,.second,.third {
             width: 90vw;
-            height: 25vh;
+            height: 35vh;
             margin: 0 auto;
-            margin-bottom: 10px;
-            border: 1px solid red;
+            margin-bottom: 5vh;
+            /*border: 1px solid #3374EB;*/
         }
 
         .wrapper .bottom .four{
@@ -43,7 +44,7 @@
             width: 90vw;
             height: 40vh;
             margin: 0 auto;
-            border: 1px solid red;
+            /*border: 1px solid #3374EB;*/
         }
         
     </style>
@@ -52,7 +53,7 @@
 <body>
     <div class="wrapper">
         <div class="top">
-            <h2 style="color: white;text-align: center;">经济预测系统</h2>
+            <h2 style="text-align: center;">经济预测系统</h2>
         </div>
 
         <div class="bottom">
@@ -80,7 +81,7 @@
             data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
             axisLine:{
                 lineStyle:{
-                    color:'white',
+                    color:'#3378EB',
                     width:1,//这里是为了突出显示加上的
                 }
             },
@@ -90,23 +91,30 @@
                   margin:2,
                   textStyle:{
                     fontWeight:"bolder",
-                    color:"white",
+                    color:"#3378EB",
                     fontSize:"30%",
                   }
             },
         },
+        grid:{
+                    left:'3%',
+                    right:'3%',
+                    bottom:'3%',    
+                    top:'10%',
+                    containLabel:true
+        },
         yAxis: {
             type: 'value',
             axisLine:{
                 lineStyle:{
-                    color:'white',
+                    color:'#3378EB',
                     width:1,//这里是为了突出显示加上的
                 }
             },
             axisLabel:{
                 textStyle:{
                     fontWeight:"bolder",
-                    color:"white",
+                    color:"#3378EB",
                     fontSize:"30%",
                 }
             }
@@ -123,7 +131,7 @@
             text:'第一产业',
             textStyle:{
                 //文字颜色
-                color:'#ccc',
+                color:'#3378EB',
                 //字体风格,'normal','italic','oblique'
                 fontStyle:'normal',
                 //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
@@ -160,7 +168,7 @@
             data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
             axisLine:{
                 lineStyle:{
-                    color:'white',
+                    color:'#3378EB',
                     width:1,//这里是为了突出显示加上的
                 }
             },
@@ -170,24 +178,31 @@
                   margin:2,
                   textStyle:{
                     fontWeight:"bolder",
-                    color:"white",
+                    color:"#3378EB",
                     fontSize:"30%",
                   }
             },
 
         },
+        grid:{
+                    left:'3%',
+                    right:'3%',
+                    bottom:'3%',    
+                    top:'10%',
+                    containLabel:true
+        },
         yAxis: {
             type: 'value',
             axisLine:{
                 lineStyle:{
-                    color:'white',
+                    color:'#3378EB',
                     width:1,//这里是为了突出显示加上的
                 }
             },
             axisLabel:{
                 textStyle:{
                     fontWeight:"bolder",
-                    color:"white",
+                    color:"#3378EB",
                     fontSize:"30%",
                 }
             },
@@ -204,7 +219,7 @@
             text:'第二产业',
             textStyle:{
                 //文字颜色
-                color:'#ccc',
+                color:'#3378EB',
                 //字体风格,'normal','italic','oblique'
                 fontStyle:'normal',
                 //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
@@ -240,7 +255,7 @@
             data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
             axisLine:{
                 lineStyle:{
-                    color:'white',
+                    color:'#3378EB',
                     width:1,//这里是为了突出显示加上的
                 }
             },
@@ -250,24 +265,31 @@
                   margin:2,
                   textStyle:{
                     fontWeight:"bolder",
-                    color:"white",
+                    color:"#3378EB",
                     fontSize:"30%",
                   }
             },
 
         },
+        grid:{
+                    left:'3%',
+                    right:'3%',
+                    bottom:'3%',    
+                    top:'10%',
+                    containLabel:true
+        },
         yAxis: {
             type: 'value',
             axisLine:{
                 lineStyle:{
-                    color:'white',
+                    color:'#3378EB',
                     width:1,//这里是为了突出显示加上的
                 }
             },
             axisLabel:{
                 textStyle:{
                     fontWeight:"bolder",
-                    color:"white",
+                    color:"#3378EB",
                     fontSize:"30%",
                 }
             }
@@ -284,7 +306,7 @@
             text:'第三产业',
             textStyle:{
                 //文字颜色
-                color:'#ccc',
+                color:'#3378EB',
                 //字体风格,'normal','italic','oblique'
                 fontStyle:'normal',
                 //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
@@ -336,7 +358,7 @@
             text:'地区生产总值',
             textStyle:{
                 //文字颜色
-                color:'#ccc',
+                color:'#3378EB',
                 //字体风格,'normal','italic','oblique'
                 fontStyle:'normal',
                 //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
@@ -372,12 +394,19 @@
                   margin:2,
                   textStyle:{
                     fontWeight:"bolder",
-                    color:"white",
+                    color:"#3378EB",
                     fontSize:"30%"
                   }
                 },
             }
         ],
+        grid:{
+                    left:'3%',
+                    right:'3%',
+                    bottom:'3%',    
+                    top:'10%',
+                    containLabel:true
+        },
         yAxis: [
             {
                 type: 'value',
@@ -387,10 +416,10 @@
                 interval: 3000,
                 axisLabel: {
                     formatter: '{value}',
-                    color:"white",
+                    color:"#3378EB",
                     textStyle:{
                         fontWeight:"bolder",
-                        color:"white",
+                        color:"#3378EB",
                         fontSize:"30%",
                   }
                 }
@@ -405,7 +434,7 @@
                     formatter: '{value}',
                     textStyle:{
                         fontWeight:"bolder",
-                        color:"white",
+                        color:"#3378EB",
                         fontSize:"30%",
                     }
                 }

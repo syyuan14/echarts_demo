@@ -18,8 +18,7 @@
 
         .wrapper {
             width: 100vw;
-            height: 100vh;
-            background-color: rgba(13, 38, 71);
+            background-color: #3374EB;
         }
         .wrapper .top{
             height: 10vh;
@@ -28,8 +27,8 @@
             height: 10vh;
         }
         .wrapper .middle .middle-content{
-            width: 88vw;
-            margin-left: 10vw;
+            width: 95vw;
+            padding-left: 2.5vw;
             color: white;
         }
 
@@ -55,7 +54,7 @@
         .wrapper .bottom table{
 
             margin:0 auto;
-            width:70vw;
+            width:95vw;
             border:solid #add9c0; 
             border-width:1px 0px 0px 1px;
             color: white;
@@ -75,14 +74,15 @@
         </div>
         <div class="middle">
             <div class="middle-content">
-                <h3 style="float: left;">宏观指标</h3>
-                <div class="search" style="float: right;">
+                <h3 class="search">
                     
                         <span>选择时间:</span>
                         <input type="date" name="input_date"/>
-                        <input type="button" value="查询" id="getinput"/>
+                        <span id="getinput"> 查询</span>
                     
-                </div>
+                </h3>
+                <h3 style="padding-top: 1vh">宏观指标</h3>
+                
             </div>
         </div>
         <div class="bottom">
@@ -93,61 +93,47 @@
             </div> -->
             <div class="bottom-right">
                 <table border="1">
-                    <tr>
-                      <th rowspan="2">指标名称</th>
-                      <th rowspan="2">预期增长目标</th>
-                      <th colspan="2">实际完成</th>
-                    </tr>
-                    <tr>
-                        <td>总量</td>
-                        <td>增速</td>
-                    </tr>
-
-
-                    <tr>
-                        <td>地区生产总值</td>
-                        <td>7亿元</td>
-                        <td>2123.74</td>
-                        <td>6</td>
-                    </tr>
-                    <tr>
-                        <td>地区生产总值</td>
-                        <td>7亿元</td>
-                        <td>2123.74</td>
-                        <td>6</td>
-                    </tr>
-                    <tr>
-                        <td>地区生产总值</td>
-                        <td>7亿元</td>
-                        <td>2123.74</td>
-                        <td>6</td>
-                    </tr>
-                    <tr>
-                        <td>地区生产总值</td>
-                        <td>7亿元</td>
-                        <td>2123.74</td>
-                        <td>6</td>
-                    </tr>
-                    <tr>
-                        <td>地区生产总值</td>
-                        <td>7亿元</td>
-                        <td>2123.74</td>
-                        <td>6</td>
-                    </tr>
-                    <tr>
-                        <td>地区生产总值</td>
-                        <td>7亿元</td>
-                        <td>2123.74</td>
-                        <td>6</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                          <th rowspan="2">指标名称</th>
+                          <th rowspan="2">预期增长目标</th>
+                          <th colspan="2">实际完成</th>
+                        </tr>
+                        <tr>
+                            <td>总量</td>
+                            <td>增速</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
                   </table>
             </div>
         </div>
     </div>
 </body>
 <script>
+
+    function getDataAndRender(date){
+        $.getJSON("http://47.94.216.106/api/gdps" + '?date=' + date).done(
+                function(result){
+                    if(result && result.data){
+                        let tbodyStr = '';
+                        result.data.forEach(function(item){
+                            tbodyStr = tbodyStr+ "<tr><td>"+ item.zbName+"</td><td>"+ item.zbDataValueId+ item.unit +"</td><td>"+ item.realZbId+"</td><td>"+ item.targetZbId+"</td></tr>";
+                        });
+                        $('tbody').html(tbodyStr)
+                    }
+                    
+                }
+        )
+    }
+    getDataAndRender('2020-02-20');
     $("#getinput").click(function(e){
-        console.log($("input[name='input_date']").attr("value"))
+        let currDate = $("input[name='input_date']").val();
+        if(currDate){
+           getDataAndRender(currDate) 
+        }    
     });
 </script>
 </html>
