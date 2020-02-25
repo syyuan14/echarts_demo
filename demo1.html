@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="echarts.min.js"></script>
-    <script src="jquery-3.4.1.min.js"></script>
+    <script src="./external_js/echarts.min.js"></script>
+    <script src="./external_js/jquery-3.4.1.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -44,6 +44,7 @@
             width: 90vw;
             height: 40vh;
             margin: 0 auto;
+            margin-bottom: 40px;
             /*border: 1px solid #3374EB;*/
         }
         
@@ -57,10 +58,10 @@
         </div>
 
         <div class="bottom">
+            <div class="four"></div>
             <div class="first"></div>
             <div class="second"></div>
             <div class="third"></div>
-            <div class="four"></div>
         </div>
 
     </div>
@@ -75,6 +76,14 @@
     var option1 = {
         tooltip: {
             trigger: 'axis',
+            formatter:params => {        //可以在此设置每一条数据的hover提示信息，根据params.data中的数据自己判断，然后返回不同的值
+                if(params[0]["data"]){
+                    return params[0]["name"] + "</br>" +params[0]["marker"]+ params[0]["seriesName"]+":  "+params[0]["data"]
+                }
+            }
+        },
+        legend: {
+            right:'right'
         },
         xAxis: {
             type: 'category',
@@ -92,7 +101,7 @@
                   textStyle:{
                     fontWeight:"bolder",
                     color:"#3378EB",
-                    fontSize:"30%",
+                    fontSize:"40%",
                   }
             },
         },
@@ -115,14 +124,33 @@
                 textStyle:{
                     fontWeight:"bolder",
                     color:"#3378EB",
-                    fontSize:"30%",
+                    fontSize:"40%",
                 }
             }
         },
         series: [{
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
-            type: 'line'
-        }],
+            name:'增速',
+            data: [820, 932, 901, 934, 1290, 1330],
+            type:'line',  
+        },
+        {   name:'增速',
+            data: [,,,,,1330,1320],
+            type:'line',
+            lineStyle: {
+                    type: 'dashed',
+                    color:'black'
+            },
+            markPoint: {
+                data: [
+                    {name: '最后', value: 3.1, xAxis: 12, yAxis: 3.1}
+                ],
+                label: {
+                    formatter: '{c}%'
+                }
+
+            },
+        },
+        ],
         title:{
             left:'center',
             //默认为10
@@ -146,10 +174,18 @@
     // 使用刚指定的配置项和数据显示图表。
     $.getJSON("http://125.208.29.20:10062/indexmanager/industry/forecast/findSynthesis/PRIMARY_INDUSTRY?t=0.8855584597914254&nsukey=KGDK1O6EcYKCbjAjt0dS8f90AXoRjOFHa1sIv5pGwgnuuH5dRWiQ854W7BxcMcRMql%2BV0It3Ic4wJwz1Oul1koB8YAXQ%2Bo0wDPRgXRHWGQRLp5QNlITkiM%2BortJQeLLLsxkoN2Qv3Hz%2BA8sclIyhMoUCg4DqSGjV3jm824caRz5BiogQGlJuegEqlSFaoONXcVeWdl3vQfo9FvJRedKToA%3D%3D").done(
         function(result){
+            // console.log(option1)
             option1["xAxis"]["data"] = result.data["lineChart"]["timeLine"]
-            option1["series"][0]["data"] = result.data["lineChart"]["data"]["增速"]["value"]
+            len = result.data["lineChart"]["data"]["增速"]["value"].length
+            arr = new Array()
+            arr.length = len - 2
+            option1["series"][0]["data"] = result.data["lineChart"]["data"]["增速"]["value"].slice(0,len-1)
+            option1["series"][1]["data"] = arr.concat(result.data["lineChart"]["data"]["增速"]["value"].splice(len-2)) 
+            
+            option1["series"][1]["markPoint"]["data"][0]["value"] =   option1["series"][1]["data"][len-1]
+            option1["series"][1]["markPoint"]["data"][0]["xAxis"] =  len - 1
+            option1["series"][1]["markPoint"]["data"][0]["yAxis"] =  option1["series"][1]["data"][len-1]
             myChart1.setOption(option1);
-            window.onresize = myChart1.resize;
         }
     )
     
@@ -162,6 +198,14 @@
     var option2 = {
         tooltip: {
             trigger: 'axis',
+            formatter:params => {        //可以在此设置每一条数据的hover提示信息，根据params.data中的数据自己判断，然后返回不同的值
+                if(params[0]["data"]){
+                    return params[0]["name"] + "</br>" +params[0]["marker"]+ params[0]["seriesName"]+":  "+params[0]["data"]
+                }
+            }
+        },
+        legend: {
+            right:'right'
         },
         xAxis: {
             type: 'category',
@@ -179,7 +223,7 @@
                   textStyle:{
                     fontWeight:"bolder",
                     color:"#3378EB",
-                    fontSize:"30%",
+                    fontSize:"40%",
                   }
             },
 
@@ -203,14 +247,32 @@
                 textStyle:{
                     fontWeight:"bolder",
                     color:"#3378EB",
-                    fontSize:"30%",
+                    fontSize:"40%",
                 }
             },
         },
         series: [{
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
-            type: 'line'
-        }],
+            name:'增速',
+            data: [820, 932, 901, 934, 1290, 1330],
+            type:'line',  
+        },
+        {   name:'增速',
+            data: [,,,,,1330,1320],
+            type:'line',
+            lineStyle: {
+                    type: 'dashed',
+                    color:'black'
+            },
+            markPoint: {
+                data: [
+                    {name: '最后', value: 3.1, xAxis: 12, yAxis: 3.1}
+                ],
+                label: {
+                    formatter: '{c}%'
+                }
+
+            },
+        },],
         title:{
             left:'center',
             //默认为10
@@ -235,8 +297,16 @@
     $.getJSON("http://125.208.29.20:10062/indexmanager/industry/forecast/findSynthesis/SECONDARY_INDUSTRY?t=0.34088511751358075&nsukey=DBm5HUMf3M3P3nw3%2B9C%2Frf6TllPJvExsNcub3KYE6joLxMgGSI%2BuKdFYU5Ju7RVCRGwxGaTR3IlGvPhsZcUzbV1Se5%2Byi9KKjda%2F%2FqPQyfaB%2F1HA8MfWjo7H9OIfBGYNdRVfcaD%2BJV7689toGVqPOa34PC64%2B%2B2FK4tJLh68e6I0WwY0TPNV%2F8qS9baWy82nTOWeUgubw5wsUEPS2R0OEw%3D%3D").done(
         function(result){
             option2["xAxis"]["data"] = result.data["lineChart"]["timeLine"]
-            option2["series"][0]["data"] = result.data["lineChart"]["data"]["增速"]["value"]
-            //console.log(option2)
+            len = result.data["lineChart"]["data"]["增速"]["value"].length
+            arr = new Array()
+            arr.length = len - 2
+            option2["series"][0]["data"] = result.data["lineChart"]["data"]["增速"]["value"].slice(0,len-1)
+            option2["series"][1]["data"] = arr.concat(result.data["lineChart"]["data"]["增速"]["value"].splice(len-2)) 
+            
+            option2["series"][1]["markPoint"]["data"][0]["value"] =   option2["series"][1]["data"][len-1]
+            option2["series"][1]["markPoint"]["data"][0]["xAxis"] =  len - 1
+            option2["series"][1]["markPoint"]["data"][0]["yAxis"] =  option2["series"][1]["data"][len-1]
+
             myChart2.setOption(option2);
         }
     )
@@ -249,6 +319,14 @@
     var option3 = {
         tooltip: {
             trigger: 'axis',
+            formatter:params => {        //可以在此设置每一条数据的hover提示信息，根据params.data中的数据自己判断，然后返回不同的值
+                if(params[0]["data"]){
+                    return params[0]["name"] + "</br>" +params[0]["marker"]+ params[0]["seriesName"]+":  "+params[0]["data"]
+                }
+            }
+        },
+        legend: {
+            right:'right'
         },
         xAxis: {
             type: 'category',
@@ -266,7 +344,7 @@
                   textStyle:{
                     fontWeight:"bolder",
                     color:"#3378EB",
-                    fontSize:"30%",
+                    fontSize:"40%",
                   }
             },
 
@@ -290,14 +368,32 @@
                 textStyle:{
                     fontWeight:"bolder",
                     color:"#3378EB",
-                    fontSize:"30%",
+                    fontSize:"40%",
                 }
             }
         },
         series: [{
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
-            type: 'line'
-        }],
+            name:'增速',
+            data: [820, 932, 901, 934, 1290, 1330],
+            type:'line',  
+        },
+        {   name:'增速',
+            data: [,,,,,1330,1320],
+            type:'line',
+            lineStyle: {
+                    type: 'dashed',
+                    color:'black'
+            },
+            markPoint: {
+                data: [
+                    {name: '最后', value: 3.1, xAxis: 12, yAxis: 3.1}
+                ],
+                label: {
+                    formatter: '{c}%'
+                }
+
+            },
+        },],
         title:{
             left:'center',
             //默认为10
@@ -321,9 +417,21 @@
     // 使用刚指定的配置项和数据显示图表。
     $.getJSON("http://125.208.29.20:10062/indexmanager/industry/forecast/findSynthesis/TERTIARY_INDUSTRY?t=0.3433335880165884&nsukey=PROF%2FURciOfycwZfnvLTRd%2BK3CY2w7fByzwVIEhMmtn15iJ%2FmnvcJeFlnjp2ZKqqZte7LvGhXq7FHYOR389rExCcxxTJj5gy7CCl5Kv2tcdZcGuVCPYTtw97NwzjVpvPbgxVig3TgoPHUNUTDhUIFGRu%2B2NAGwVQG3x23zeteLvJR%2FfHk8VakxxEok2vLxYPE%2BeQ%2FhKE3f%2B3eJesG%2F4BRQ%3D%3D").done(
         function(result){
+            // option3["xAxis"]["data"] = result.data["lineChart"]["timeLine"]
+            // option3["series"][0]["data"] = result.data["lineChart"]["data"]["增速"]["value"]
+            // //console.log(option3)
+
             option3["xAxis"]["data"] = result.data["lineChart"]["timeLine"]
-            option3["series"][0]["data"] = result.data["lineChart"]["data"]["增速"]["value"]
-            //console.log(option3)
+            len = result.data["lineChart"]["data"]["增速"]["value"].length
+            arr = new Array()
+            arr.length = len - 2
+            option3["series"][0]["data"] = result.data["lineChart"]["data"]["增速"]["value"].slice(0,len-1)
+            option3["series"][1]["data"] = arr.concat(result.data["lineChart"]["data"]["增速"]["value"].splice(len-2)) 
+            
+            option3["series"][1]["markPoint"]["data"][0]["value"] =   option3["series"][1]["data"][len-1]
+            option3["series"][1]["markPoint"]["data"][0]["xAxis"] =  len - 1
+            option3["series"][1]["markPoint"]["data"][0]["yAxis"] =  option3["series"][1]["data"][len-1]
+
             myChart3.setOption(option3);
         }
     )
@@ -332,13 +440,21 @@
 
     //地区生产总值图表
     var myChart4 = echarts.init(document.querySelector("div.four"));
-    option = {
+    option4 = {
         tooltip: {
             trigger: 'axis',
             axisPointer: {
                 type: 'cross',
                 crossStyle: {
                     color: '#999'
+                }
+            },
+            formatter:params => {   
+                console.log(params)     //可以在此设置每一条数据的hover提示信息，根据params.data中的数据自己判断，然后返回不同的值
+                if(params[0]["data"]){
+                    return params[0]["name"] + "</br>" +params[0]["marker"]+ params[0]["seriesName"]+":  "+params[0]["data"] + "</br>" +params[1]["marker"]+ params[1]["seriesName"]+":  "+params[1]["data"]
+                }else{
+                    return params[0]["name"] + "</br>" +params[0]["marker"]+ params[0]["seriesName"]+":  "+params[0]["data"] + "</br>" +params[1]["marker"]+ params[1]["seriesName"]+":  "+params[1]["data"]
                 }
             }
         },
@@ -395,7 +511,7 @@
                   textStyle:{
                     fontWeight:"bolder",
                     color:"#3378EB",
-                    fontSize:"30%"
+                    fontSize:"40%"
                   }
                 },
             }
@@ -420,7 +536,7 @@
                     textStyle:{
                         fontWeight:"bolder",
                         color:"#3378EB",
-                        fontSize:"30%",
+                        fontSize:"40%",
                   }
                 }
             },
@@ -435,14 +551,14 @@
                     textStyle:{
                         fontWeight:"bolder",
                         color:"#3378EB",
-                        fontSize:"30%",
+                        fontSize:"40%",
                     }
                 }
             }
         ],
         series: [
             {
-                name: '蒸发量',
+                name: '总量',
                 type: 'bar',
                 data: [
                         3480.32,
@@ -465,7 +581,7 @@
                     ]
             },
             {
-                name: '平均温度',
+                name: '增速',
                 type: 'line',
                 yAxisIndex: 1,
                 data: [
@@ -485,25 +601,50 @@
                         5.9,
                         5.5,
                         6,
-                        5
                     ],
+            },
+            {
+                name:'增速',
+                data: [,,,,,,,,,,,,,,,6,5],
+                type:'line',
+                yAxisIndex: 1,
+                lineStyle: {
+                        type: 'dashed',
+                        // color:'red',
+                },
+                markPoint: {
+                data: [
+                    {name: '最后', value: 5, xAxis: 16, yAxis: 5}
+                ],
+                label: {
+                    formatter: '{c}%'
+                }
+
+            },
             }
         ]
     };
     
-    // $.getJSON("http://125.208.29.20:10062/indexmanager/server/jingjiyuce/gdpAndZengshuByPro?t=0.6494441070465966&nsukey=DbArq3nYB4UOa4Rfwc5Q5dHeGqxeryoWgiawWOdGkU%2FS%2Bpe4F1Y2Lu9DvzOMNQZFXQSN5AUIN%2Fl%2BgydOfcREmBI6fRUcEsZqHe8vrC1SPEwe7W07J8Vt13MRllste1TaIkolybvNqD%2Bg8THLS%2Fevl93Mop3wixDhRYT5oFZwKe8fcuZvkXp5HA6N%2FKU1k23pDMQMbCHheBLXixYEu%2F2oYA%3D%3D").done(
-    //     function(result){
-    //         console.log(result["data"])
-    //         option4["xAxis"][0]["data"] = result.data["lineChart"]["timeLine"]
-    //         option4["series"][0]["data"] = result.data["lineChart"]["data"]["增速"]["value"]
-    //         console.log(option3)
-    //         //myChart3.setOption(option3);
-    //     }
-    // )
-    $.post("http://125.208.29.20:10062/indexmanager/server/jingjiyuce/gdpAndZengshuByPro?t=0.6494441070465966&nsukey=DbArq3nYB4UOa4Rfwc5Q5dHeGqxeryoWgiawWOdGkU%2FS%2Bpe4F1Y2Lu9DvzOMNQZFXQSN5AUIN%2Fl%2BgydOfcREmBI6fRUcEsZqHe8vrC1SPEwe7W07J8Vt13MRllste1TaIkolybvNqD%2Bg8THLS%2Fevl93Mop3wixDhRYT5oFZwKe8fcuZvkXp5HA6N%2FKU1k23pDMQMbCHheBLXixYEu%2F2oYA%3D%3D%22)",function(result){
-        console.log(result)
-    })
-    myChart4.setOption(option, true);
+    $.getJSON("http://47.94.216.106/api/gdp?nsukey=7dgQk2CkWpbfbOMPah%2FKz2zgdSgVvHy%2BOv9w%2BIRolPRmfDiZtuyNjfCdXz3pHy70pn6fJW%2BKrihYOp8sC8Jrmsq7JBBjqeNiDl58SCoVZlOLF2lPBC2mO%2FMjRtJ6gDEhrn67meucGQREiRBFagLgP%2FUUWvGqqul9v8KgjbeX17lMYXNAiftOyXhHdGYBLYdsEBNfOXY2vDpQF%2FwIUJiMJQ%3D%3D").done(
+        function(result){
+            
+            len = result.data["data"]["增速"]["value"].length
+            arr = new Array()
+            arr.length = len - 2
+
+            option4["xAxis"][0]["data"] = result.data["timeLine"]
+            option4["series"][0]["data"] = result.data["data"]["总量"]["value"]
+            option4["series"][1]["data"] = result.data["data"]["增速"]["value"].slice(0,len-1)
+            option4["series"][2]["data"] = arr.concat(result.data["data"]["增速"]["value"].slice(len-2))
+
+            option4["series"][2]["markPoint"]["data"][0]["value"] =   option4["series"][2]["data"][len-1]
+            option4["series"][2]["markPoint"]["data"][0]["xAxis"] =  len - 1
+            option4["series"][2]["markPoint"]["data"][0]["yAxis"] =  option4["series"][2]["data"][len-1]
+
+
+            myChart4.setOption(option4,true);
+        }
+    )
     
 
 </script>
