@@ -1,138 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="./external_js/jquery-3.4.1.min.js"></script>
     <style>
-        *{
+        * {
             padding: 0;
             margin: 0;
             text-decoration: none;
         }
-        body{
+
+        body {
             width: 100%;
             height: 100%;
         }
-        .wrapper .first{
+
+        .wrapper .first {
             width: 90vw;
-            height:28vh;
+            height: 28vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin:10px auto;
+            margin: 10px auto;
             background-color: #3378EB;
 
         }
-        .wrapper .second,.third,.four{
+
+        .wrapper .second,
+        .third,
+        .four {
             width: 90vw;
-            height:16vh;
-            margin:10px auto;
+            height: 16vh;
+            margin: 10px auto;
             background-color: #3378EB;
             border-radius: 46px;
         }
-        .wrapper a{
-            color: white;
-        }
-        .wrapper  ul{
-            padding: 0;
-            position: relative;
-            /* width: 80vw; */
-        }
-        .wrapper ul li{
-            
-            width:100%;
-            height: 100%;
-            line-height: 100%;
-            font-size: 15px;
-            color: white;
-            text-align: center;
-            /* line-height: 500px; */
-            list-style: none;
-            position:absolute;
 
-            opacity: 0;
-            transition: all 0.6s;
+        /* 文字上下滚动 */
+        .scroll-box {
+            position: relative;
+            top: 0;
+            overflow: hidden;
+            padding: 0 10px;
+            display: inline-block;
+            height: 29px;
+            width: 100%;
+            line-height: 29px;
+            font-size: 12px;
         }
-        .wrapper ul li.active{
-            opacity: 1;
+
+        .scroll-box.on {
+            background: #fff;
+            z-index: 2;
+            overflow: auto;
+            height: auto !important;
+            box-shadow: 1px 1px 10px #888
         }
-        .wrapper a:hover{
-            cursor: pointer;
+
+        .scroll-box.on li {
+            width: 100%;
+            top: 0 !important;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        .scroll-box li {
+            position: relative;
+        }
+
+        .scroll-box span {
+            width: 95%;
+            display: inline-block;
+            white-space: nowrap;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            text-align: center;
         }
     </style>
+    <script type="text/javascript">
+
+        (function ($) {
+            /* 单行文字上下滚动 */
+            $.fn.adScroll = function (options) {
+                // 默认配置
+                var scrollOptions = {
+                    interval: 6000
+                };
+                $.extend(scrollOptions, options);
+
+                $(this).each(function () {
+                    var scrollObj = $(this);
+                    // 单行内容无需滚动显示，取消初始化
+                    var totalHeight = 0;
+                    scrollObj.find('li').each(function () { totalHeight += $(this).height()});
+                    var liSize = Math.round(totalHeight / scrollObj.height());
+                    if (liSize <= 1) return;
+
+                    // 初始化开始
+                    scrollObj.attr('index', '0');
+                    // 重置滚动容器高度
+                    scrollObj.height(scrollObj.find('a').outerHeight(true));
+                    // 重置滚动项 li 高度
+                    scrollObj.find('li').length > 1 && scrollObj.find('li').height(scrollObj.height());
+                    // 外层容器，辅助定位
+                    var containerObj = $('<div>').height(scrollObj.outerHeight(true));
+                    scrollObj.wrap(containerObj);
+                    // 遮罩层
+                    var maskObj = $('<div>').addClass('scroll-mask');
+                    scrollObj.after(maskObj);
+
+                    setInterval(function () {
+                        if (!scrollObj.hasClass('on')) {
+                            // 所有 li 高度之和除以容器高度
+                            var liTotalHeight = 0;
+                            scrollObj.find('li').each(function () { liTotalHeight += $(this).height() });
+                            var size = Math.round(liTotalHeight / scrollObj.height());
+                            var curIndex = parseInt(scrollObj.attr('index'));
+                            var next = curIndex + 1 >= size ? 0 : curIndex + 1;
+                            if (next == 0) {
+                                scrollObj.find('li').animate({ top: 0 }, 'slow');
+                            } else {
+                                scrollObj.find('li').animate({ top: '-=' + scrollObj.height() }, 'slow');
+                            }
+                            scrollObj.attr('index', next);
+                        }
+                    }, scrollOptions.interval);
+                });
+            };
+        }
+        )(jQuery);
+
+
+        $(function () {
+            if ($('.scroll-box').length > 0) {
+                $('.scroll-box').adScroll({ interval: 2000 });
+            }
+        })
+
+    </script>
 </head>
+
 <body>
     <div class="wrapper">
         <div class="first">
             <h2 style="color: white;text-align: center;line-height: 16vh;">宏观经济云</h2>
         </div>
         <div class="second">
-            <h2 style="color: white;text-align: center;line-height: 10vh;"> 
-                <a href="demo1.html" >复工复产要情</a>
+            <h2 style="color: white;text-align: center;line-height: 10vh;">
+                <a href="demo1.html">复工复产要情</a>
             </h2>
-            <ul>
-                <li class="active">2020年2月20日，全区累计复工企业10687家、比上日新增1055家。</li>
-                <li>2020年2月20日，复工率为49%、提高4.8个百分点。</li>
+            <ul class="scroll-box box-expand">
+                <li><span>2020年2月20日，全区累计复工企业10687家、</span></li>
+                <li><span>比上日新增1055家。</span></li>
+                <li><span>2020年2月20日，复工率为49%、提高4.8个百分点。</span></li>
             </ul>
         </div>
         <div class="third">
-            <h2 style="color: white;text-align: center;line-height: 10vh;"> <a href="demo1.html" >宏观经济预测</a></h2>
-            <ul>
-                <li class="active">2020年一季度，地区生产总值增速预测增长5.0%。</li>
-                <li>2020年一季度，投资增速预测增长5.9%。</li>
+            <h2 style="color: white;text-align: center;line-height: 10vh;"> <a href="demo1.html">宏观经济预测</a></h2>
+            <ul class="scroll-box box-expand">
+                <li><span>2020年一季度，地区生产总值增速预测增长5.0%。</span></li>
+                <li><span>2020年一季度，投资增速预测增长5.9%。</span></li>
             </ul>
         </div>
         <div class="four">
-            <h2 style="color: white;text-align: center;line-height: 10vh;"> <a href="demo2.html" >宏观经济查询</a></h2>
-            <ul>
-                <li class="active">2019年1-12月，规模以上工业增加值：年度目标值6.5%，实际值4.5%。</li>
-                <li>2019年1-12月，固定资产投资：年度目标值10.0%，实际值9.5%。</li>
+            <h2 style="color: white;text-align: center;line-height: 10vh;"> <a href="demo2.html">宏观经济查询</a></h2>
+            <ul class="scroll-box box-expand">
+                <li><span>2019年1-12月，规模以上工业增加值:</span></li>
+                <li><span>年度目标值6.5%，实际值4.5%。</span></li>
+                <li><span>2019年1-12月，固定资产投资:</span></li>
+                <li><span>年度目标值10.0%，实际值9.5%。</span></li>
             </ul>
         </div>
     </div>
 </body>
-<script>
-    let index = 0;
-    let time = 0;
-    let lisSecond = document.querySelectorAll(".second li");
-    let lisThird = document.querySelectorAll(".third li");
-    let lisFour = document.querySelectorAll(".four li");
-    let clearActive = function (){
-        for (let i=0;i<lisSecond.length;i++){
-            lisSecond[i].className = "";
-        }
-        for (let i=0;i<lisThird.length;i++){
-            lisThird[i].className = "";
-        }
-        for (let i=0;i<lisFour.length;i++){
-            lisFour[i].className = "";
-        }
-    }
-    let goIndex = function(){
-        clearActive();
-        time  = 0;
-        lisSecond[index].className="active";
-        lisThird[index].className="active";
-        lisFour[index].className="active";
-    }
 
-    let goNext = function(){
-        if(index<1){
-            index++;
-        }else{
-            index =0;
-        }
-        goIndex()
-    }
-
-
-    setInterval(() => {
-        time++
-        if(time === 20){
-            goNext();
-            time = 0;
-        }
-    }, 100);
-</script>
 </html>
