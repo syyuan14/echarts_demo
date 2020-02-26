@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>宏观经济查询</title>
     <script src="./external_js/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./external_css/month-picker.min.css" />
     <style>
@@ -20,7 +20,7 @@
 
         .wrapper {
             width: 100vw;
-            background-color: #3374EB;
+            /* background-color: #3374EB; */
         }
 
         .wrapper .top {
@@ -30,30 +30,30 @@
 
         .wrapper .middle {
             height: 6vh;
-            margin-bottom: 4vh;
+            margin-bottom: 8vh;
         }
 
         .wrapper .middle .middle-content {
             width: 95vw;
             padding-left: 2.5vw;
-            color: white;
+            /* color: white; */
 
         }
 
-        .wrapper .middle .middle-content h3 {
-            margin-bottom: 1vh;
-
+        .wrapper .middle .middle-content .search {
+            margin-bottom: 3vh;
         }
 
-        .wrapper .middle .middle-content span:active {
-            color: #D200D2;
+        .wrapper .middle .middle-content #hongBtn,#hesuanBtn{
+            display: inline-block;
+            background: #add9c0;
+            padding: 3px;
+        }
+
+        /* .wrapper .middle .middle-content #hongBtn:hover,#hesuanBtn:hover {
+            background: #3378EB;
             text-decoration: none;
-        }
-
-        .wrapper .middle .middle-content span:hover {
-            color: yellow;
-            text-decoration: none;
-        }
+        } */
 
         .wrapper .bottom {
             clear: both;
@@ -65,7 +65,7 @@
             width: 95vw;
             border: solid #add9c0;
             border-width: 1px 0px 0px 1px;
-            color: white;
+            /* color: white; */
             margin-bottom: 2vh;
         }
 
@@ -100,20 +100,19 @@
 <body>
     <div class="wrapper">
         <div class="top">
-            <h2 style="color: white;text-align: center;">经济调度系统</h2>
+            <h2 style="color:#3378EB ;text-align: center;">经济调度系统</h2>
         </div>
         <div class="middle">
             <div class="middle-content">
                 <h3 class="search">
                     <span style="margin-right: 3vw;">选择时间:</span>
-                    <input name="input_date" value="2019-01至2019-12" />
+                    <input name="input_date" value="2019-01至2019-12" style="border: 1px solid #BCBCBC;"/>
                 </h3>
                 <!-- <h3 style="padding-top: 1vh">宏观指标</h3> -->
-                <h3 class="search">
-                    <span>选择查询数据类型：</span>
+                <div class="search">
                     <span id="hongBtn">宏观指标</span>
                     <span id="hesuanBtn">核算指标</span>
-                </h3>
+                </div>
 
             </div>
         </div>
@@ -189,15 +188,26 @@
 
     //页面初始化
     getDataAndRenderHong('2019-12-01');
-    getDataAndRenderHe('2019-12-01');
+    $("#hongBtn").css("background-color","#3378EB");
+    
 
     $("#hongBtn").click(function (e) {
+
+        //修改按钮背景色
+        $("#hesuanBtn").css("background-color","#add9c0");
+        $(this).css("background-color","#3378EB");
+
         let currDate = $("input[name='input_date']").val().split("至")[1];
+        
         if (currDate) {
             getDataAndRenderHong(currDate);
         }
     });
     $("#hesuanBtn").click(function (e) {
+        //修改按钮背景色
+        $("#hongBtn").css("background-color","#add9c0");
+        $(this).css("background-color","#3378EB");
+
         let currDate = $("input[name='input_date']").val().split("至")[1];
         if (currDate) {
             getDataAndRenderHe(currDate);
@@ -206,6 +216,7 @@
 </script>
 <script type="text/javascript" src="./external_js/month-picker.js"></script>
 <script type="text/javascript" charset="utf-8">
+    //日期选择器组件
     $(function () {
         $("input[name='input_date']").MonthPicker();
 

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>复工复产要情</title>
     <script src="./external_js/echarts.min.js"></script>
+    <script src="./external_js/jquery-3.4.1.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -113,7 +114,7 @@
             type: 'value',
             axisLabel: {
                 textStyle: {
-                    
+
                     fontWeight: "bolder",
                     color: "#BCBCBC",
                     fontSize: "60%",
@@ -130,7 +131,7 @@
                 rotate: 50,//倾斜度 -90 至 90 默认为0
                 margin: 2,
                 textStyle: {
-                    
+
                     fontWeight: "bolder",
                     color: "#BCBCBC",
                     fontSize: "60%",
@@ -169,13 +170,49 @@
                         color: "#E66926"
                     }
                 }
-                
+
             },
         ]
     };;
-    if (option && typeof option === "object") {
-        myChart.setOption(option, true);
+    function renderTable(data) {
+        //渲染表格使用
+        
+        let tbodyStr = '';
+        data.forEach(function (item) {
+            tbodyStr = tbodyStr + "<tr><td>" + item["统计企业总数"] + "</td><td>" + (item["复工率（%）"] ? (item["复工率（%）"]) : '--') + "</td><td>" + (item["今日新增复工企业数（个）"] ? item["今日新增复工企业数（个）"] : '--') + "</td></tr>";
+        });
+        $('div.second tbody').html(tbodyStr)
     }
+
+    function formatData(data) {
+        //服务端返回的数据直接格式化为echarts需要的格式
+        let fugong = []
+        let weifugong = []
+        
+        for (key in data) {
+            fugong.push(data[key]["复工企业个数"])
+            weifugong.push(data[key]["未复工企业个数"])
+        }
+        return [fugong, weifugong]
+    }
+    $.getJSON("http://47.94.216.106/api/yiqing").done(
+        function (result) {
+            if (result && result.table) {
+                renderTable(result.table)
+            }
+
+            if (result && result.chart) {
+                formatResult = formatData(result.chart)
+                option["series"][0]["data"] = formatResult[0]
+                option["series"][1]["data"] = formatResult[1]
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+            }
+
+        }
+    )
+
 </script>
 
 </html>
