@@ -44,16 +44,13 @@
             margin-bottom: 3vh;
         }
 
-        .wrapper .middle .middle-content #hongBtn,#hesuanBtn{
+        .wrapper .middle .middle-content #hongBtn,
+        #hesuanBtn {
             display: inline-block;
             background: #add9c0;
             padding: 3px;
         }
 
-        /* .wrapper .middle .middle-content #hongBtn:hover,#hesuanBtn:hover {
-            background: #3378EB;
-            text-decoration: none;
-        } */
 
         .wrapper .bottom {
             clear: both;
@@ -106,10 +103,10 @@
             <div class="middle-content">
                 <h3 class="search">
                     <span style="margin-right: 3vw;">选择时间:</span>
-                    <input name="input_date" value="2019-01至2019-12" style="border: 1px solid #BCBCBC;"/>
+                    <input name="input_date" value="2019-01至2019-12" style="border: 1px solid #BCBCBC;" />
                 </h3>
                 <!-- <h3 style="padding-top: 1vh">宏观指标</h3> -->
-                <div class="search">
+                <div class="search btns">
                     <span id="hongBtn">宏观指标</span>
                     <span id="hesuanBtn">核算指标</span>
                 </div>
@@ -188,31 +185,28 @@
 
     //页面初始化
     getDataAndRenderHong('2019-12-01');
-    $("#hongBtn").css("background-color","#3378EB");
-    
+    $("#hongBtn").css("background-color", "#3378EB");
 
-    $("#hongBtn").click(function (e) {
-
-        //修改按钮背景色
-        $("#hesuanBtn").css("background-color","#add9c0");
-        $(this).css("background-color","#3378EB");
-
+    $('.btns').on('click', 'span', function () {
+        //console.log(this.id)
         let currDate = $("input[name='input_date']").val().split("至")[1];
-        
-        if (currDate) {
-            getDataAndRenderHong(currDate);
-        }
-    });
-    $("#hesuanBtn").click(function (e) {
-        //修改按钮背景色
-        $("#hongBtn").css("background-color","#add9c0");
-        $(this).css("background-color","#3378EB");
+        if (this.id === "hesuanBtn") {
+            $("#hongBtn").css("background-color", "#add9c0");
+            $(this).css("background-color", "#3378EB");
 
-        let currDate = $("input[name='input_date']").val().split("至")[1];
-        if (currDate) {
-            getDataAndRenderHe(currDate);
+            if (currDate) {
+                getDataAndRenderHe(currDate);
+            }
+        } if (this.id === "hongBtn") {
+            //修改按钮背景色
+            $("#hesuanBtn").css("background-color", "#add9c0");
+            $(this).css("background-color", "#3378EB");
+
+            if (currDate) {
+                getDataAndRenderHong(currDate);
+            }
         }
-    });
+    })
 </script>
 <script type="text/javascript" src="./external_js/month-picker.js"></script>
 <script type="text/javascript" charset="utf-8">

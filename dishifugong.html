@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地市复工情况</title>
+    <script src="./external_js/echarts.min.js"></script>
+    <script src="./external_js/jquery-3.4.1.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .top {
+            margin-top: 3vh;
+            margin-bottom: 3vh;
+        }
+
+        .middle .labels span {
+            display: inline-block;
+            background: #add9c0;
+            padding: 3px;
+            margin: 3px;
+        }
+
+        .middle .echart {
+            width: 80vw;
+            height: 35vh;
+            margin: 3vh auto;
+        }
+
+
+        .bottom table {
+
+            margin: 0 auto;
+            width: 95vw;
+            border: solid #add9c0;
+            border-width: 1px 0px 0px 1px;
+            /* color: white; */
+            margin-bottom: 2vh;
+        }
+
+        .bottom table td {
+            border: solid #add9c0;
+            border-width: 0px 1px 1px 0px;
+            padding: 0px 0px
+        }
+
+        .bottom table td {
+            border: solid #add9c0;
+            border-width: 0px 1px 1px 0px;
+            padding: 0px 0px;
+        }
+
+        table thead th {
+            border-top: none;
+            border-left: none;
+        }
+
+        .bottom table thead th,
+        td {
+            text-align: center;
+        }
+
+        .bottom table tbody td {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top">
+        <h2 style="color:#3378EB ;text-align: center;">地市复工情况</h2>
+    </div>
+    <div class="middle">
+        <div class="labels">
+            <span id="btn1">统计企业数</span>
+            <span id="btn2">复工企业数</span>
+            <span id="btn3">复工率</span>
+            <span id="btn4">正常生产人数</span>
+            <span id="btn5">已到岗人数</span>
+            <span id="btn6">复产率</span>
+            <span id="btn7">比上日新增复工企业数</span>
+        </div>
+        <div class="echart">
+
+        </div>
+    </div>
+    <div class="bottom">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th rowspan="2">地区</th>
+                    <th colspan="4">截止2月20日累计</th>
+                    <th rowspan="2">比上日新增复工企业/项目数（家/个）</th>
+                </tr>
+                <tr>
+                    <td>复工/统计企业数（家）</td>
+                    <td>复工率（%）</td>
+                    <td>已到岗/正常生产人数（万人）</td>
+                    <td>复产率(%)</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>全区</td>
+                    <td>3153/6155</td>
+                    <td>51.2</td>
+                    <td>51.5/109.3</td>
+                    <td>47.1</td>
+                    <td>252</td>
+                </tr>
+                <tr>
+                    <td>柳州市</td>
+                    <td>3153/6155</td>
+                    <td>51.2</td>
+                    <td>51.5/109.3</td>
+                    <td>47.1</td>
+                    <td>252</td>
+                </tr>
+                <tr>
+                    <td>桂林市</td>
+                    <td>3153/6155</td>
+                    <td>51.2</td>
+                    <td>51.5/109.3</td>
+                    <td>47.1</td>
+                    <td>252</td>
+                </tr>
+                <tr>
+                    <td>梧州市</td>
+                    <td>3153/6155</td>
+                    <td>51.2</td>
+                    <td>51.5/109.3</td>
+                    <td>47.1</td>
+                    <td>252</td>
+                </tr>
+                <tr>
+                    <td>北海市</td>
+                    <td>3153/6155</td>
+                    <td>51.2</td>
+                    <td>51.5/109.3</td>
+                    <td>47.1</td>
+                    <td>252</td>
+                </tr>
+                <tr>
+                    <td>防城港市</td>
+                    <td>3153/6155</td>
+                    <td>51.2</td>
+                    <td>51.5/109.3</td>
+                    <td>47.1</td>
+                    <td>252</td>
+                </tr>
+                <tr>
+                    <td>钦州市</td>
+                    <td>3153/6155</td>
+                    <td>51.2</td>
+                    <td>51.5/109.3</td>
+                    <td>47.1</td>
+                    <td>252</td>
+                </tr>
+                <tr>
+                    <td>贵港市</td>
+                    <td>3153/6155</td>
+                    <td>51.2</td>
+                    <td>51.5/109.3</td>
+                    <td>47.1</td>
+                    <td>252</td>
+                </tr>
+                <tr>
+                    <td>玉林市</td>
+                    <td>3153/6155</td>
+                    <td>51.2</td>
+                    <td>51.5/109.3</td>
+                    <td>47.1</td>
+                    <td>252</td>
+                </tr>
+                <tr>
+                    <td>贺州市</td>
+                    <td>3153/6155</td>
+                    <td>51.2</td>
+                    <td>51.5/109.3</td>
+                    <td>47.1</td>
+                    <td>252</td>
+                </tr>
+                <tr>
+                    <td>河池市</td>
+                    <td>3153/6155</td>
+                    <td>51.2</td>
+                    <td>51.5/109.3</td>
+                    <td>47.1</td>
+                    <td>252</td>
+                </tr>
+                <tr>
+                    <td>贵港市</td>
+                    <td>3153/6155</td>
+                    <td>51.2</td>
+                    <td>51.5/109.3</td>
+                    <td>47.1</td>
+                    <td>252</td>
+                </tr>
+                <tr>
+                    <td>来宾市</td>
+                    <td>3153/6155</td>
+                    <td>51.2</td>
+                    <td>51.5/109.3</td>
+                    <td>47.1</td>
+                    <td>252</td>
+                </tr>
+                <tr>
+                    <td>崇左市</td>
+                    <td>3153/6155</td>
+                    <td>51.2</td>
+                    <td>51.5/109.3</td>
+                    <td>47.1</td>
+                    <td>252</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    // 画第一产业图表
+    var myChart = echarts.init(document.querySelector("div.echart"));
+
+    // 指定图表的配置项和数据
+
+    var option = {
+        tooltip: {
+            trigger: 'axis',
+            formatter: params => {        //可以在此设置每一条数据的hover提示信息，根据params.data中的数据自己判断，然后返回不同的值
+                if (params[0]["data"]) {
+                    return params[0]["name"] + "</br>" + params[0]["marker"] + params[0]["seriesName"] + ":  " + params[0]["data"]
+                }
+            }
+        },
+        legend: {
+            right: 'right'
+        },
+        xAxis: {
+            type: 'category',
+            data: ['18', '19', '20', '21', '22'],
+            axisLine: {
+                lineStyle: {
+                    color: '#BCBCBC',
+                    width: 1,//这里是为了突出显示加上的
+                }
+            },
+            axisLabel: {
+                interval: 0,
+                rotate: 45,//倾斜度 -90 至 90 默认为0
+                margin: 2,
+                textStyle: {
+                    fontWeight: "bolder",
+                    color: "#BCBCBC",
+                    fontSize: "50%",
+                }
+            },
+        },
+        grid: {
+            left: '3%',
+            right: '3%',
+            bottom: '3%',
+            top: '10%',
+            containLabel: true
+        },
+        yAxis: {
+            type: 'value',
+            axisLine: { show: false },
+            axisTick: { show: false },
+            axisLabel: {
+                textStyle: {
+                    fontWeight: "bolder",
+                    color: "#BCBCBC",
+                    fontSize: "50%",
+                }
+            }
+        },
+        series: [{
+            name: '增速',
+            data: [820, 932, 901, 934,],
+            type: 'line',
+            lineStyle: {
+                color: "#B4DEDD",
+            },
+            //设置点的样式
+            itemStyle: {
+                color: "#B4DEDD",
+            }
+        },
+        {
+            name: '增速',
+            data: [ , , , 934, 1320],
+            type: 'line',
+            lineStyle: {
+                color: "#B4DEDD",
+                type: "dashed"
+            },
+            //设置点的样式
+            itemStyle: {
+                color: "#B4DEDD",
+            },
+            markPoint: {
+                data: [
+                    { name: '最后', value: 3.1, xAxis: 12, yAxis: 3.1 }
+                ],
+                label: {
+                    formatter: '{c}%'
+                }
+
+            },
+        },
+        ],
+        title: {
+            left: 'center',
+            //默认为10
+            //2.主副标题之间的间距
+            itemGap: 20,
+            text: '统计企业数',
+            textStyle: {
+                //文字颜色
+                color: '#3378EB',
+                //字体风格,'normal','italic','oblique'
+                fontStyle: 'normal',
+                //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
+                fontWeight: 'bold',
+                //字体系列
+                fontFamily: 'sans-serif',
+                //字体大小
+                fontSize: 18
+            }
+        }
+    };
+    
+    myChart.setOption(option);
+
+    //将其他按钮背景色恢复未点击状态
+    function resetBackColor() {
+        btns = $("div.labels span")
+        for (let i = 0; i < btns.length; i++) {
+            $(btns[i]).css("background-color", "#add9c0");
+        }
+    }
+    //根据选择的数据标签决定渲染什么数据
+    function renderSelectTable(label) {
+        /*
+        此处根据label获取数值进行渲染
+        */
+        option["title"]["text"] = label
+        myChart.setOption(option);
+    }
+
+    //初始化
+    $("#btn1").css("background-color", "#3378EB")
+    
+    //设置点击事件
+    $('.labels').on('click', 'span', function (e) {
+        resetBackColor();
+        $(this).css("background-color", "#3378EB");
+        renderSelectTable($(this).text())
+    })
+</script>
+
+</html>
