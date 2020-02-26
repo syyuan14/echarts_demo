@@ -30,24 +30,35 @@
 
         .wrapper .middle {
             height: 6vh;
+            margin-bottom: 4vh;
         }
 
         .wrapper .middle .middle-content {
             width: 95vw;
             padding-left: 2.5vw;
             color: white;
+
+        }
+
+        .wrapper .middle .middle-content h3 {
+            margin-bottom: 1vh;
+
+        }
+
+        .wrapper .middle .middle-content span:active {
+            color: #D200D2;
+            text-decoration: none;
+        }
+
+        .wrapper .middle .middle-content span:hover {
+            color: yellow;
+            text-decoration: none;
         }
 
         .wrapper .bottom {
             clear: both;
         }
 
-        .wrapper .bottom h3{
-            color:white;
-            width: 25vw;
-            margin-left: 2vw;
-            margin-bottom: 2vh;
-        }
         .wrapper .bottom table {
 
             margin: 0 auto;
@@ -74,7 +85,9 @@
             border-top: none;
             border-left: none;
         }
-        .bottom table thead th,td{
+
+        .bottom table thead th,
+        td {
             text-align: center;
         }
 
@@ -92,38 +105,20 @@
         <div class="middle">
             <div class="middle-content">
                 <h3 class="search">
-                    <span>选择时间:</span>
+                    <span style="margin-right: 3vw;">选择时间:</span>
                     <input name="input_date" value="2019-01至2019-12" />
-                    <span id="getinput"> 查询</span>
-
                 </h3>
                 <!-- <h3 style="padding-top: 1vh">宏观指标</h3> -->
+                <h3 class="search">
+                    <span>选择查询数据类型：</span>
+                    <span id="hongBtn">宏观指标</span>
+                    <span id="hesuanBtn">核算指标</span>
+                </h3>
+
             </div>
         </div>
         <div class="bottom">
             <div class="hongguan">
-                <h3>宏观指标</h3>
-                <table border="1">
-                    <thead>
-                        <tr>
-                            <th rowspan="2">指标名称</th>
-                            <th rowspan="2">预期增长目标</th>
-                            <th colspan="2">实际完成</th>
-                        </tr>
-                        <tr>
-                            <td>总量</td>
-                            <td>增速</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
-            
-
-            <div class="hesuan">
-                <h3>核算指标</h3>
                 <table border="1">
                     <thead>
                         <tr>
@@ -160,7 +155,7 @@
                 if (result && result.data) {
                     let tbodyStr = '';
                     result.data.forEach(function (item) {
-                        tbodyStr = tbodyStr + "<tr><td>" + item.zbName + "</td><td>" + (item.targetValue ? (item.targetValue + item.unit) : '--') + "</td><td>" + (item.zbValue ? item.zbValue : '--') + "</td><td>" + (item.realValue ? item.realValue : '--') + "</td></tr>";
+                        tbodyStr = tbodyStr + "<tr><td>" + item.zbName + "</td><td>" + (item.targetValue ? (item.targetValue + '%') : '--') + "</td><td>" + (item.zbValue ? item.zbValue + item.unit : '--') + "</td><td>" + (item.realValue ? item.realValue + '%' : '--') + "</td></tr>";
                     });
                     $('div.hongguan tbody').html(tbodyStr)
                 }
@@ -183,9 +178,9 @@
                 if (result && result.data) {
                     let tbodyStr = '';
                     result.data.forEach(function (item) {
-                        tbodyStr = tbodyStr + "<tr><td>" + item.zbName + "</td><td>" + (item.targetValue ? (item.targetValue + item.unit) : '--') + "</td><td>" + (item.zbValue ? item.zbValue : '--') + "</td><td>" + (item.realValue ? item.realValue : '--') + "</td></tr>";
+                        tbodyStr = tbodyStr + "<tr><td>" + item.zbName + "</td><td>" + (item.targetValue ? (item.targetValue + "%") : '--') + "</td><td>" + (item.zbValue ? item.zbValue + item.unit : '--') + "</td><td>" + (item.realValue ? item.realValue + "%" : '--') + "</td></tr>";
                     });
-                    $('div.hesuan tbody').html(tbodyStr)
+                    $('div.hongguan tbody').html(tbodyStr)
                 }
 
             }
@@ -196,10 +191,15 @@
     getDataAndRenderHong('2019-12-01');
     getDataAndRenderHe('2019-12-01');
 
-    $("#getinput").click(function (e) {
+    $("#hongBtn").click(function (e) {
         let currDate = $("input[name='input_date']").val().split("至")[1];
         if (currDate) {
             getDataAndRenderHong(currDate);
+        }
+    });
+    $("#hesuanBtn").click(function (e) {
+        let currDate = $("input[name='input_date']").val().split("至")[1];
+        if (currDate) {
             getDataAndRenderHe(currDate);
         }
     });
