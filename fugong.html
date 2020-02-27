@@ -26,10 +26,12 @@
             margin: 0 auto;
             margin-top: 20px;
         }
-        .first{
+
+        .first {
             height: 40vh;
             margin-top: 10px;
         }
+
         .second table {
 
             margin: 0 auto;
@@ -72,9 +74,6 @@
             </tbody>
         </table>
     </div>
-    <div class="link_detail">
-        <h2 style="text-align: center;"><a href="dishifugong.html" >详细地市复工情况</a></h2>
-    </div>
 </body>
 <script>
     var myChart = echarts.init(document.querySelector("div.first"));
@@ -99,6 +98,9 @@
         xAxis: {
             type: 'value',
             axisLabel: {
+                interval: 0,
+                rotate: 50,//倾斜度 -90 至 90 默认为0
+                margin: 2,
                 textStyle: {
 
                     fontWeight: "bolder",
@@ -109,7 +111,7 @@
         },
         yAxis: {
             type: 'category',
-            data: ['规模以上商贸服务业企业', '规模以上服务企业', '规模以上工业企业', '跟踪统计企业合计',],
+            data: ['规模以上工业企业', '规模以上服务业企业', '限额以上商贸服务业企业', '农业龙头企业', '交通运输客货运企业', '房地产企业', '外资企业', '外贸企业'],
             axisLine: { show: false },
             axisTick: { show: false },
             axisLabel: {
@@ -130,10 +132,10 @@
                 type: 'bar',
                 stack: '总量',
                 label: {
-                    show: true,
+                    show: false,
                     position: 'insideRight'
                 },
-                data: [320, 302, 301, 334],
+                data: [3153, 1482, 2896, 191, 1319, 503, 608, 535],
                 itemStyle: {
                     normal: {
                         //设置柱形图的颜色
@@ -146,10 +148,10 @@
                 type: 'bar',
                 stack: '总量',
                 label: {
-                    show: true,
-                    position: 'insideRight'
+                    show: false,
+                    position: 'insideRight',
                 },
-                data: [120, 132, 101, 134],
+                data: [3002, 1070, 2503, 47, 663, 2196, 1153, 510],
                 itemStyle: {
                     normal: {
                         //设置柱形图的颜色
@@ -160,9 +162,10 @@
             },
         ]
     };;
+    
     function renderTable(data) {
         //渲染表格使用
-        
+
         let tbodyStr = '';
         data.forEach(function (item) {
             tbodyStr = tbodyStr + "<tr><td>" + item["统计企业总数"] + "</td><td>" + (item["复工率（%）"] ? (item["复工率（%）"]) : '--') + "</td><td>" + (item["今日新增复工企业数（个）"] ? item["今日新增复工企业数（个）"] : '--') + "</td></tr>";
@@ -174,7 +177,7 @@
         //服务端返回的数据直接格式化为echarts需要的格式
         let fugong = []
         let weifugong = []
-        
+
         for (key in data) {
             fugong.push(data[key]["复工企业个数"])
             weifugong.push(data[key]["未复工企业个数"])
@@ -187,17 +190,23 @@
                 renderTable(result.table)
             }
 
-            if (result && result.chart) {
-                formatResult = formatData(result.chart)
-                option["series"][0]["data"] = formatResult[0]
-                option["series"][1]["data"] = formatResult[1]
-                if (option && typeof option === "object") {
-                    myChart.setOption(option, true);
-                }
-            }
+            // if (result && result.chart) {
+            //     formatResult = formatData(result.chart)
+            //     option["series"][0]["data"] = formatResult[0]
+            //     option["series"][1]["data"] = formatResult[1]
+            //     if (option && typeof option === "object") {
+            //         myChart.setOption(option, true);
+            //     }
+            // }
 
         }
     )
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+    myChart.on('click', function (params) {
+        window.location.href=`fugongdetail.html?company=${params.name}`
+    });
 
 </script>
 

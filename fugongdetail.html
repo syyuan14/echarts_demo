@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地市复工情况</title>
+    <script src="./external_js/echarts.min.js"></script>
+    <script src="./external_js/jquery-3.4.1.min.js"></script>
+    <script src="./external_js/echarts.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .top {
+            margin-top: 3vh;
+            margin-bottom: 3vh;
+        }
+
+        /* .middle .labels span {
+            display: inline-block;
+            background: #add9c0;
+            padding: 3px;
+            margin: 3px;
+        } */
+
+        .middle .echart {
+            width: 85vw;
+            height: 35vh;
+            margin: 3vh auto;
+        }
+
+        .bottom .bar1,
+        .bar2 {
+
+            width: 85vw;
+            height: 45vh;
+            margin: 0 auto;
+            margin-bottom: 40px;
+            /*border: 1px solid #3374EB;*/
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top">
+        <h2 style="color:#3378EB ;text-align: center;">地市复工情况</h2>
+    </div>
+    <div class="middle">
+        <!-- <div class="labels">
+            <span id="btn1">统计企业数</span>
+            <span id="btn2">复工企业数</span>
+            <span id="btn3">复工率</span>
+            <span id="btn4">正常生产人数</span>
+            <span id="btn5">已到岗人数</span>
+            <span id="btn6">复产率</span>
+            <span id="btn7">比上日新增复工企业数</span>
+        </div> -->
+        <div class="echart">
+
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+    </div>
+</body>
+<script>
+    // 画折线图一
+    var myChart1 = echarts.init(document.querySelector("div.echart"));
+
+    // 指定图表的配置项和数据
+
+    var option1 = {
+        tooltip: {
+            trigger: 'axis',
+            formatter: params => {        //可以在此设置每一条数据的hover提示信息，根据params.data中的数据自己判断，然后返回不同的值
+                if (params[0]["data"]) {
+                    return params[0]["name"] + "</br>" + params[0]["marker"] + params[0]["seriesName"] + ":  " + params[0]["data"] + '%' + "</br>" + params[1]["marker"] + params[1]["seriesName"] + ":  " + params[1]["data"] + '%'
+                }
+            }
+        },
+        legend: {
+            bottom: "bottom"
+        },
+        xAxis: {
+            type: 'category',
+            data: ['2月18日', '2月19日', '2月20日', '2月21日', '2月22日'],
+            axisLine: {
+                lineStyle: {
+                    color: '#BCBCBC',
+                    width: 1,//这里是为了突出显示加上的
+                }
+            },
+            axisLabel: {
+                interval: 0,
+                rotate: 45,//倾斜度 -90 至 90 默认为0
+                margin: 2,
+                textStyle: {
+                    fontWeight: "bolder",
+                    color: "#BCBCBC",
+                    fontSize: "70%",
+                }
+            },
+        },
+        grid: [
+            {
+                bottom: '25%',
+                left: "18%",
+                top: "18%"
+            },
+        ],
+        yAxis: {
+            type: 'value',
+            axisLine: { show: false },
+            axisTick: { show: false },
+            axisLabel: {
+                formatter: '{value} %',
+                textStyle: {
+                    fontWeight: "bolder",
+                    color: "#BCBCBC",
+                    fontSize: "70%",
+                }
+            }
+        },
+        series: [{
+            name: '复工率',
+            data: [33, 36, 42, 46, 55],
+            type: 'line',
+            lineStyle: {
+                color: "#B4DEDD",
+            },
+            //设置点的样式
+            itemStyle: {
+                color: "#B4DEDD",
+            }
+        },
+        {
+            name: '复产率',
+            data: [26, 29, 36, 48, 54],
+            type: 'line',
+            lineStyle: {
+                color: "#3378EB",
+                type: "dashed"
+            },
+            //设置点的样式
+            itemStyle: {
+                color: "#3378EB",
+            },
+        },
+        ],
+        title: {
+            left: 'center',
+            //默认为10
+            //2.主副标题之间的间距
+            itemGap: 20,
+            text: '统计企业数',
+            textStyle: {
+                //文字颜色
+                color: '#3378EB',
+                //字体风格,'normal','italic','oblique'
+                fontStyle: 'normal',
+                //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
+                fontWeight: 'bold',
+                //字体系列
+                fontFamily: 'sans-serif',
+                //字体大小
+                fontSize: 18
+            }
+        }
+    };
+
+
+
+
+    //各地区复工情况表一
+    var myChart2 = echarts.init(document.querySelector("div.bottom .bar1"));
+    option2 = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                crossStyle: {
+                    color: '#999'
+                }
+            },
+            formatter: params => {
+                console.log(params)     //可以在此设置每一条数据的hover提示信息，根据params.data中的数据自己判断，然后返回不同的值
+                if (params[0]["data"]) {
+                    return params[0]["name"] + "</br>" + params[0]["marker"] + params[0]["seriesName"] + ":  " + params[0]["data"] + "</br>" + params[1]["marker"] + params[1]["seriesName"] + ":  " + params[1]["data"]
+                } else {
+                    return params[0]["name"] + "</br>" + params[0]["marker"] + params[0]["seriesName"] + ":  " + params[0]["data"] + "</br>" + params[1]["marker"] + params[1]["seriesName"] + ":  " + params[1]["data"]
+                }
+            }
+        },
+        // toolbox: {
+        //     feature: {
+        //         dataView: {show: true, readOnly: false},
+        //         magicType: {show: true, type: ['line', 'bar']},
+        //         restore: {show: true},
+        //         saveAsImage: {show: true}
+        //     }
+        // },
+        title: {
+            left: 'center',
+            //默认为10
+            //2.主副标题之间的间距
+            itemGap: 20,
+            text: '地区生产总值',
+            textStyle: {
+                //文字颜色
+                color: '#3378EB',
+                //字体风格,'normal','italic','oblique'
+                fontStyle: 'normal',
+                //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
+                fontWeight: 'bold',
+                //字体系列
+                fontFamily: 'sans-serif',
+                //字体大小
+                fontSize: 18
+            }
+        },
+        legend: {
+            show: true,
+            data: ['统计企业数', '复工企业数', '复工率', '复产率'],
+            bottom: 'bottom',
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: ["南宁市", "柳州市", "桂林市", "梧州市", "北海市", "防城港市", "钦州市"],
+                axisPointer: {
+                    type: 'shadow'
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#BCBCBC',
+                        width: 1,//这里是为了突出显示加上的
+                    }
+                },
+                axisLabel: {
+                    interval: 0,
+                    rotate: 45,//倾斜度 -90 至 90 默认为0
+                    margin: 2,
+                    textStyle: {
+                        fontWeight: "bolder",
+                        color: "#BCBCBC",
+                        fontSize: "70%"
+                    }
+                },
+            }
+        ],
+        grid: [
+            {
+                bottom: '25%',
+                left: "15%",
+                top: "15%"
+            },
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLine: { show: false },
+                axisTick: { show: false },
+                min: 0,
+                max: 1100,
+                interval: 110,
+                axisLabel: {
+                    formatter: '{value}',
+                    color: "#3378EB",
+                    textStyle: {
+                        fontWeight: "bolder",
+                        color: "#BCBCBC",
+                        fontSize: "70%",
+                    }
+                }
+            },
+            {
+                type: 'value',
+                axisLine: { show: false },
+                axisTick: { show: false },
+                min: 0,
+                max: 110,
+                interval: 11,
+                axisLabel: {
+                    formatter: '{value}%',
+                    textStyle: {
+                        fontWeight: "bolder",
+                        color: '#BCBCBC',
+                        fontSize: "70%",
+                    }
+                }
+            }
+        ],
+        series: [
+            {
+                name: '统计企业数',
+                type: 'bar',
+                data: [
+                    1005,
+                    942,
+                    480,
+                    422,
+                    264,
+                    148,
+                    313
+                ],
+                itemStyle: {
+                    normal: {
+                        //设置柱形图的颜色
+                        color: "#4A86CB"
+                    }
+                },
+            },
+            {
+                name: '复工企业数',
+                type: 'bar',
+                data: [
+                    1005,
+                    942,
+                    480,
+                    422,
+                    264,
+                    148,
+                    313
+                ],
+                itemStyle: {
+                    normal: {
+                        //设置柱形图的颜色
+                        color: "#E56627"
+                    }
+                },
+            },
+            {
+                name: '复工率',
+                type: 'line',
+                yAxisIndex: 1,
+                data: [
+                    59.4,
+                    57.9,
+                    60.4,
+                    55.9,
+                    31.4,
+                    43.9,
+                    24.0,
+                ],
+                //设置线的样式
+                lineStyle: {
+                    color: "#B4DEDD",
+                },
+                //设置点的样式
+                itemStyle: {
+                    color: "#B4DEDD",
+                }
+
+            },
+
+            {
+                name: '复产率',
+                type: 'line',
+                yAxisIndex: 1,
+                data: [
+                    19.4,
+                    27.9,
+                    30.4,
+                    45.9,
+                    51.4,
+                    53.9,
+                    55.0,
+                ],
+                //设置线的样式
+                lineStyle: {
+                    type: "dashed",
+                    color: "#3378EB",
+                },
+                //设置点的样式
+                itemStyle: {
+                    type: "line",
+                    color: "#B4DEDD",
+                }
+
+            },
+        ]
+    };
+
+
+
+    var myChart3 = echarts.init(document.querySelector("div.bottom .bar2"));
+    option3 = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                crossStyle: {
+                    color: '#999'
+                }
+            },
+            formatter: params => {
+                console.log(params)     //可以在此设置每一条数据的hover提示信息，根据params.data中的数据自己判断，然后返回不同的值
+                if (params[0]["data"]) {
+                    return params[0]["name"] + "</br>" + params[0]["marker"] + params[0]["seriesName"] + ":  " + params[0]["data"] + "</br>" + params[1]["marker"] + params[1]["seriesName"] + ":  " + params[1]["data"]
+                } else {
+                    return params[0]["name"] + "</br>" + params[0]["marker"] + params[0]["seriesName"] + ":  " + params[0]["data"] + "</br>" + params[1]["marker"] + params[1]["seriesName"] + ":  " + params[1]["data"]
+                }
+            }
+        },
+        // toolbox: {
+        //     feature: {
+        //         dataView: {show: true, readOnly: false},
+        //         magicType: {show: true, type: ['line', 'bar']},
+        //         restore: {show: true},
+        //         saveAsImage: {show: true}
+        //     }
+        // },
+        title: {
+            left: 'center',
+            //默认为10
+            //2.主副标题之间的间距
+            itemGap: 20,
+            text: '地区生产总值',
+            textStyle: {
+                //文字颜色
+                color: '#3378EB',
+                //字体风格,'normal','italic','oblique'
+                fontStyle: 'normal',
+                //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
+                fontWeight: 'bold',
+                //字体系列
+                fontFamily: 'sans-serif',
+                //字体大小
+                fontSize: 18
+            }
+        },
+        legend: {
+            show: true,
+            data: ['统计企业数', '复工企业数', '复工率', '复产率'],
+            bottom: 'bottom',
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: ["南宁市", "柳州市", "桂林市", "梧州市", "北海市", "防城港市", "钦州市"],
+                axisPointer: {
+                    type: 'shadow'
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#BCBCBC',
+                        width: 1,//这里是为了突出显示加上的
+                    }
+                },
+                axisLabel: {
+                    interval: 0,
+                    rotate: 45,//倾斜度 -90 至 90 默认为0
+                    margin: 2,
+                    textStyle: {
+                        fontWeight: "bolder",
+                        color: "#BCBCBC",
+                        fontSize: "70%"
+                    }
+                },
+            }
+        ],
+        grid: [
+            {
+                bottom: '25%',
+                left: "15%",
+                top: "15%"
+            },
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLine: { show: false },
+                axisTick: { show: false },
+                min: 0,
+                max: 1100,
+                interval: 110,
+                axisLabel: {
+                    formatter: '{value}',
+                    color: "#3378EB",
+                    textStyle: {
+                        fontWeight: "bolder",
+                        color: "#BCBCBC",
+                        fontSize: "70%",
+                    }
+                }
+            },
+            {
+                type: 'value',
+                axisLine: { show: false },
+                axisTick: { show: false },
+                min: 0,
+                max: 110,
+                interval: 11,
+                axisLabel: {
+                    formatter: '{value}%',
+                    textStyle: {
+                        fontWeight: "bolder",
+                        color: '#BCBCBC',
+                        fontSize: "70%",
+                    }
+                }
+            }
+        ],
+        series: [
+            {
+                name: '统计企业数',
+                type: 'bar',
+                data: [
+                    1005,
+                    942,
+                    480,
+                    422,
+                    264,
+                    148,
+                    313
+                ],
+                itemStyle: {
+                    normal: {
+                        //设置柱形图的颜色
+                        color: "#4A86CB"
+                    }
+                },
+            },
+            {
+                name: '复工企业数',
+                type: 'bar',
+                data: [
+                    1005,
+                    942,
+                    480,
+                    422,
+                    264,
+                    148,
+                    313
+                ],
+                itemStyle: {
+                    normal: {
+                        //设置柱形图的颜色
+                        color: "#E56627"
+                    }
+                },
+            },
+            {
+                name: '复工率',
+                type: 'line',
+                yAxisIndex: 1,
+                data: [
+                    59.4,
+                    57.9,
+                    60.4,
+                    55.9,
+                    31.4,
+                    43.9,
+                    24.0,
+                ],
+                //设置线的样式
+                lineStyle: {
+                    color: "#B4DEDD",
+                },
+                //设置点的样式
+                itemStyle: {
+                    color: "#B4DEDD",
+                }
+
+            },
+
+            {
+                name: '复产率',
+                type: 'line',
+                yAxisIndex: 1,
+                data: [
+                    19.4,
+                    27.9,
+                    30.4,
+                    45.9,
+                    51.4,
+                    53.9,
+                    55.0,
+                ],
+                //设置线的样式
+                lineStyle: {
+                    type: "dashed",
+                    color: "#3378EB",
+                },
+                //设置点的样式
+                itemStyle: {
+                    type: "line",
+                    color: "#B4DEDD",
+                }
+
+            },
+        ]
+    };
+
+
+
+
+    //获取页面传递过来的参数
+    company = decodeURI(location.search.split("=")[1])
+    //console.log(company)
+    option1["title"]["text"] = company
+    option2["title"]["text"] = company
+    option3["title"]["text"] = company
+    myChart1.setOption(option1);
+    myChart2.setOption(option2, true);
+    myChart3.setOption(option3, true);
+
+
+    // //将其他按钮背景色恢复未点击状态
+    // function resetBackColor() {
+    //     btns = $("div.labels span")
+    //     for (let i = 0; i < btns.length; i++) {
+    //         $(btns[i]).css("background-color", "#add9c0");
+    //     }
+    // }
+    // //根据选择的数据标签决定渲染什么数据
+    // function renderSelectTable(label) {
+    //     /*
+    //     此处根据label获取数值进行渲染
+    //     */
+    //     option["title"]["text"] = label
+    //     myChart.setOption(option);
+    // }
+
+    // //初始化
+    // $("#btn1").css("background-color", "#3378EB")
+
+    // //设置点击事件
+    // $('.labels').on('click', 'span', function (e) {
+    //     resetBackColor();
+    //     $(this).css("background-color", "#3378EB");
+    //     renderSelectTable($(this).text())
+    // })
+
+</script>
+
+</html>
