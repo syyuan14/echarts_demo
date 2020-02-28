@@ -20,6 +20,13 @@
             color:white;
         }
 
+        .more{
+            padding: 8px;
+            color: white;
+            background-color: #f98632;
+            border-radius: 10px;
+        }
+
         .wrapper .first {
             width: 90vw;
             height: 28vh;
@@ -27,7 +34,7 @@
             justify-content: center;
             align-items: center;
             margin: 10px auto;
-            background-color: #3378EB;
+            /*background-color: #3378EB;*/
 
         }
 
@@ -38,7 +45,7 @@
             height: 16vh;
             margin: 10px auto;
             background-color: #3378EB;
-            border-radius: 46px;
+            border-radius: 36px;
         }
 
         /* 文字上下滚动 */
@@ -46,7 +53,7 @@
             position: relative;
             top: 0;
             overflow: hidden;
-            padding: 0 10px;
+            padding: 0 30px;
             display: inline-block;
             height: 29px;
             width: 100%;
@@ -80,7 +87,6 @@
             padding-bottom: 0 !important;
             margin-top: 0 !important;
             margin-bottom: 0 !important;
-            text-align: center;
         }
     </style>
     <script type="text/javascript">
@@ -149,37 +155,48 @@
 <body>
     <div class="wrapper">
         <div class="first">
-            <h2 style="color: white;text-align: center;line-height: 16vh;"></h2>
+            <h2 style="color: white;text-align: center;line-height: 16vh;">
+                <img style="padding-top:45px" src="img/cloud.jpeg">
+            </h2>
         </div>
         <div class="second">
-            <h2 style="color: white;text-align: center;line-height: 10vh;">
-                <a style="color: white" href="fugong.html">复工复产要情</a>
-            </h2>
+            <div>
+                <h2 style="display: inline-block; width: 50%;color: white; padding:10px 30px 0px; line-height: 8vh;">
+                    <a style="color: white" href="fugong.html">复工复产要情</a>
+                </h2>
+                <a class="more" href="fugong.html">查看详情</a>
+            </div>
             <ul class="scroll-box box-expand">
-                <li><span>2020年2月20日，全区累计复工企业10687家、</span></li>
-                <li><span>比上日新增1055家。</span></li>
-                <li><span>2020年2月20日，复工率为49%、提高4.8个百分点。</span></li>
-            </ul>
+                    <li><span>2020年2月20日，全区累计复工企业10687家、</span></li>
+                    <li><span>比上日新增1055家。</span></li>
+                    <li><span>2020年2月20日，复工率为49%、提高4.8个百分点。</span></li>
+                </ul>  
         </div>
         <div class="third">
-            <h2 style="color: white;text-align: center;line-height: 10vh;">
-                <a style="color: white" href="hongce.html">宏观经济预测</a>
-            </h2>
+            <div>
+                <h2 style="display: inline-block; width: 50%; color: white; padding:10px 30px 0px; line-height: 8vh;">
+                    <a style="color: white" href="hongce.html">宏观经济预测</a>
+                </h2>
+                <a class="more" href="hongce.html">查看详情</a>
+            </div>
             <ul class="scroll-box box-expand">
-                <li><span>2020年一季度，地区生产总值增速预测增长5.0%。</span></li>
-                <li><span>2020年一季度，投资增速预测增长5.9%。</span></li>
-            </ul>
+                    <li><span>2020年一季度，地区生产总值增速预测增长5.0%。</span></li>
+                    <li><span>2020年一季度，投资增速预测增长5.9%。</span></li>
+                </ul>
         </div>
         <div class="four">
-            <h2 style="color: white;text-align: center;line-height: 10vh;">
-                <a style="color: white" href="hongcha.html">宏观经济查询</a>
-            </h2>
+            <div>
+                <h2 style="display: inline-block; width: 50%; color: white; padding:10px 30px 0px; line-height: 8vh;">
+                    <a style="color: white" href="hongcha.html">宏观经济查询</a>
+                </h2>
+                <a class="more" href="hongcha.html">查看详情</a>
+            </div>
             <ul class="scroll-box box-expand">
-                <li><span>2019年1-12月，规模以上工业增加值:</span></li>
-                <li><span>年度目标值6.5%，实际值4.5%。</span></li>
-                <li><span>2019年1-12月，固定资产投资:</span></li>
-                <li><span>年度目标值10.0%，实际值9.5%。</span></li>
-            </ul>
+                    <li><span>2019年1-12月，规模以上工业增加值:</span></li>
+                    <li><span>年度目标值6.5%，实际值4.5%。</span></li>
+                    <li><span>2019年1-12月，固定资产投资:</span></li>
+                    <li><span>年度目标值10.0%，实际值9.5%。</span></li>
+                </ul>
         </div>
     </div>
 </body>
