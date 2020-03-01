@@ -17,48 +17,156 @@
         body {
             width: 100%;
             height: 100%;
-            color:white;
         }
 
-        .more{
-            padding: 8px;
-            color: white;
-            background-color: #f98632;
-            border-radius: 10px;
+        .wrapper {
+            width: 100vw;
+            height: 100vh;
+            overflow: auto;
+            background: linear-gradient(0deg, rgba(175, 205, 249, 1), rgba(19, 113, 255, 1), rgba(19, 114, 244, 1));
         }
 
         .wrapper .first {
-            width: 90vw;
-            height: 28vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 10px auto;
-            /*background-color: #3378EB;*/
+            width: 100vw;
+            height: 22vh;
+        }
 
+        .wrapper .first .first-left {
+            float: left;
+            width: 44vw;
+            height: 22vh;
+        }
+
+        .wrapper .first .first-right {
+            float: left;
+            width: 40vw;
+            height: 22vh;
         }
 
         .wrapper .second,
         .third,
         .four {
             width: 90vw;
-            height: 16vh;
-            margin: 10px auto;
-            background-color: #3378EB;
-            border-radius: 36px;
+            height: 21vh;
+            margin: 13px auto;
+            background-color: white;
+            border-radius: 14px;
+
+        }
+
+        .wrapper .four {
+            width: 90vw;
+            height: 29vh;
+        }
+
+        .wrapper .second .title,
+        .third .title,
+        .four .title {
+            height: 3vh;
+            color: rgba(51, 51, 51, 1);
+            font-size: 14px;
+            padding: 8px;
+        }
+
+        .wrapper .second .title .more span,
+        .third .title .more span,
+        .four .title .more span {
+            display: inline-block;
+
+
+            width: 22vw;
+            height: 2vh;
+            background: rgba(19, 113, 250, 0);
+            border: 1px solid rgba(19, 113, 255, 1);
+            border-radius: 30px;
+            padding: 2px;
+
+
+            line-height: 2vh;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(19, 113, 255, 1);
+        }
+
+        .wrapper .second .content,
+        .third .content {
+            width: 84vw;
+            height: 9vh;
+            margin: 0 auto;
+            background: rgba(219, 234, 255, 0.4);
+            border-radius: 5px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wrapper .four .content {
+            height: 17vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wrapper .second .content .content-col,
+        .third .content .content-col {
+            width: 20vw;
+            height: 6vh;
+            font-size: 12px;
+        }
+
+        .wrapper .third .content .content-col {
+            width: 28vw;
+            font-size: 12px;
+        }
+
+        .wrapper .four .content .content-col div {
+            width: 18vw;
+            font-size: 12px;
+        }
+
+        .wrapper .four .content .content-col div:first-child span:first-child {
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        .wrapper .four .content .content-col div:last-child span:first-child {
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        .wrapper .four .content .content-col {
+            height: 14vh;
+        }
+
+        .wrapper .second .content .content-col span,
+        .third .content .content-col span,
+        .four .content .content-col span {
+            display: block;
+            text-align: center;
         }
 
         /* 文字上下滚动 */
+        .wrapper .scroll-wrapper {
+            margin-left: 4vw;
+            margin-top: 1vh;
+        }
+
         .scroll-box {
             position: relative;
             top: 0;
             overflow: hidden;
-            padding: 0 30px;
+            /* padding: 0 30px; */
             display: inline-block;
             height: 29px;
-            width: 100%;
+            width: 78vw;
             line-height: 29px;
             font-size: 12px;
+
+            margin-left: 4vw;
+
+            color: rgba(85, 85, 85, 1);
         }
 
         .scroll-box.on {
@@ -155,48 +263,150 @@
 <body>
     <div class="wrapper">
         <div class="first">
-            <h2 style="color: white;text-align: center;line-height: 16vh;">
-                <img style="padding-top:45px" src="img/cloud.jpeg">
-            </h2>
+            <div class="first-left">
+                <img src="./img/首页1.png" alt="首页云图" style="width:44vw;height: 23vh;">
+            </div>
+            <div class="first-right">
+                <img src="./img/头部文字.png" alt="首页云图" style="width:50vw;height: 19vh;">
+            </div>
         </div>
         <div class="second">
-            <div>
-                <h2 style="display: inline-block; width: 50%;color: white; padding:10px 30px 0px; line-height: 8vh;">
-                    <a style="color: white" href="fugong.html">复工复产要情</a>
-                </h2>
-                <a class="more" href="fugong.html">查看详情</a>
+            <!-- 标题 -->
+            <div class="title">
+                <div style="float: left;padding-left: 4vw;">
+                    <img src="./img/矩形4.png" alt="矩形图飙" style="width: 2vw;height: 1vh;">
+                    全区复工复产要情
+                    <img src="./img/矩形4.png" alt="矩形图标" style="width: 2vw;height: 1vh;">
+                </div>
+                <div class="more" style="float: right;padding-right: 4vw;">
+                    <span> <a href="./fugong.html" style="color: rgba(19, 113, 255, 1);;">查看更多 ></a> </span>
+                </div>
             </div>
-            <ul class="scroll-box box-expand">
+            <!-- 内容区域 -->
+            <div class="content">
+                <div class="content-col">
+                    <span style="color:rgba(228,72,15,1);font-weight:500;font-size:19px">10687</span>
+                    <span>累计复工企业</span>
+                </div>
+                <div class="content-col">
+                    <span style="color:rgba(8,140,123,1);font-size:19px;font-weight:500">1055</span>
+                    <span>比上日新增</span>
+                </div>
+                <div class="content-col">
+                    <span style="color:rgba(242,154,1,1);font-size:19px;font-weight:500">49%</span>
+                    <span>复工率</span>
+                </div>
+                <div class="content-col">
+                    <span style="color:rgba(20,118,193,1);font-size:19px;font-weight:500">4.8</span>
+                    <span>提高百分点</span>
+                </div>
+            </div>
+            <!-- 文字轮播区域 -->
+            <div class="scroll-wrapper">
+                <div class="horn" style="float: left;">
+                    <img src="./img/喇叭.png" alt="喇叭" style="width: 3vw;height: 2vh;margin-top: 1vh;">
+                </div>
+                <ul class="scroll-box box-expand">
                     <li><span>2020年2月20日，全区累计复工企业10687家、</span></li>
                     <li><span>比上日新增1055家。</span></li>
                     <li><span>2020年2月20日，复工率为49%、提高4.8个百分点。</span></li>
-                </ul>  
+                </ul>
+            </div>
+
         </div>
         <div class="third">
-            <div>
-                <h2 style="display: inline-block; width: 50%; color: white; padding:10px 30px 0px; line-height: 8vh;">
-                    <a style="color: white" href="hongce.html">宏观经济预测</a>
-                </h2>
-                <a class="more" href="hongce.html">查看详情</a>
+            <!-- 标题 -->
+            <div class="title">
+                <div style="float: left;padding-left: 4vw;">
+                    <img src="./img/矩形4.png" alt="矩形图飙" style="width: 2vw;height: 1vh;">
+                    宏观经济预测
+                    <img src="./img/矩形4.png" alt="矩形图标" style="width: 2vw;height: 1vh;">
+                </div>
+                <div class="more" style="float: right;padding-right: 4vw;">
+                    <span> <a href="./hongce.html" style="color: rgba(19, 113, 255, 1);;">查看更多 ></a> </span>
+                </div>
             </div>
-            <ul class="scroll-box box-expand">
-                    <li><span>2020年一季度，地区生产总值增速预测增长5.0%。</span></li>
-                    <li><span>2020年一季度，投资增速预测增长5.9%。</span></li>
+            <!-- 内容区域 -->
+            <div class="content">
+                <div class="content-col">
+                    <span style="color:rgba(69,112,225,1);font-size:15px;font-weight: 500;">2019年</span>
+                    <span style="color:rgba(69,112,225,1);font-size:15px;font-weight: 500;">第一季度</span>
+                </div>
+                <div class="content-col">
+                    <span style="color:rgba(228,72,15,1);font-size:13px;font-weight:500">增长<span
+                            style=" display: inline;font-size:21px;">5.0</span></span>
+                    <span>地区生产总值增速</span>
+                </div>
+                <div class="content-col">
+                    <span style="color:rgba(228,72,15,1);font-size:13px;font-weight:500">增长<span
+                            style="display: inline;font-size:21px;">5.9</span></span>
+                    <span>投资增速预测</span>
+                </div>
+            </div>
+            <!-- 文字轮播区域 -->
+            <div class="scroll-wrapper">
+                <div class="horn" style="float: left;">
+                    <img src="./img/喇叭.png" alt="喇叭" style="width: 3vw;height: 2vh;margin-top: 1vh;">
+                </div>
+                <ul class="scroll-box box-expand">
+                    <li><span>2020年2月20日，全区累计复工企业10687家、</span></li>
+                    <li><span>比上日新增1055家。</span></li>
+                    <li><span>2020年2月20日，复工率为49%、提高4.8个百分点。</span></li>
                 </ul>
+            </div>
+
         </div>
         <div class="four">
-            <div>
-                <h2 style="display: inline-block; width: 50%; color: white; padding:10px 30px 0px; line-height: 8vh;">
-                    <a style="color: white" href="hongcha.html">宏观经济查询</a>
-                </h2>
-                <a class="more" href="hongcha.html">查看详情</a>
+            <!-- 标题 -->
+            <div class="title">
+                <div style="float: left;padding-left: 4vw;">
+                    <img src="./img/矩形4.png" alt="矩形图飙" style="width: 2vw;height: 1vh;">
+                    宏观经济查询
+                    <img src="./img/矩形4.png" alt="矩形图标" style="width: 2vw;height: 1vh;">
+                </div>
+                <div class="more" style="float: right;padding-right: 4vw;">
+                    <span> <a href="./hongcha.html" style="color: rgba(19, 113, 255, 1);;">查看更多 ></a> </span>
+                </div>
             </div>
-            <ul class="scroll-box box-expand">
-                    <li><span>2019年1-12月，规模以上工业增加值:</span></li>
-                    <li><span>年度目标值6.5%，实际值4.5%。</span></li>
-                    <li><span>2019年1-12月，固定资产投资:</span></li>
-                    <li><span>年度目标值10.0%，实际值9.5%。</span></li>
+            <!-- 内容区域 -->
+            <div class="content">
+                <div>
+                    <div style="width: 48vw;
+                                height: 5vh;
+                                background: rgba(219,234,255,0.4);
+                                border-radius: 49px;
+                                text-align: center;
+                                line-height: 5vh;
+                                margin-bottom: 2vh;
+                                font-size: 12px;">规模以上工业增加值</div>
+                    <div style="width: 48vw;
+                                height: 5vh;
+                                background: rgba(219,234,255,0.4);
+                                border-radius: 49px;
+                                text-align: center;
+                                line-height: 5vh;
+                                font-size: 12px;">固定资产投资</div>
+                </div>
+                <div class="content-col">
+                    <div style="margin-bottom: 1vh;"><span style="color: #E4480F;">6.5%</span><span>目标值</span></div>
+                    <div><span style="color: #088C7B;">5.3%</span><span>目标值</span></div>
+                </div>
+                <div class="content-col">
+                    <div style="margin-bottom: 1vh;"><span style="color: #E4480F;">4.5%</span><span>实际值</span></div>
+                    <div><span style="color: #088C7B;">4.6%</span><span>实际值</span></div>
+                </div>
+            </div>
+            <!-- 文字轮播区域 -->
+            <div class="scroll-wrapper">
+                <div class="horn" style="float: left;">
+                    <img src="./img/喇叭.png" alt="喇叭" style="width: 3vw;height: 2vh;margin-top: 1vh;">
+                </div>
+                <ul class="scroll-box box-expand">
+                    <li><span>2020年2月20日，全区累计复工企业10687家、</span></li>
+                    <li><span>比上日新增1055家。</span></li>
+                    <li><span>2020年2月20日，复工率为49%、提高4.8个百分点。</span></li>
                 </ul>
+            </div>
         </div>
     </div>
 </body>
