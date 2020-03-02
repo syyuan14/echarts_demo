@@ -9,39 +9,132 @@
         body {
             margin-top: 50px;
             text-align: center;
+            background-color: royalblue;
+        }
+
+        table.imagetable {
+
+            background: white;
+            border-radius: 12px;
+
+            font-family: verdana, arial, sans-serif;
+            font-size: 11px;
+            color: #333333;
+            border-width: 0px;
+            border-color: #999999;
+            border-collapse: collapse;
+        }
+
+        table.imagetable th {
+            border: none;
+            padding: 8px;
+            border-bottom: #3F8BF7 solid 1px;
+
+        }
+
+        table.imagetable td {
+            /* background: #dcddc0 url('cell-grey.jpg');
+            border-width: 1px; */
+            padding: 8px;
+            /* border-style: solid;
+            border-color: #999999; */
+
+
+            border: none;
+            border-bottom: 1px solid rgba(76, 201, 216, 0.3);
+            ;
+        }
+
+        table.imagetable td:nth-child(2) {
+            color: #088C7B;
+        }
+
+        table.imagetable td:nth-child(3) {
+            color: #E4480F;
+        }
+
+        table.imagetable td:nth-child(4) {
+            color: #1476C1;
+        }
+
+        table.imagetable tr:nth-child(3) td {
+            color: #333333;
         }
     </style>
-    <script type="text/javascript">
-        //当前月份之前的年月
-        var last_year_month = function () {
-            var d = new Date();
-            var num = d.getMonth() + 1;
-            var result = [];
-            for (var i = 1; i < num; i++) {
-                d.setMonth(d.getMonth() - 1);
-                var m = d.getMonth() + 1;
-                m = m < 10 ? "0" + m : m;
-                result.push(d.getFullYear() + m);
-
-            }
-            return result;
-        }
-        $(document).ready(function () {
-            //将值插入到下拉框
-            for (var allinfo = last_time(), i = 0; i < allinfo.length; i++) {
-                $("#queryDate").append("<option value='" + allinfo[i] + "'>" + allinfo[i] + "</option>");
-            }
-        });
-    </script>
 </head>
 
 <body>
 
 
-    <select id="queryDate" name="queryDate">
-        <option>请选择年月</option>
-    </select>
-    <a class="sbtn sbtn01" οnclick="querySysj()" href="#">查询历史数据</a>
+    <table class="imagetable">
+        <tr>
+            <th style="border: none;"> <img src="./img/矩形4.png" alt="矩形图飙" style="width: 2vw;height: 1vh;">
+                广西企业及项目复工复产情况表
+                <img src="./img/矩形4.png" alt="矩形图标" style="width: 2vw;height: 1vh;"></th>
+        </tr>
+        <tr>
+            <th>跟踪统计企业</th>
+            <th>统计企<br>业总数</th>
+            <th>复工率</th>
+            <th>今日新增<br>复工企业数</th>
+        </tr>
+        <tr style="color:black">
+            <td>跟踪统计企业合集</td>
+            <td>21182</td>
+            <td>83%</td>
+            <td>415</td>
+        </tr>
+        <tr>
+            <td>规模以上工业企业</td>
+            <td>6741</td>
+            <td>86%</td>
+            <td>484</td>
+        </tr>
+        <tr>
+            <td>限额以上商贸服务业企业</td>
+            <td>4552</td>
+            <td>76%</td>
+            <td>632</td>
+        </tr>
+        <tr>
+            <td>农业龙头企业</td>
+            <td>4547</td>
+            <td>68%</td>
+            <td>245</td>
+        </tr>
+        <tr>
+            <td>规模以上工业企业</td>
+            <td>462</td>
+            <td>64%</td>
+            <td>124</td>
+        </tr>
+        <tr>
+            <td>交通运输客货企运企业</td>
+            <td>874</td>
+            <td>53%</td>
+            <td>136</td>
+        </tr>
+        <tr>
+            <td>房地产企业</td>
+            <td>5431</td>
+            <td>49%</td>
+            <td>139</td>
+        </tr>
+        <tr>
+            <td>外贸企业</td>
+            <td>716</td>
+            <td>44%</td>
+            <td>364</td>
+        </tr>
+        <tr>
+            <td>自治区统筹推进在建重大项</td>
+            <td>1452</td>
+            <td>42%</td>
+            <td>T185</td>
+        </tr>
+    </table>
+
+
 
 
 </body>
