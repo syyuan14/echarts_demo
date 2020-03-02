@@ -45,7 +45,7 @@
 
         table.imagetable {
 
-            width:95vw;
+            width: 95vw;
 
             margin: 2vh auto;
 
@@ -61,15 +61,15 @@
         }
 
         table.imagetable th {
-            
+
             border: none;
-            padding: 8px;
+            padding: 2px 1px;
             border-bottom: #3F8BF7 solid 1px;
 
         }
 
         table.imagetable td {
-            
+
             padding: 8px;
 
 
@@ -94,12 +94,13 @@
             color: #333333;
         }
 
+        
 
         .wrapper .bar {
             width: 95vw;
             height: 55vh;
 
-            margin: 0 auto;
+            margin: 2vh auto;
 
             border-radius: 11px;
             overflow: hidden;
@@ -119,7 +120,8 @@
         </div>
         <table class="imagetable">
             <tr>
-                <th style="border: none;"> <img src="./img/矩形4.png" alt="矩形图飙" style="width: 2vw;height: 1vh;">
+                <th colspan="3" style="border: none;font-size: 16px;font-weight: 400;padding: 2vh 0;"> <img
+                        src="./img/矩形4.png" alt="矩形图飙" style="width: 2vw;height: 1vh;">
                     广西企业及项目复工复产情况表
                     <img src="./img/矩形4.png" alt="矩形图标" style="width: 2vw;height: 1vh;"></th>
             </tr>
@@ -129,55 +131,55 @@
                 <th>复工率</th>
                 <th>今日新增<br>复工企业数</th>
             </tr>
-            <tr style="color:black">
-                <td>跟踪统计企业合集</td>
+            <tr>
+                <td>跟踪统计企业合计</td>
                 <td>21182</td>
                 <td>83%</td>
                 <td>415</td>
             </tr>
-            <tr>
+            <tr id="规模以上工业企业">
                 <td>规模以上工业企业</td>
                 <td>6741</td>
                 <td>86%</td>
                 <td>484</td>
             </tr>
-            <tr>
+            <tr id="限额以上商贸服务业企业">
                 <td>限额以上商贸服务业企业</td>
                 <td>4552</td>
                 <td>76%</td>
                 <td>632</td>
             </tr>
-            <tr>
+            <tr id="农业龙头企业">
                 <td>农业龙头企业</td>
                 <td>4547</td>
                 <td>68%</td>
                 <td>245</td>
             </tr>
-            <tr>
+            <tr id="规模以上工业企业">
                 <td>规模以上工业企业</td>
                 <td>462</td>
                 <td>64%</td>
                 <td>124</td>
             </tr>
-            <tr>
+            <tr id="交通运输客货企运企业">
                 <td>交通运输客货企运企业</td>
                 <td>874</td>
                 <td>53%</td>
                 <td>136</td>
             </tr>
-            <tr>
+            <tr id="房地产企业">
                 <td>房地产企业</td>
                 <td>5431</td>
                 <td>49%</td>
                 <td>139</td>
             </tr>
-            <tr>
+            <tr id="外贸企业">
                 <td>外贸企业</td>
                 <td>716</td>
                 <td>44%</td>
                 <td>364</td>
             </tr>
-            <tr>
+            <tr id="外贸企业">
                 <td>自治区统筹推进在建重大项</td>
                 <td>1452</td>
                 <td>42%</td>
@@ -268,7 +270,7 @@
                 '农业龙头企业',
                 '限额以上商贸服务业企业',
                 '规模以上工业企业',
-                '跟踪统计企业合集'
+                '跟踪统计企业合计'
             ],
             axisLine: { show: false },
             axisTick: { show: false },
@@ -369,8 +371,18 @@
         myChart.setOption(option, true);
     }
     myChart.on('click', function (params) {
-        window.location.href = `fugongdetail.html?company=${params.name}`
+        if (params.name !== "跟踪统计企业合计") {
+            window.location.href = `fugongdetail.html?company=${params.name}`
+        }
     });
+    //表格点击跳转
+    $('table.imagetable').on('click', 'tr', function (e) {
+        //console.log(e.currentTarget.id === null)
+        id = e.currentTarget.id
+        if (!(typeof id == "undefined" || id == null || id == "")) {
+            window.location.href = `fugongdetail.html?company=${e.currentTarget.id}`
+        }
+    })
 
 </script>
 
