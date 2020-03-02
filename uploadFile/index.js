@@ -57,11 +57,11 @@ fs.readdir(pathName, function (err, files) {
                         console.log(item)
                         data = {
                             "data": res,
-                            "key": String(dirs.indexOf(item)),
-                            // "key":item.split(".")[0],//使用文件名
+                            // "key": String(dirs.indexOf(item)),
+                            "key":item.split(".")[0],//使用文件名
                         }
-                        //console.log(encodeURI("http://47.94.216.106/api/test?key="+item.split(".")[0]));
-                        postData(encodeURI("http://47.94.216.106/api/test?key=" + String(dirs.indexOf(item))), data).then((res) => {
+                        console.log(encodeURI("http://47.94.216.106/api/test?key="+item.split(".")[0]));
+                        postData(encodeURI("http://47.94.216.106/api/test?key=" + String(item.split(".")[0])), data).then((res) => {
                             console.log(res)
                         }).catch((err) => {
                             console.log(err)
@@ -82,11 +82,11 @@ fs.readdir(pathName, function (err, files) {
                         console.log(item)
                         data = {
                             "data": res,
-                            "key": String(dirs.indexOf(item)),
-                            // "key":item.split(".")[0],//使用文件名
+                            // "key": String(dirs.indexOf(item)),
+                            "key":item.split(".")[0],//使用文件名
                         }
-                        //console.log(encodeURI("http://47.94.216.106/api/test?key="+item.split(".")[0]));
-                        postData(encodeURI("http://47.94.216.106/api/test?key=" + String(dirs.indexOf(item))), data).then((res) => {
+                        console.log(encodeURI("http://47.94.216.106/api/test?key="+item.split(".")[0]));
+                        postData(encodeURI("http://47.94.216.106/api/test?key=" + item.split(".")[0]), data).then((res) => {
                             console.log(res)
                         }).catch((err) => {
                             console.log(err)

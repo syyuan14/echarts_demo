@@ -273,7 +273,7 @@
                 '北海市', '梧州市', '桂林市',
                 '柳州市', '南宁市'
             ],
-            
+
             axisLine: { show: false },
             axisTick: { show: false },
             axisLabel: {
@@ -338,10 +338,79 @@
     //获取页面传递过来的参数
     company = decodeURI(location.search.split("=")[1])
     //console.log(company)
-    option1["title"]["text"] = company
-    option2["title"]["text"] = company
-    myChart1.setOption(option1);
-    myChart2.setOption(option2)
+
+    let map = {
+        "＃规模以上工业企业": "广西规模以上工业企业复工情况表",
+        "规模以上服务业企业": "广西规模以上服务业企业复工情况表",
+        "限额以上商贸服务业企业": "广西限额以上商贸服务业企业复工情况表",
+        "农业龙头企业": "广西农业龙头企业复工情况表",
+        "交通运输客货运企业": "广西交通运输客货运企业复工情况表",
+        "房地产企业": "广西建筑业项目和房地产企业复工情况表",
+        "外资企业": "广西外资企业和外贸企业复工情况表",
+        "外贸企业": "广西外资企业和外贸企业复工情况表",
+        "自治区层面统筹推进": "自治区层面统筹推进在建重大项目复工情况表",
+        "建筑业施工项目": "广西建筑业项目和房地产企业复工情况表",
+    }
+
+    function formatData1(data) {
+
+        let addr = [];
+        let fugonglv = [];
+        let fugong = [];
+        let weifugong = [];
+
+
+        data.forEach((item) => {
+            addr.push(item["地区"]);
+            fugonglv.push(item["复工率（%）"]);
+            fugong.push(item["复工企业数（家）"]);
+            weifugong.push(item["统计企业数（家）"] - item["复工企业数（家）"]);
+        })
+
+        return [addr, fugonglv, fugong, weifugong]
+    }
+
+    $.getJSON(encodeURI("http://47.94.216.106/api/test?key=" + map[company])).done(
+        function (result) {
+            if (map[company] !== "广西建筑业项目和房地产企业复工情况表" && map[company] !== "广西外资企业和外贸企业复工情况表") {
+                if (result && result.data) {
+                    // console.log(result.data.data);
+                    // console.log(formatData1(result.data.data))
+                    formatResult = formatData1(result.data.data)
+                    option1["series"][0]["data"] = formatResult[1]
+                    //option1["series"][1]["data"] = formatResult[3]
+                    option1["yAxis"]["data"] = formatResult[0]
+                    if (option1 && typeof option1 === "object") {
+                        myChart1.setOption(option1, true);
+                    }
+                    option2["series"][0]["data"] = formatResult[2]
+                    option2["series"][1]["data"] = formatResult[3]
+                    option2["yAxis"]["data"] = formatResult[0]
+                    if (option2 && typeof option2 === "object") {
+                        myChart2.setOption(option2, true);
+                    }
+
+                }
+            }else{
+                if (result && result.data) {
+                    // console.log(result.data.data);
+                    // console.log(formatData1(result.data.data))
+                    // formatResult = formatData1(result.data.data)
+                    // option1["series"][0]["data"] = formatResult[1]
+                    // //option1["series"][1]["data"] = formatResult[3]
+                    // option1["yAxis"]["data"] = formatResult[0]
+                    // if (option1 && typeof option1 === "object") {
+                    //     myChart1.setOption(option1, true);
+                    // }
+                }
+            }
+
+        }
+    )
+    // option1["title"]["text"] = company
+    // option2["title"]["text"] = company
+    // myChart1.setOption(option1);
+    //myChart2.setOption(option2)
 
 
 

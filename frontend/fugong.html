@@ -168,7 +168,7 @@
                 <th>复工率</th>
                 <th>今日新增<br>复工企业数</th>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td>跟踪统计企业合计</td>
                 <td>21182</td>
                 <td>83%</td>
@@ -216,12 +216,12 @@
                 <td>44%</td>
                 <td>364</td>
             </tr>
-            <tr id="外贸企业">
+            <tr id="自治区统筹推进在建重大项">
                 <td><span class="six" style="display: inline-block;">8</span>&nbsp;&nbsp;自治区统筹推进在建重大项</td>
                 <td>1452</td>
                 <td>42%</td>
                 <td>185</td>
-            </tr>
+            </tr> -->
         </table>
         <div class="bar">
 
@@ -372,44 +372,59 @@
     function renderTable(data) {
         //渲染表格使用
 
-        let tbodyStr = '';
-        data.forEach(function (item) {
-            tbodyStr = tbodyStr + "<tr><td>" + item["统计企业总数"] + "</td><td>" + (item["复工率（%）"] ? (item["复工率（%）"]) : '--') + "</td><td>" + (item["今日新增复工企业数（个）"] ? item["今日新增复工企业数（个）"] : '--') + "</td></tr>";
-        });
-        $('div.second tbody').html(tbodyStr)
+        let tbodyStr = `<tr>
+                <td>${data[0]["地区"]}</td>
+                <td>${data[0]["统计企业/项目数（家/个）"]}</td>
+                <td>${data[0]["复工率（%）"]}%</td>
+                <td>${data[0]["比上日新增复工企业/项目数\n（家/个）"]}</td>
+            </tr>`;
+        for (let i = 1; i < data.length; i++) {
+            tbodyStr = tbodyStr + `<tr id="${data[i]["地区"]}">
+                <td> <span class="six" style="display: inline-block;">${i}</span>&nbsp;&nbsp;${data[i]["地区"]}</td>
+                <td>${data[i]["统计企业/项目数（家/个）"]}</td>
+                <td>${data[i]["复工率（%）"]}%</td>
+                <td>${data[i]["比上日新增复工企业/项目数\n（家/个）"]}</td>
+            </tr>`
+        }
+        //$('table.imagetable tbody').html(tbodyStr)
+        //console.log(tbodyStr)
+        $("table.imagetable tbody tr:eq(1)").after(tbodyStr)
     }
 
     function formatData(data) {
         //服务端返回的数据直接格式化为echarts需要的格式
-        let fugong = []
-        let weifugong = []
+        let fugong = [];
+        let weifugong = [];
+        let yAxis = [];
 
         for (key in data) {
-            fugong.push(data[key]["复工企业个数"])
-            weifugong.push(data[key]["未复工企业个数"])
+            fugong.push(data[key]["复工企业/项目数（家/个）"]);
+            weifugong.push(data[key]["统计企业/项目数（家/个）"] - data[key]["复工企业/项目数（家/个）"]);
+            yAxis.push(data[key]["地区"])
         }
-        return [fugong, weifugong]
+        return [fugong, weifugong,yAxis]
     }
-    // $.getJSON("http://47.94.216.106/api/yiqing").done(
-    //     function (result) {
-    //         if (result && result.table) {
-    //             renderTable(result.table)
-    //         }
+    $.getJSON(encodeURI("http://47.94.216.106/api/test?key=" + "广西企业及项目复工复产情况表")).done(
+        function (result) {
+            if (result && result.data) {
+                console.log(result.data.data);
+                renderTable(result.data.data);
 
-    //         // if (result && result.chart) {
-    //         //     formatResult = formatData(result.chart)
-    //         //     option["series"][0]["data"] = formatResult[0]
-    //         //     option["series"][1]["data"] = formatResult[1]
-    //         //     if (option && typeof option === "object") {
-    //         //         myChart.setOption(option, true);
-    //         //     }
-    //         // }
+                formatResult = formatData(result.data.data)
+                option["series"][0]["data"] = formatResult[0]
+                option["series"][1]["data"] = formatResult[1]
+                option["yAxis"]["data"] = formatResult[2]
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+            }
 
-    //     }
-    // )
-    if (option && typeof option === "object") {
-        myChart.setOption(option, true);
-    }
+
+        }
+    )
+    // if (option && typeof option === "object") {
+    //     myChart.setOption(option, true);
+    // }
     myChart.on('click', function (params) {
         if (params.name !== "跟踪统计企业合计") {
             window.location.href = `fugongdetail.html?company=${params.name}`
