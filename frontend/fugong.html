@@ -94,7 +94,7 @@
             color: #333333;
         }
 
-        
+
 
         .wrapper .bar {
             width: 95vw;
@@ -104,6 +104,43 @@
 
             border-radius: 11px;
             overflow: hidden;
+        }
+
+
+
+        .six {
+            position: relative;
+            width: 7px;
+            height: 14.6px;
+            margin: -3px auto;
+            background-color: #20BAFB;
+
+            color: white;
+        }
+
+        .six:before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 0;
+            height: 0;
+            right: 7px;
+            border-width: 7.3px 3.5px;
+            border-style: solid;
+            border-color: transparent #20BAFB transparent transparent;
+        }
+
+        .six:after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: 7px;
+            border-width: 7.3px 3.5px;
+            border-style: solid;
+            border-color: transparent transparent transparent #20BAFB;
+            top: 0;
         }
     </style>
 </head>
@@ -138,49 +175,49 @@
                 <td>415</td>
             </tr>
             <tr id="规模以上工业企业">
-                <td>规模以上工业企业</td>
+                <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;规模以上工业企业</td>
                 <td>6741</td>
                 <td>86%</td>
                 <td>484</td>
             </tr>
             <tr id="限额以上商贸服务业企业">
-                <td>限额以上商贸服务业企业</td>
+                <td><span class="six" style="display: inline-block;">2</span>&nbsp;&nbsp;限额以上商贸服务业企业</td>
                 <td>4552</td>
                 <td>76%</td>
                 <td>632</td>
             </tr>
             <tr id="农业龙头企业">
-                <td>农业龙头企业</td>
+                <td><span class="six" style="display: inline-block;">3</span>&nbsp;&nbsp;农业龙头企业</td>
                 <td>4547</td>
                 <td>68%</td>
                 <td>245</td>
             </tr>
             <tr id="规模以上工业企业">
-                <td>规模以上工业企业</td>
+                <td><span class="six" style="display: inline-block;">4</span>&nbsp;&nbsp;规模以上工业企业</td>
                 <td>462</td>
                 <td>64%</td>
                 <td>124</td>
             </tr>
             <tr id="交通运输客货企运企业">
-                <td>交通运输客货企运企业</td>
+                <td><span class="six" style="display: inline-block;">5</span>&nbsp;&nbsp;交通运输客货企运企业</td>
                 <td>874</td>
                 <td>53%</td>
                 <td>136</td>
             </tr>
             <tr id="房地产企业">
-                <td>房地产企业</td>
+                <td><span class="six" style="display: inline-block;">6</span>&nbsp;&nbsp;房地产企业</td>
                 <td>5431</td>
                 <td>49%</td>
                 <td>139</td>
             </tr>
             <tr id="外贸企业">
-                <td>外贸企业</td>
+                <td><span class="six" style="display: inline-block;">7</span>&nbsp;&nbsp;外贸企业</td>
                 <td>716</td>
                 <td>44%</td>
                 <td>364</td>
             </tr>
             <tr id="外贸企业">
-                <td>自治区统筹推进在建重大项</td>
+                <td><span class="six" style="display: inline-block;">8</span>&nbsp;&nbsp;自治区统筹推进在建重大项</td>
                 <td>1452</td>
                 <td>42%</td>
                 <td>185</td>
@@ -243,6 +280,9 @@
                 lineStyle: {
                     color: "#CCCCCC"
                 }
+            },
+            splitLine: {
+                show: false
             },
             axisLabel: {
 

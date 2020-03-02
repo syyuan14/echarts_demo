@@ -59,7 +59,7 @@
             height: 68vh;
             margin: 0 auto;
             margin-bottom: 40px;
-            
+
             border-radius: 12px;
             overflow: hidden;
         }
@@ -95,8 +95,8 @@
     var option1 = {
         backgroundColor: "white",
         title: {
-            left:10,
-            top:10,
+            left: 10,
+            top: 10,
             //默认为10
             //2.主副标题之间的间距
             itemGap: 20,
@@ -109,7 +109,7 @@
                 fontStyle: 'normal',
                 //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
                 //fontWeight: 'bold',
-                fontWeight:"350",
+                fontWeight: "350",
                 //字体系列
                 //fontFamily: 'sans-serif',
                 //字体大小
@@ -129,7 +129,13 @@
         },
         xAxis: {
             type: 'category',
-            data: ["南宁市", "柳州市", "桂林市", "梧州市", "北海市", "防城港市", "钦州市", "贵港市", "玉林市", "百色市", "贺州市", "河池市", "来宾市", "崇左市"],
+            data: [
+                '南宁市', '柳州市', '桂林市',
+                '梧州市', '北海市', '防城港市',
+                '钦州市', '贵港市', '玉林市',
+                '百色市', '贺州市', '河池市',
+                '来宾市', '崇左市'
+            ],
             axisLine: {
                 lineStyle: {
                     color: '#BCBCBC',
@@ -211,8 +217,8 @@
             }
         },
         title: {
-            left:20,
-            top:20,
+            left: 20,
+            top: 20,
             //默认为10
             //2.主副标题之间的间距
             itemGap: 20,
@@ -224,7 +230,7 @@
                 fontStyle: 'normal',
                 //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
                 //fontWeight: 'bold',
-                fontWeight:"350",
+                fontWeight: "350",
                 //字体系列
                 //字体大小
                 fontSize: 15
@@ -232,7 +238,7 @@
         },
         legend: {
             data: ['复工企业个数', '未复工企业个数'],
-            bottom:"bottom",
+            bottom: "bottom",
         },
         grid: [
             {
@@ -243,6 +249,9 @@
         ],
         xAxis: {
             type: 'value',
+            splitLine: {
+                show: false
+            },
             axisLabel: {
                 interval: 0,
                 rotate: 50,//倾斜度 -90 至 90 默认为0
@@ -257,7 +266,14 @@
         },
         yAxis: {
             type: 'category',
-            data: ["南宁市", "柳州市", "桂林市", "梧州市", "北海市", "防城港市", "钦州市", "贵港市", "玉林市", "百色市", "贺州市", "河池市", "来宾市", "崇左市"],
+            data: [
+                '崇左市', '来宾市', '河池市',
+                '贺州市', '百色市', '玉林市',
+                '贵港市', '钦州市', '防城港市',
+                '北海市', '梧州市', '桂林市',
+                '柳州市', '南宁市'
+            ],
+            
             axisLine: { show: false },
             axisTick: { show: false },
             axisLabel: {
@@ -281,7 +297,12 @@
                     show: false,
                     position: 'insideRight'
                 },
-                data: [3153, 1482, 2896, 1910, 1319, 503, 608, 535, 200, 180, 130, 110, 120, 100],
+                data: [
+                    100, 120, 110, 130,
+                    180, 200, 535, 608,
+                    503, 1319, 1910, 2896,
+                    1482, 3153
+                ],
                 itemStyle: {
                     normal: {
                         //设置柱形图的颜色
@@ -297,7 +318,12 @@
                     show: false,
                     position: 'insideRight',
                 },
-                data: [3002, 1070, 2503, 47, 663, 2196, 1153, 510, 503, 608, 535, 200, 180, 130],
+                data: [
+                    130, 180, 200, 535,
+                    608, 503, 510, 1153,
+                    2196, 663, 47, 2503,
+                    1070, 3002
+                ],
                 itemStyle: {
                     normal: {
                         //设置柱形图的颜色
@@ -316,8 +342,7 @@
     option2["title"]["text"] = company
     myChart1.setOption(option1);
     myChart2.setOption(option2)
-    // myChart2.setOption(option2, true);
-    // myChart3.setOption(option3, true);
+
 
 
 
