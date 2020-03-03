@@ -5,45 +5,56 @@
     　　　　
     <meta charset="UTF-8">
     　　　　<title></title>
+            <script src="./external_js/jquery-3.4.1.min.js"></script>
     　　　　<style type="text/css">
-        .div {
+        #affiche {
+            color: red;
+            display: block;
+            width: 96%;
+            height: 20vh;
+            margin: 0 auto;
             position: relative;
-            width: 50px;
-            height: 86.6px;
-            margin: 50px auto;
-            background-color: red;
+            overflow: hidden;
         }
 
-        .div:before {
-            content: '';
-            display: block;
+        .affiche_text {
             position: absolute;
-            width: 0;
-            height: 0;
-            right: 50px;
-            border-width: 43.3px 25px;
-            border-style: solid;
-            border-color: transparent red transparent transparent;
-        }
-
-        .div:after {
-            content: '';
-            display: block;
-            position: absolute;
-            width: 0;
-            height: 0;
-            left: 50px;
-            border-width: 43.3px 25px;
-            border-style: solid;
-            border-color: transparent transparent transparent red;
             top: 0;
+            left: 100%;
+            line-height: 20vh;
+            display: block;
+            word-break: keep-all;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 50px;
         }
     </style>
     　　</head>
 　　
 
 <body>
-<div class="div"></div>
+
+    <div id="affiche">
+        <div class="affiche_text">
+            酒店 友情提示：
+        </div>
+    </div>
+
 </body>
+<script>
+    (function () { var timer = setTimeout(this.marquee, 1000); }());
+    function marquee() {
+        var scrollWidth = $('#affiche').width();
+        var textWidth = $('.affiche_text').width();
+        var i = scrollWidth;
+        setInterval(function () {
+            i--;
+            if (i < -textWidth) {
+                i = scrollWidth;
+            }
+            $('.affiche_text').animate({ 'left': i + 'px' }, 20);
+        }, 20);
+    }
+</script>
 
 </html>

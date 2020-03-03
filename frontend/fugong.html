@@ -407,7 +407,7 @@
     $.getJSON(encodeURI("http://47.94.216.106/api/test?key=" + "广西企业及项目复工复产情况表")).done(
         function (result) {
             if (result && result.data) {
-                console.log(result.data.data);
+                //console.log(result.data.data);
                 renderTable(result.data.data);
 
                 formatResult = formatData(result.data.data)

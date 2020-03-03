@@ -476,33 +476,33 @@
                 && map[company] !== "自治区层面统筹推进在建重大项目复工情况表"
             ) {
                 if (result && result.data) {
-                    console.log(result.data.data);
+                    //console.log(result.data.data);
                     // console.log(formatData1(result.data.data))
                     formatResult = formatData1(result.data.data)
-                    console.log(formatResult)
+                    //console.log(formatResult)
 
                     renderEchart(formatResult, company)
 
                 }
             } else if (map[company] === "广西外资企业和外贸企业复工情况表") {
                 if (result && result.data) {
-                    console.log(result.data.data);
+                    //console.log(result.data.data);
                     formatResult = formatData2(result.data.data, company)
-                    console.log(formatResult)
+                    //console.log(formatResult)
                     renderEchart(formatResult, company)
                 }
             } else if (map[company] === "广西建筑业项目和房地产企业复工情况表") {
                 if (result && result.data) {
-                    console.log(result.data.data);
+                    //console.log(result.data.data);
                     formatResult = formatData3(result.data.data, company)
-                    console.log(formatResult)
+                    //console.log(formatResult)
                     renderEchart(formatResult, company)
                 }
             } else {
                 if (result && result.data) {
-                    console.log(result.data.data);
+                    //console.log(result.data.data);
                     formatResult = formatData4(result.data.data)
-                    console.log(formatResult)
+                    //console.log(formatResult)
                     renderEchart(formatResult, company)
                 }
             }

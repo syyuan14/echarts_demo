@@ -147,6 +147,30 @@
             text-align: center;
         }
 
+        /*文字上下滚动*/
+        #affiche {
+            display: block;
+            width: 90%;
+            height: 4vh;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .affiche_text {
+            position: absolute;
+            top: 3px;
+            left: 100%;
+            height: 4vh;
+            line-height: 4vh;
+            display: block;
+            word-break: keep-all;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 12px;
+            color: rgba(85, 85, 85, 1);
+        }
+
         /* 文字上下滚动 */
         .wrapper .scroll-wrapper {
             margin-left: 4vw;
@@ -168,8 +192,8 @@
 
             color: rgba(85, 85, 85, 1);
         }
-
-        .scroll-box.on {
+        /* 文字上下滚动 */
+        /* .scroll-box.on {
             background: #fff;
             z-index: 2;
             overflow: auto;
@@ -195,7 +219,7 @@
             padding-bottom: 0 !important;
             margin-top: 0 !important;
             margin-bottom: 0 !important;
-        }
+        } */
     </style>
     <script type="text/javascript">
 
@@ -257,6 +281,20 @@
             }
         })
 
+        //横向文字滚动
+        (function () { var timer = setTimeout(this.marquee, 1000); }());
+        function marquee() {
+            var scrollWidth = $('#affiche').width();
+            var textWidth = $('.affiche_text').width();
+            var i = scrollWidth;
+            setInterval(function () {
+                i--;
+                if (i < -textWidth) {
+                    i = scrollWidth;
+                }
+                $('.affiche_text').animate({ 'left': i + 'px' }, 20);
+            }, 20);
+        }
     </script>
 </head>
 
@@ -306,11 +344,16 @@
                 <div class="horn" style="float: left;">
                     <img src="./img/喇叭.png" alt="喇叭" style="width: 3vw;height: 2vh;margin-top: 1vh;">
                 </div>
-                <ul class="scroll-box box-expand">
+                <!-- <ul class="scroll-box box-expand">
                     <li><span>2020年2月20日，全区累计复工企业10687家</span></li>
                     <li><span>、比上日新增1055家。</span></li>
                     <li><span>2020年2月20日，复工率为49%、提高4.8个百分点。</span></li>
-                </ul>
+                </ul> -->
+                <div id="affiche">
+                    <div class="affiche_text">
+                        2020年2月20日，全区累计复工企业10687家、比上日新增1055家。2020年2月20日，复工率为49%、提高4.8个百分点。
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -348,10 +391,15 @@
                 <div class="horn" style="float: left;">
                     <img src="./img/喇叭.png" alt="喇叭" style="width: 3vw;height: 2vh;margin-top: 1vh;">
                 </div>
-                <ul class="scroll-box box-expand">
+                <!-- <ul class="scroll-box box-expand">
                     <li><span>2020年一季度，地区生产总值增速预测增长5.0%。</span></li>
                     <li><span>2020年一季度，投资增速预测增长5.9%。</span></li>
-                </ul>
+                </ul> -->
+                <div id="affiche">
+                    <div class="affiche_text">
+                        2020年一季度，地区生产总值增速预测增长5.0%。2020年一季度，投资增速预测增长5.9%。
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -400,12 +448,17 @@
                 <div class="horn" style="float: left;">
                     <img src="./img/喇叭.png" alt="喇叭" style="width: 3vw;height: 2vh;margin-top: 1vh;">
                 </div>
-                <ul class="scroll-box box-expand">
+                <!-- <ul class="scroll-box box-expand">
                     <li><span>2019年1-12月，规模以上工业增加值：年度目标值6.5%，</span></li>
                     <li><span>实际值4.5%。</span></li>
                     <li><span>2019年1-12月，固定资产投资：年度目标值10.0%，</span></li>
                     <li><span>实际值9.5%。</span></li>
-                </ul>
+                </ul> -->
+                <div id="affiche">
+                    <div class="affiche_text">
+                        2019年1-12月，规模以上工业增加值：年度目标值6.5%，实际值4.5%。2019年1-12月，固定资产投资：年度目标值10.0%，实际值9.5%。
+                    </div>
+                </div>
             </div>
         </div>
     </div>
