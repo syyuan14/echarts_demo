@@ -292,7 +292,7 @@
             {
                 name: '复工企业个数',
                 type: 'bar',
-                stack: '总量',
+                //stack: '总量',
                 label: {
                     show: false,
                     position: 'insideRight'
@@ -313,7 +313,7 @@
             {
                 name: '未复工企业个数',
                 type: 'bar',
-                stack: '总量',
+                //stack: '总量',
                 label: {
                     show: false,
                     position: 'insideRight',
@@ -369,7 +369,7 @@
             weifugong.push(item["统计企业数（家）"] - item["复工企业数（家）"]);
         })
 
-        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.reverse())
+        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.reverse().slice(0,list.length-1))
     }
     function formatData2(data, company) {
         //格式化外资外贸数据
@@ -390,7 +390,7 @@
             weifugong.push(item[company]["统计企业数（家）"] - item[company]["复工企业数（家）"]);
         })
 
-        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.reverse())
+        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.reverse().slice(0,list.length-1))
     }
     function formatData3(data, company) {
         //格式化建筑行业和房地产行业
@@ -422,7 +422,7 @@
         }
 
 
-        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.reverse())
+        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.reverse().slice(0,list.length-1))
     }
 
     function formatData4(data) {
@@ -442,7 +442,7 @@
             weifugong.push(item["重大项目数（个）"] - item["复工项目数（个）"]);
         })
 
-        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.reverse())
+        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.reverse().slice(0,list.length-1))
     }
     function renderEchart(formatResult, company) {
         //折线图

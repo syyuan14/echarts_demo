@@ -54,7 +54,7 @@ function readFile2(path) {
     }
 
     json_data = XLSX.utils.sheet_to_json(worksheet);
-
+    
     let res = json_data.slice(1).map(
         (item) => {
 
@@ -80,10 +80,11 @@ function readFile2(path) {
 
         }
     )
+    console.log(res)
     return res
 }
 
-
+//readFile2("./excels/广西建筑业项目和房地产企业复工情况表.xlsx")
 module.exports = {
     readFile1,
     readFile2
