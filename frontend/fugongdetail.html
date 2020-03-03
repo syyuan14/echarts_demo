@@ -118,11 +118,11 @@
         },
         tooltip: {
             trigger: 'axis',
-            formatter: params => {        //可以在此设置每一条数据的hover提示信息，根据params.data中的数据自己判断，然后返回不同的值
-                if (params[0]["data"]) {
-                    return params[0]["name"] + "</br>" + params[0]["marker"] + params[0]["seriesName"] + ":  " + params[0]["data"] + '%' + "</br>" + params[1]["marker"] + params[1]["seriesName"] + ":  " + params[1]["data"] + '%'
-                }
-            }
+            // formatter: params => {        //可以在此设置每一条数据的hover提示信息，根据params.data中的数据自己判断，然后返回不同的值
+            //     if (params[0]["data"]) {
+            //         return params[0]["name"] + "</br>" + params[0]["marker"] + params[0]["seriesName"] + ":  " + params[0]["data"] + '%' + "</br>" + params[1]["marker"] + params[1]["seriesName"] + ":  " + params[1]["data"] + '%'
+            //     }
+            // }
         },
         legend: {
             bottom: "bottom",
@@ -356,6 +356,7 @@
 
         let addr = [];
         let fugonglv = [];
+        let fuchanlv = [];
         let fugong = [];
         let weifugong = [];
 
@@ -364,44 +365,145 @@
             addr.push(item["地区"]);
             fugonglv.push(item["复工率（%）"]);
             fugong.push(item["复工企业数（家）"]);
+            fuchanlv.push(item["复产率（%）"]);
             weifugong.push(item["统计企业数（家）"] - item["复工企业数（家）"]);
         })
 
-        return [addr, fugonglv, fugong, weifugong]
+        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.reverse())
+    }
+    function formatData2(data, company) {
+        //格式化外资外贸数据
+
+        let addr = [];
+        let fugonglv = [];
+        let fuchanlv = [];
+        let fugong = [];
+        let weifugong = [];
+
+
+        data.forEach((item) => {
+            addr.push(item["地区"]);
+            //console.log(item[company])
+            fugonglv.push(item[company]["复工率（%）"]);
+            fugong.push(item[company]["复工企业数（家）"]);
+            fuchanlv.push(item[company]["复产率（%）"]);
+            weifugong.push(item[company]["统计企业数（家）"] - item[company]["复工企业数（家）"]);
+        })
+
+        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.reverse())
+    }
+    function formatData3(data, company) {
+        //格式化建筑行业和房地产行业
+        let addr = [];
+        let fugonglv = [];
+        let fuchanlv = [];
+        let fugong = [];
+        let weifugong = [];
+
+        if (company === "建筑业施工项目") {
+            data.forEach((item) => {
+
+                addr.push(item["地区"]);
+                //console.log(item["建筑业项目"]["复工项目数（个）"])
+                fugonglv.push(item["建筑业项目"]["复工率（%）"]);
+                fugong.push(item["建筑业项目"]["复工项目数（个）"]);
+                fuchanlv.push(item["建筑业项目"]["复产率（%）"]);
+                weifugong.push(item["建筑业项目"]["施工项目数（个）"] - item["建筑业项目"]["复工项目数（个）"]);
+            })
+        } else {
+            data.forEach((item) => {
+                addr.push(item["地区"]);
+                //console.log(item[company])
+                fugonglv.push(item[company]["复工率（%）"]);
+                fugong.push(item[company]["复工企业数（家）"]);
+                fuchanlv.push(item[company]["复产率（%）"]);
+                weifugong.push(item[company]["统计企业数（家）"] - item[company]["复工企业数（家）"]);
+            })
+        }
+
+
+        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.reverse())
     }
 
+    function formatData4(data) {
+        let addr = [];
+        let fugonglv = [];
+        let fuchanlv = [];
+        let fugong = [];
+        let weifugong = [];
+
+
+        data.forEach((item) => {
+            addr.push(item["地区"]);
+            //console.log(item[company])
+            fugonglv.push(item["复工率（%）"]);
+            fugong.push(item["复工项目数（个）"]);
+            fuchanlv.push(item["复产率（%）"]);
+            weifugong.push(item["重大项目数（个）"] - item["复工项目数（个）"]);
+        })
+
+        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.reverse())
+    }
+    function renderEchart(formatResult, company) {
+        //折线图
+        option1["series"][0]["data"] = formatResult[1] //复工率
+        option1["title"]["text"] = company
+
+        //复产率不存在
+        if (formatResult[2].some((item) => item === undefined)) {
+            option1["series"].pop();
+        } else {
+            option1["series"][1]["data"] = formatResult[2] //复工率存在
+        }
+        option1["xAxis"]["data"] = formatResult[0] //地区
+        if (option1 && typeof option1 === "object") {
+            myChart1.setOption(option1, true);
+        }
+
+        //柱状图
+        option2["series"][0]["data"] = formatResult[3] //复工企业个数
+        option2["series"][1]["data"] = formatResult[4] //未复工企业个数
+        option2["yAxis"]["data"] = formatResult[0] //地区
+        option2["title"]["text"] = company
+        if (option2 && typeof option2 === "object") {
+            myChart2.setOption(option2, true);
+        }
+    }
     $.getJSON(encodeURI("http://47.94.216.106/api/test?key=" + map[company])).done(
         function (result) {
-            if (map[company] !== "广西建筑业项目和房地产企业复工情况表" && map[company] !== "广西外资企业和外贸企业复工情况表") {
+            if (map[company] !== "广西建筑业项目和房地产企业复工情况表" &&
+                map[company] !== "广西外资企业和外贸企业复工情况表"
+                && map[company] !== "自治区层面统筹推进在建重大项目复工情况表"
+            ) {
                 if (result && result.data) {
-                    // console.log(result.data.data);
+                    console.log(result.data.data);
                     // console.log(formatData1(result.data.data))
                     formatResult = formatData1(result.data.data)
-                    option1["series"][0]["data"] = formatResult[1]
-                    //option1["series"][1]["data"] = formatResult[3]
-                    option1["yAxis"]["data"] = formatResult[0]
-                    if (option1 && typeof option1 === "object") {
-                        myChart1.setOption(option1, true);
-                    }
-                    option2["series"][0]["data"] = formatResult[2]
-                    option2["series"][1]["data"] = formatResult[3]
-                    option2["yAxis"]["data"] = formatResult[0]
-                    if (option2 && typeof option2 === "object") {
-                        myChart2.setOption(option2, true);
-                    }
+                    console.log(formatResult)
+
+                    renderEchart(formatResult, company)
 
                 }
-            }else{
+            } else if (map[company] === "广西外资企业和外贸企业复工情况表") {
                 if (result && result.data) {
-                    // console.log(result.data.data);
-                    // console.log(formatData1(result.data.data))
-                    // formatResult = formatData1(result.data.data)
-                    // option1["series"][0]["data"] = formatResult[1]
-                    // //option1["series"][1]["data"] = formatResult[3]
-                    // option1["yAxis"]["data"] = formatResult[0]
-                    // if (option1 && typeof option1 === "object") {
-                    //     myChart1.setOption(option1, true);
-                    // }
+                    console.log(result.data.data);
+                    formatResult = formatData2(result.data.data, company)
+                    console.log(formatResult)
+                    renderEchart(formatResult, company)
+                }
+            } else if (map[company] === "广西建筑业项目和房地产企业复工情况表") {
+                if (result && result.data) {
+                    console.log(result.data.data);
+                    formatResult = formatData3(result.data.data, company)
+                    console.log(formatResult)
+                    renderEchart(formatResult, company)
+                }
+            } else {
+                if (result && result.data) {
+                    console.log(result.data.data);
+                    formatResult = formatData4(result.data.data)
+                    console.log(formatResult)
+                    renderEchart(formatResult, company)
                 }
             }
 

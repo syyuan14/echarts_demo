@@ -402,7 +402,7 @@
             weifugong.push(data[key]["统计企业/项目数（家/个）"] - data[key]["复工企业/项目数（家/个）"]);
             yAxis.push(data[key]["地区"])
         }
-        return [fugong, weifugong,yAxis]
+        return [fugong, weifugong,yAxis].map((item)=>item.reverse())
     }
     $.getJSON(encodeURI("http://47.94.216.106/api/test?key=" + "广西企业及项目复工复产情况表")).done(
         function (result) {
