@@ -148,6 +148,11 @@
         }
 
         /*文字上下滚动*/
+        .wrapper .scroll-wrapper {
+            margin-left: 4vw;
+            margin-top: 1vh;
+        }
+
         #affiche {
             display: block;
             width: 90%;
@@ -157,10 +162,12 @@
             overflow: hidden;
         }
 
-        .affiche_text {
+        .affiche_text1,
+        .affiche_text2,
+        .affiche_text3 {
             position: absolute;
             top: 3px;
-            left: 100%;
+            left: 0;
             height: 4vh;
             line-height: 4vh;
             display: block;
@@ -172,7 +179,7 @@
         }
 
         /* 文字上下滚动 */
-        .wrapper .scroll-wrapper {
+        /* .wrapper .scroll-wrapper {
             margin-left: 4vw;
             margin-top: 1vh;
         }
@@ -181,7 +188,7 @@
             position: relative;
             top: 0;
             overflow: hidden;
-            /* padding: 0 30px; */
+            padding: 0 30px; 
             display: inline-block;
             height: 29px;
             width: 78vw;
@@ -192,8 +199,8 @@
 
             color: rgba(85, 85, 85, 1);
         }
-        /* 文字上下滚动 */
-        /* .scroll-box.on {
+
+        .scroll-box.on {
             background: #fff;
             z-index: 2;
             overflow: auto;
@@ -282,19 +289,30 @@
         })
 
         //横向文字滚动
-        (function () { var timer = setTimeout(this.marquee, 1000); }());
-        function marquee() {
+        function marquee(select_text) {
             var scrollWidth = $('#affiche').width();
-            var textWidth = $('.affiche_text').width();
-            var i = scrollWidth;
+            //var textWidth = $('.affiche_text').width();
+            var textWidth = $(select_text).width();
+            //var i = scrollWidth;
+            let i = 0;
             setInterval(function () {
                 i--;
                 if (i < -textWidth) {
                     i = scrollWidth;
                 }
-                $('.affiche_text').animate({ 'left': i + 'px' }, 20);
+                //console.log(i)
+                $(select_text).animate({ 'left': i + 'px' }, 20);
             }, 20);
+            
+
+
         }
+
+        (function run() {
+            let timer1 = setTimeout(this.marquee, 1000,".affiche_text1");
+            let timer2 = setTimeout(this.marquee, 1000,".affiche_text2");
+            let timer3 = setTimeout(this.marquee, 1000,".affiche_text3");
+        })()
     </script>
 </head>
 
@@ -350,7 +368,7 @@
                     <li><span>2020年2月20日，复工率为49%、提高4.8个百分点。</span></li>
                 </ul> -->
                 <div id="affiche">
-                    <div class="affiche_text">
+                    <div class="affiche_text1">
                         2020年2月20日，全区累计复工企业10687家、比上日新增1055家。2020年2月20日，复工率为49%、提高4.8个百分点。
                     </div>
                 </div>
@@ -396,7 +414,7 @@
                     <li><span>2020年一季度，投资增速预测增长5.9%。</span></li>
                 </ul> -->
                 <div id="affiche">
-                    <div class="affiche_text">
+                    <div class="affiche_text2">
                         2020年一季度，地区生产总值增速预测增长5.0%。2020年一季度，投资增速预测增长5.9%。
                     </div>
                 </div>
@@ -455,7 +473,7 @@
                     <li><span>实际值9.5%。</span></li>
                 </ul> -->
                 <div id="affiche">
-                    <div class="affiche_text">
+                    <div class="affiche_text3">
                         2019年1-12月，规模以上工业增加值：年度目标值6.5%，实际值4.5%。2019年1-12月，固定资产投资：年度目标值10.0%，实际值9.5%。
                     </div>
                 </div>

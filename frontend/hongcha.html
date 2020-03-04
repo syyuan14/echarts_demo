@@ -17,79 +17,192 @@
             width: 100%;
             height: 100%;
         }
-
+        a{
+            color: white;
+            text-decoration: none;
+        }
         .wrapper {
             width: 100vw;
-            /* background-color: #3374EB; */
+            height: 100vh;
+            overflow: auto;
+            background: linear-gradient(0deg, rgba(175, 205, 249, 1), rgba(19, 113, 255, 1), rgba(19, 114, 244, 1));
         }
 
         .wrapper .top {
-            height: 10vh;
-            padding-top: 3vh;
+            width: 100vw;
+            height: 22vh;
+        }
+
+        .wrapper .top .top-left {
+            float: left;
+            width: 44vw;
+            height: 22vh;
+        }
+
+        .wrapper .top .first-right {
+            float: left;
+            width: 40vw;
+            height: 22vh;
+        }
+
+        .wrapper .top .title {
+            position: relative;
+        }
+
+        .wrapper .top .title h3 {
+            font-weight: 400;
+            color: white;
+            position: absolute;
+
+            left: 4vw;
+            top: -18vh;
         }
 
         .wrapper .middle {
-            height: 6vh;
-            margin-bottom: 8vh;
+            height: 2vh;
         }
 
         .wrapper .middle .middle-content {
             width: 95vw;
             padding-left: 2.5vw;
-            /* color: white; */
+            position: relative;
 
         }
 
-        .wrapper .middle .middle-content .search {
+        .wrapper .middle .middle-content .search-input {
             margin-bottom: 3vh;
+
+            position: absolute;
+            top: -5vh;
         }
 
-        .wrapper .middle .middle-content #hongBtn,
-        #hesuanBtn {
+
+        .wrapper .btns {
+            width: 95vw;
+            height: 5vh;
+            background: white;
+            margin: 0 auto;
+
+            border-top-right-radius: 12px;
+            border-top-left-radius: 12px;
+            border-width: 0px;
+            display: flex;
+            justify-content: center;
+
+
+            overflow: hidden;
+        }
+
+        .wrapper .btns .btn {
+            width: 35vw;
             display: inline-block;
-            background: #add9c0;
-            padding: 3px;
+            padding: 1vh;
+
+            width: calc(95vw / 2);
+
+            text-align: center;
         }
 
-
-        .wrapper .bottom {
-            clear: both;
-        }
-
-        .wrapper .bottom table {
+        /*  新表格*/
+        .wrapper .table-wrapper {
+            width: 95vw;
+            background-color: white;
 
             margin: 0 auto;
-            width: 95vw;
-            border: solid #add9c0;
-            border-width: 1px 0px 0px 1px;
-            /* color: white; */
             margin-bottom: 2vh;
+
+            border-radius: 12px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+
+
         }
 
-        .wrapper .bottom table td {
-            border: solid #add9c0;
-            border-width: 0px 1px 1px 0px;
-            padding: 0px 0px
+        table.imagetable {
+
+            width: 95vw;
+
+            margin: 0 auto;
+
+            background: white;
+
+            border-radius: 12px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+
+            font-family: verdana, arial, sans-serif;
+            font-size: 11px;
+            color: #333333;
+            border-width: 0px;
+            border-color: #999999;
+            border-collapse: collapse;
         }
 
-        .bottom table td {
-            border: solid #add9c0;
-            border-width: 0px 1px 1px 0px;
-            padding: 10px 0px
+        table.imagetable th {
+
+            border: none;
+            padding: 2vh 1px;
+            border-bottom: #3F8BF7 solid 1px;
+
         }
 
-        .bottom table thead th {
-            border-top: none;
-            border-left: none;
+        table.imagetable td {
+
+            padding: 8px;
+
+            border: none;
+            border-bottom: 1px solid rgba(76, 201, 216, 0.3);
+            ;
         }
 
-        .bottom table thead th,
-        td {
+        table.imagetable td:nth-child(2) {
+            color: #088C7B;
+        }
+
+        table.imagetable td:nth-child(3) {
+            color: #E4480F;
+        }
+
+        table.imagetable td:nth-child(4) {
+            color: #1476C1;
+        }
+
+
+        .six {
+            position: relative;
+            width: 14px;
+            height: 15.6px;
+            margin: -3px auto;
+            background-color: #20BAFB;
+
+            color: white;
+
             text-align: center;
         }
 
-        .bottom table tbody td {
-            text-align: center;
+        .six:before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 0;
+            height: 0;
+            right: 14px;
+            border-width: 7.8px 7px;
+            border-style: solid;
+            border-color: transparent #20BAFB transparent transparent;
+        }
+
+        .six:after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: 14px;
+            border-width: 7.8px 7px;
+            border-style: solid;
+            border-color: transparent transparent transparent #20BAFB;
+            top: 0;
         }
     </style>
 </head>
@@ -97,42 +210,100 @@
 <body>
     <div class="wrapper">
         <div class="top">
-            <h2 style="color:#3378EB ;text-align: center;">经济调度系统</h2>
+            <div class="top-left">
+                <img src="./img/首页1.png" alt="首页云图" style="width:44vw;height: 23vh;">
+            </div>
+            <div class="top-right">
+                <img src="./img/头部文字.png" alt="首页云图" style="width:50vw;height: 19vh;">
+            </div>
+            <div class="title">
+                <h3> <a href="index.html">&#60;&nbsp;宏观经济查询</a></h3>
+            </div>
         </div>
         <div class="middle">
             <div class="middle-content">
-                <h3 class="search">
-                    <span style="margin-right: 3vw;">选择时间:</span>
-                    <input name="input_date" value="2019-01至2019-12" style="border: 1px solid #BCBCBC;" />
+                <h3 class="search search-input">
+                    <input name="input_date" value="2019-01至2019-12"
+                        style="border: 1px solid #BCBCBC;border-radius: 20px;background: rgba(243, 138, 35, 1);height:4vh;text-align: center;" />
                 </h3>
-                <!-- <h3 style="padding-top: 1vh">宏观指标</h3> -->
-                <div class="search btns">
-                    <span id="hongBtn">宏观指标</span>
-                    <span id="hesuanBtn">核算指标</span>
-                </div>
-
             </div>
         </div>
-        <div class="bottom">
-            <div class="hongguan">
-                <table border="1">
-                    <thead>
-                        <tr>
-                            <th rowspan="2">指标名称</th>
-                            <th rowspan="2">预期增长目标</th>
-                            <th colspan="2">实际完成</th>
-                        </tr>
-                        <tr>
-                            <td>总量</td>
-                            <td>增速</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
+        <div class="btns">
+            <span id="hongBtn" class="btn">宏观指标</span>
+            <span id="hesuanBtn" class="btn">核算指标</span>
         </div>
+        <div class="table-wrapper">
+            <table class="imagetable">
+                <!-- <tr>
+                    <th colspan="2" style="border: none;font-size: 16px;font-weight: 400;padding: 2vh 0;"> <img
+                            src="./img/矩形4.png" alt="矩形图飙" style="width: 2vw;height: 1vh;">
+                        广西企业及项目复工复产情况表
+                        <img src="./img/矩形4.png" alt="矩形图标" style="width: 2vw;height: 1vh;"></th>
+                </tr> -->
+                <tr>
+                    <th>指标名称</th>
+                    <th>预期增长目标</th>
+                    <th>总量</th>
+                    <th>增速</th>
+                </tr>
+                <!-- <tr>
+                    <td>地区生产总值</td>
+                    <td>7%</td>
+                    <td>2123.14</td>
+                    <td>6%</td>
+                </tr>
+                <tr id="规模以上工业企业">
+                    <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
+                    <td>10%</td>
+                    <td>3490.2</td>
+                    <td>5.6</td>
+                </tr>
+                <tr id="限额以上商贸服务业企业">
+                    <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
+                    <td>10%</td>
+                    <td>3490.2</td>
+                    <td>5.6</td>
+                </tr>
+                <tr id="农业龙头企业">
+                    <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
+                    <td>10%</td>
+                    <td>3490.2</td>
+                    <td>5.6</td>
+                </tr>
+                <tr id="规模以上工业企业">
+                    <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
+                    <td>10%</td>
+                    <td>3490.2</td>
+                    <td>5.6</td>
+                </tr>
+                <tr id="交通运输客货企运企业">
+                    <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
+                    <td>10%</td>
+                    <td>3490.2</td>
+                    <td>5.6</td>
+                </tr>
+                <tr id="房地产企业">
+                    <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
+                    <td>10%</td>
+                    <td>3490.2</td>
+                    <td>5.6</td>
+                </tr>
+                <tr id="外贸企业">
+                    <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
+                    <td>10%</td>
+                    <td>3490.2</td>
+                    <td>5.6</td>
+                </tr>
+                <tr id="自治区统筹推进在建重大项">
+                    <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
+                    <td>10%</td>
+                    <td>3490.2</td>
+                    <td>5.6</td>
+                </tr> -->
+            </table>
+
+        </div>
+
     </div>
 
 </body>
@@ -150,10 +321,19 @@
             function (result) {
                 if (result && result.data) {
                     let tbodyStr = '';
-                    result.data.forEach(function (item) {
-                        tbodyStr = tbodyStr + "<tr><td>" + item.zbName + "</td><td>" + (item.targetValue ? (item.targetValue + '%') : '--') + "</td><td>" + (item.zbValue ? item.zbValue + item.unit : '--') + "</td><td>" + (item.realValue ? item.realValue + '%' : '--') + "</td></tr>";
+                    result.data.forEach(function (item, index) {
+                        //tbodyStr = tbodyStr + "<tr><td>" + item.zbName + "</td><td>" + (item.targetValue ? (item.targetValue + "%") : '--') + "</td><td>" + (item.zbValue ? item.zbValue + item.unit : '--') + "</td><td>" + (item.realValue ? item.realValue + "%" : '--') + "</td></tr>";
+                        tbodyStr = tbodyStr + `<tr>
+                                                <td> <span class="six" style="display: inline-block;">${index + 1}</span>&nbsp;&nbsp;${item.zbName}</td>
+                                                <td>${item.targetValue ? (item.targetValue + "%") : '--'}</td>
+                                                <td>${item.zbValue ? item.zbValue + item.unit : '--'}</td>
+                                                <td>${item.realValue ? item.realValue + "%" : '--'}</td>
+                                            </tr>`
                     });
-                    $('div.hongguan tbody').html(tbodyStr)
+                    //console.log(tbodyStr)
+                    $("table.imagetable tbody tr:eq(0)").nextAll().remove();
+                    console.log($("table.imagetable tbody tr:eq(0)").nextAll())
+                    $("table.imagetable tbody tr:eq(0)").after(tbodyStr)
                 }
 
             }
@@ -173,10 +353,18 @@
             function (result) {
                 if (result && result.data) {
                     let tbodyStr = '';
-                    result.data.forEach(function (item) {
-                        tbodyStr = tbodyStr + "<tr><td>" + item.zbName + "</td><td>" + (item.targetValue ? (item.targetValue + "%") : '--') + "</td><td>" + (item.zbValue ? item.zbValue + item.unit : '--') + "</td><td>" + (item.realValue ? item.realValue + "%" : '--') + "</td></tr>";
+                    result.data.forEach(function (item, index) {
+                        //tbodyStr = tbodyStr + "<tr><td>" + item.zbName + "</td><td>" + (item.targetValue ? (item.targetValue + "%") : '--') + "</td><td>" + (item.zbValue ? item.zbValue + item.unit : '--') + "</td><td>" + (item.realValue ? item.realValue + "%" : '--') + "</td></tr>";
+                        tbodyStr = tbodyStr + `<tr>
+                                                <td> <span class="six" style="display: inline-block;">${index + 1}</span>&nbsp;&nbsp;${item.zbName}</td>
+                                                <td>${item.targetValue ? (item.targetValue + "%") : '--'}</td>
+                                                <td>${item.zbValue ? item.zbValue + item.unit : '--'}</td>
+                                                <td>${item.realValue ? item.realValue + "%" : '--'}</td>
+                                            </tr>`
                     });
-                    $('div.hongguan tbody').html(tbodyStr)
+                    //console.log(tbodyStr)
+                    $("table.imagetable tbody tr:eq(0)").nextAll().remove();
+                    $("table.imagetable tbody tr:eq(0)").after(tbodyStr)
                 }
 
             }
@@ -185,22 +373,22 @@
 
     //页面初始化
     getDataAndRenderHong('2019-12-01');
-    $("#hongBtn").css("background-color", "#3378EB");
+    $("#hongBtn").css("background-color", "rgba(227, 239, 255, 1)");
 
     $('.btns').on('click', 'span', function () {
         //console.log(this.id)
         let currDate = $("input[name='input_date']").val().split("至")[1];
         if (this.id === "hesuanBtn") {
-            $("#hongBtn").css("background-color", "#add9c0");
-            $(this).css("background-color", "#3378EB");
+            $("#hongBtn").css("background-color", "white");
+            $(this).css("background-color", "rgba(227, 239, 255, 1)");
 
             if (currDate) {
                 getDataAndRenderHe(currDate);
             }
         } if (this.id === "hongBtn") {
             //修改按钮背景色
-            $("#hesuanBtn").css("background-color", "#add9c0");
-            $(this).css("background-color", "#3378EB");
+            $("#hesuanBtn").css("background-color", "white");
+            $(this).css("background-color", "rgba(227, 239, 255, 1)");
 
             if (currDate) {
                 getDataAndRenderHong(currDate);

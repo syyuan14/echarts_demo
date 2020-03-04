@@ -78,6 +78,7 @@
             ;
         }
 
+
         table.imagetable td:nth-child(2) {
             color: #088C7B;
         }
@@ -229,7 +230,14 @@
     </div>
 </body>
 <script>
+
     var myChart = echarts.init(document.querySelector("div.bar"));
+    // myChart.showLoading({
+    //     text: 'loading',
+    //     color: '#4cbbff',
+    //     textColor: '#4cbbff',
+    //     maskColor: 'rgba(0, 0, 0, 0.9',
+    // });
     option = null;
     option = {
         backgroundColor: "white",
@@ -312,7 +320,11 @@
                 '规模以上工业企业',
                 '跟踪统计企业合计'
             ],
-            axisLine: { show: false },
+            axisLine: {
+                lineStyle: {
+                    color: "#CCCCCC"
+                }
+            },
             axisTick: { show: false },
             axisLabel: {
                 interval: 0,
@@ -402,7 +414,7 @@
             weifugong.push(data[key]["统计企业/项目数（家/个）"] - data[key]["复工企业/项目数（家/个）"]);
             yAxis.push(data[key]["地区"])
         }
-        return [fugong, weifugong,yAxis].map((item)=>item.reverse())
+        return [fugong, weifugong, yAxis].map((item) => item.reverse())
     }
     $.getJSON(encodeURI("http://47.94.216.106/api/test?key=" + "广西企业及项目复工复产情况表")).done(
         function (result) {
@@ -415,6 +427,7 @@
                 option["series"][1]["data"] = formatResult[1]
                 option["yAxis"]["data"] = formatResult[2]
                 if (option && typeof option === "object") {
+                    //myChart.hideLoading();
                     myChart.setOption(option, true);
                 }
             }

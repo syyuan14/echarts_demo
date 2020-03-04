@@ -252,7 +252,14 @@
             splitLine: {
                 show: false
             },
+            axisLine: {
+                lineStyle: {
+                    color: "#CCCCCC"
+                }
+            },
+            axisTick: { show: false },
             axisLabel: {
+                show:false,
                 interval: 0,
                 rotate: 50,//倾斜度 -90 至 90 默认为0
                 margin: 2,
@@ -274,7 +281,11 @@
                 '柳州市', '南宁市'
             ],
 
-            axisLine: { show: false },
+            axisLine: {
+                lineStyle: {
+                    color: "#CCCCCC"
+                }
+            },
             axisTick: { show: false },
             axisLabel: {
                 interval: 0,
@@ -369,7 +380,7 @@
             weifugong.push(item["统计企业数（家）"] - item["复工企业数（家）"]);
         })
 
-        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.reverse().slice(0,list.length-1))
+        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.slice(1,list.length-1))
     }
     function formatData2(data, company) {
         //格式化外资外贸数据
@@ -390,7 +401,7 @@
             weifugong.push(item[company]["统计企业数（家）"] - item[company]["复工企业数（家）"]);
         })
 
-        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.reverse().slice(0,list.length-1))
+        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.slice(1,list.length-1))
     }
     function formatData3(data, company) {
         //格式化建筑行业和房地产行业
@@ -422,7 +433,7 @@
         }
 
 
-        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.reverse().slice(0,list.length-1))
+        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.slice(1,list.length-1))
     }
 
     function formatData4(data) {
@@ -442,31 +453,35 @@
             weifugong.push(item["重大项目数（个）"] - item["复工项目数（个）"]);
         })
 
-        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.reverse().slice(0,list.length-1))
+        return [addr, fugonglv, fuchanlv, fugong, weifugong].map((list) => list.slice(1,list.length-1))
     }
+    
     function renderEchart(formatResult, company) {
+        
+
+        //柱状图
+        option2["series"][0]["data"] = formatResult[3].reverse() //复工企业个数
+        option2["series"][1]["data"] = formatResult[4].reverse() //未复工企业个数
+        option2["yAxis"]["data"] = formatResult[0].reverse() //地区
+        option2["title"]["text"] = company
+        if (option2 && typeof option2 === "object") {
+            myChart2.setOption(option2, true);
+        }
+
+
         //折线图
         option1["series"][0]["data"] = formatResult[1] //复工率
         option1["title"]["text"] = company
-
+        //console.log(formatResult)
         //复产率不存在
         if (formatResult[2].some((item) => item === undefined)) {
             option1["series"].pop();
         } else {
-            option1["series"][1]["data"] = formatResult[2] //复工率存在
+            option1["series"][1]["data"] = formatResult[2] //复产率存在
         }
-        option1["xAxis"]["data"] = formatResult[0] //地区
+        option1["xAxis"]["data"] = formatResult[0].reverse() //地区
         if (option1 && typeof option1 === "object") {
             myChart1.setOption(option1, true);
-        }
-
-        //柱状图
-        option2["series"][0]["data"] = formatResult[3] //复工企业个数
-        option2["series"][1]["data"] = formatResult[4] //未复工企业个数
-        option2["yAxis"]["data"] = formatResult[0] //地区
-        option2["title"]["text"] = company
-        if (option2 && typeof option2 === "object") {
-            myChart2.setOption(option2, true);
         }
     }
     $.getJSON(encodeURI("http://47.94.216.106/api/test?key=" + map[company])).done(
@@ -479,14 +494,13 @@
                     //console.log(result.data.data);
                     // console.log(formatData1(result.data.data))
                     formatResult = formatData1(result.data.data)
-                    //console.log(formatResult)
 
                     renderEchart(formatResult, company)
 
                 }
             } else if (map[company] === "广西外资企业和外贸企业复工情况表") {
                 if (result && result.data) {
-                    //console.log(result.data.data);
+                    console.log(result.data.data);
                     formatResult = formatData2(result.data.data, company)
                     //console.log(formatResult)
                     renderEchart(formatResult, company)
@@ -509,13 +523,6 @@
 
         }
     )
-    // option1["title"]["text"] = company
-    // option2["title"]["text"] = company
-    // myChart1.setOption(option1);
-    //myChart2.setOption(option2)
-
-
-
 
 </script>
 
