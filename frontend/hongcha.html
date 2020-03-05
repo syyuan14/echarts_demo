@@ -17,10 +17,12 @@
             width: 100%;
             height: 100%;
         }
-        a{
+
+        a {
             color: white;
             text-decoration: none;
         }
+
         .wrapper {
             width: 100vw;
             height: 100vh;
@@ -74,6 +76,17 @@
 
             position: absolute;
             top: -5vh;
+
+
+            border-radius: 20px;
+            background: rgba(243, 138, 35, 1);
+            height: 4vh;
+            text-align: center;
+
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
         }
 
 
@@ -120,7 +133,7 @@
 
         table.imagetable {
 
-            width: 95vw;
+            width: 92vw;
 
             margin: 0 auto;
 
@@ -148,7 +161,8 @@
 
         table.imagetable td {
 
-            padding: 8px;
+            /* padding: 8px; */
+            padding: 4px;
 
             border: none;
             border-bottom: 1px solid rgba(76, 201, 216, 0.3);
@@ -169,40 +183,14 @@
 
 
         .six {
-            position: relative;
-            width: 14px;
-            height: 15.6px;
-            margin: -3px auto;
+            width: 5vw;
+            height: 2vh;
+            border-radius: 12px;
             background-color: #20BAFB;
-
             color: white;
-
             text-align: center;
-        }
-
-        .six:before {
-            content: '';
-            display: block;
-            position: absolute;
-            width: 0;
-            height: 0;
-            right: 14px;
-            border-width: 7.8px 7px;
-            border-style: solid;
-            border-color: transparent #20BAFB transparent transparent;
-        }
-
-        .six:after {
-            content: '';
-            display: block;
-            position: absolute;
-            width: 0;
-            height: 0;
-            left: 14px;
-            border-width: 7.8px 7px;
-            border-style: solid;
-            border-color: transparent transparent transparent #20BAFB;
-            top: 0;
+            line-height: 2vh;
+            padding: 1px;
         }
     </style>
 </head>
@@ -223,8 +211,9 @@
         <div class="middle">
             <div class="middle-content">
                 <h3 class="search search-input">
+                    <img src="./img/日历.png" alt="日历" style="width: 3vw;height:2vh;padding: 2vw;">
                     <input name="input_date" value="2019-01至2019-12"
-                        style="border: 1px solid #BCBCBC;border-radius: 20px;background: rgba(243, 138, 35, 1);height:4vh;text-align: center;" />
+                        style="border: none;background-color: rgba(243, 138, 35, 1);color: white;" />
                 </h3>
             </div>
         </div>
@@ -240,66 +229,77 @@
                         广西企业及项目复工复产情况表
                         <img src="./img/矩形4.png" alt="矩形图标" style="width: 2vw;height: 1vh;"></th>
                 </tr> -->
-                <tr>
+                <!-- <tr>
                     <th>指标名称</th>
                     <th>预期增长目标</th>
                     <th>总量</th>
                     <th>增速</th>
-                </tr>
-                <!-- <tr>
-                    <td>地区生产总值</td>
-                    <td>7%</td>
-                    <td>2123.14</td>
-                    <td>6%</td>
-                </tr>
-                <tr id="规模以上工业企业">
-                    <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
-                    <td>10%</td>
-                    <td>3490.2</td>
-                    <td>5.6</td>
-                </tr>
-                <tr id="限额以上商贸服务业企业">
-                    <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
-                    <td>10%</td>
-                    <td>3490.2</td>
-                    <td>5.6</td>
-                </tr>
-                <tr id="农业龙头企业">
-                    <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
-                    <td>10%</td>
-                    <td>3490.2</td>
-                    <td>5.6</td>
-                </tr>
-                <tr id="规模以上工业企业">
-                    <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
-                    <td>10%</td>
-                    <td>3490.2</td>
-                    <td>5.6</td>
-                </tr>
-                <tr id="交通运输客货企运企业">
-                    <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
-                    <td>10%</td>
-                    <td>3490.2</td>
-                    <td>5.6</td>
-                </tr>
-                <tr id="房地产企业">
-                    <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
-                    <td>10%</td>
-                    <td>3490.2</td>
-                    <td>5.6</td>
-                </tr>
-                <tr id="外贸企业">
-                    <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
-                    <td>10%</td>
-                    <td>3490.2</td>
-                    <td>5.6</td>
-                </tr>
-                <tr id="自治区统筹推进在建重大项">
-                    <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
-                    <td>10%</td>
-                    <td>3490.2</td>
-                    <td>5.6</td>
                 </tr> -->
+                <tr>
+                    <th>指标名称</th>
+                    <th style="white-space: nowrap;">预期增长目标</th>
+                    <th>总量</th>
+                    <th>增速</th>
+                </tr>
+
+
+
+                <!-- <tbody>
+                    <tr>
+                        <td>地区生产总值</td>
+                        <td>7%</td>
+                        <td>2123.14</td>
+                        <td>6%</td>
+                    </tr>
+                    <tr id="规模以上工业企业">
+                        <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
+                        <td>10%</td>
+                        <td>3490.2</td>
+                        <td>5.6</td>
+                    </tr>
+                    <tr id="限额以上商贸服务业企业">
+                        <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
+                        <td>10%</td>
+                        <td>3490.2</td>
+                        <td>5.6</td>
+                    </tr>
+                    <tr id="农业龙头企业">
+                        <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
+                        <td>10%</td>
+                        <td>3490.2</td>
+                        <td>5.6</td>
+                    </tr>
+                    <tr id="规模以上工业企业">
+                        <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
+                        <td>10%</td>
+                        <td>3490.2</td>
+                        <td>5.6</td>
+                    </tr>
+                    <tr id="交通运输客货企运企业">
+                        <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
+                        <td>10%</td>
+                        <td>3490.2</td>
+                        <td>5.6</td>
+                    </tr>
+                    <tr id="房地产企业">
+                        <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
+                        <td>10%</td>
+                        <td>3490.2</td>
+                        <td>5.6</td>
+                    </tr>
+                    <tr id="外贸企业">
+                        <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
+                        <td>10%</td>
+                        <td>3490.2</td>
+                        <td>5.6</td>
+                    </tr>
+                    <tr id="自治区统筹推进在建重大项">
+                        <td> <span class="six" style="display: inline-block;">1</span>&nbsp;&nbsp;第一产业增加值</td>
+                        <td>10%</td>
+                        <td>3490.2</td>
+                        <td>5.6</td>
+                    </tr>
+                </tbody> -->
             </table>
 
         </div>
@@ -332,7 +332,7 @@
                     });
                     //console.log(tbodyStr)
                     $("table.imagetable tbody tr:eq(0)").nextAll().remove();
-                    console.log($("table.imagetable tbody tr:eq(0)").nextAll())
+                    //console.log($("table.imagetable tbody tr:eq(0)").nextAll())
                     $("table.imagetable tbody tr:eq(0)").after(tbodyStr)
                 }
 

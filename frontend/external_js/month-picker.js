@@ -20,7 +20,7 @@
 			this.$dom.focus(function(event) {
 				self.opts.currentYear = new Date().getFullYear();
 				$('body').find('.mp-month-picker-box').empty().remove();
-				$('body').append('<div class="mp-month-picker-box" style="left:' + $(this).position().left + 'px;top:' + ($(this).position().top + 40) + 'px;">' +
+				$('body').append('<div class="mp-month-picker-box" style="left:' + $(this).position().left + 'px;top:' + ($(this).position().top + 16) + 'vh;">' +
 					'<i></i>' +
 					'<div class="mp-year-picker">' +
 					'<div class="mp-prev-year"><i></i><i></i></div>' +
