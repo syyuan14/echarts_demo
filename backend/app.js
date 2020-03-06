@@ -11,8 +11,10 @@ var {postData} = require("./utils/postData");
 
 var app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 
 //app.set('view cache', true);
 
@@ -24,7 +26,9 @@ var storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         //console.log(req.body.date);
-        date = req.body.date;
+        //date = req.body.date;
+        //console.log(req)
+        
         var singfileArray = file.originalname.split('.');
         var fileExtension = singfileArray[singfileArray.length - 1];
 
@@ -46,6 +50,7 @@ app.post('/upload', upload.single("logo"), function (req, res, next) {
     //console.log(req.file.path);
     //console.log(readFile1(req.file.path))
     postData(req.file.path) //向后台发送数据
+    
     res.send({
         "status": "上传成功"
     });
@@ -53,8 +58,19 @@ app.post('/upload', upload.single("logo"), function (req, res, next) {
 });
 // 表单页面
 app.get('/index', function (req, res, next) {
-    var form = fs.readFileSync('./views/form.html', { encoding: 'utf8' });
-    res.send(form);
+    
+    //获取传进的日期
+    date = req.query.date || "2020-11-01";
+    //读取upload 文件夹下的所有上传文件
+    const dirInfo = fs.readdirSync("./upload/").filter((item)=>item.endsWith(`${date}.xlsx`));
+    let data = {
+        files: dirInfo,
+        date
+    }
+    //console.log(data)
+    //res.send({"s":"dvs"})
+    
+    res.render("form.ejs", data);
 });
 
 //获取上传文件列表
@@ -74,7 +90,7 @@ app.get('/file', function (req, res, next) {
         pageIndex,
         pageSum,
     }
-    res.render("fileList.ejs", data);
+    res.render("filelist.ejs", data);
 });
 
 //下载页面

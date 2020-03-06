@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/jquery/jquery.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+
+            overflow: auto;
+        }
+
+        .wrapper {
+            width: 90vw;
+            margin: 0 auto;
+
+        }
+
+        a {
+            display: inline-block;
+            color: black;
+            text-decoration: none;
+        }
+
+        .wrapper h1 {
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .wrapper ul li {
+            padding-bottom: 20px;
+        }
+
+        .wrapper form {
+            display: inline-block;
+            margin-left: 10vw;
+        }
+
+        /*  新表格*/
+        .wrapper .table-wrapper {
+            width: 95vw;
+            background-color: white;
+
+            margin: 0 auto;
+            margin-bottom: 2vh;
+
+            border-radius: 12px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+
+
+        }
+
+        table.imagetable {
+
+            width: 92vw;
+
+            margin: 0 auto;
+
+            background: white;
+
+            border-radius: 12px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+
+            font-family: verdana, arial, sans-serif;
+            font-size: 11px;
+            color: #333333;
+            border-width: 0px;
+            border-color: #999999;
+            border-collapse: collapse;
+        }
+
+        table.imagetable th {
+
+            border: none;
+            padding: 2vh 1px;
+            border-bottom: #3F8BF7 solid 1px;
+
+        }
+
+        table.imagetable td {
+
+            /* padding: 8px; */
+            padding: 4px;
+
+            border: none;
+            border-bottom: 1px solid rgba(76, 201, 216, 0.3);
+            ;
+        }
+
+        table.imagetable td:nth-child(2) {
+            color: #088C7B;
+        }
+
+        table.imagetable td:nth-child(3) {
+            color: #E4480F;
+        }
+
+        table.imagetable td:nth-child(4) {
+            color: #1476C1;
+        }
+
+
+        .six {
+            width: 1vw;
+            height: 2vh;
+            border-radius: 12px;
+            background-color: #20BAFB;
+            color: white;
+            text-align: center;
+            line-height: 2vh;
+            padding: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>文件上传</h1>
+        <div>选择日期:<input type="date" name="date" class="date" value="<%= date %>"> <button class="search">查询</button>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="imagetable">
+
+                <thead style="text-align: left;">
+                    <th>文件名称</th>
+                    <th style="white-space: nowrap;">上传</th>
+                    <th style="white-space: nowrap;">提交</th>
+                </thead>
+
+
+
+                <tbody>
+                    <tr id="广西规模以上工业企业复工情况表">
+                        <td> <span class="six" style="display: inline-block;">1</span>
+                            <a
+                                href="<%=  '/download/?name='+files.find((file)=>{return file.startsWith('广西规模以上工业企业复工情况表') }) ||'' %>">&nbsp;&nbsp;广西规模以上工业企业复工情况表</a>
+                        </td>
+                        <td>
+                            <input class="aload" type='button'
+                                value="<%=  files.find((file)=>{return file.startsWith('广西规模以上工业企业复工情况表') }) ? '重新上传':'上传' %>"
+                                onClick='javascript:$(this).next().next().click();' />
+                            <input class='showFileName' type='text' readonly style="border: none;" />&nbsp;&nbsp;
+                            <input class='hiddenFile' type='file' style="display:none"
+                                onchange='ophiddenFile.bind(this)();' name="logo" />
+
+                        </td>
+                        <td>
+                            <input type="submit" value="提交" onclick='file_img.bind(this)();'>
+                        </td>
+                    </tr>
+                    <tr id="广西规模以上服务业企业复工情况表">
+                        <td> <span class="six" style="display: inline-block;">2</span>
+                            <a
+                                href="<%=  '/download/?name='+files.find((file)=>{return file.startsWith('广西规模以上服务业企业复工情况表') }) ||'' %>">&nbsp;&nbsp;广西规模以上服务业企业复工情况表</a>
+
+                        </td>
+                        <td>
+
+                            <input class="aload" type='button'
+                                value="<%=  files.find((file)=>{return file.startsWith('广西规模以上工业企业复工情况表') }) ? '重新上传':'上传' %>"
+                                onClick='javascript:$(this).next().next().click();' />
+
+                            <input class='showFileName' type='text' readonly style="border: none;" />&nbsp;&nbsp;
+                            <input class='hiddenFile' type='file' style="display:none"
+                                onchange='ophiddenFile.bind(this)();' name="logo" />
+
+
+                        </td>
+
+                        <td>
+                            <input type="submit" value="提交" onclick='file_img.bind(this)();'>
+                        </td>
+
+                    </tr>
+                    <tr id="广西建筑业项目和房地产企业复工情况表">
+                        <td> <span class="six" style="display: inline-block;">3</span>
+                            <a
+                                href="<%=  '/download/?name='+files.find((file)=>{return file.startsWith('广西建筑业项目和房地产企业复工情况表') }) ||'' %>">&nbsp;&nbsp;广西建筑业项目和房地产企业复工情况表</a>
+
+                        </td>
+                        <td>
+
+                            <input class="aload" type='button'
+                                value="<%=  files.find((file)=>{return file.startsWith('广西建筑业项目和房地产企业复工情况表') }) ? '重新上传':'上传' %>"
+                                onClick='javascript:$(this).next().next().click();' />
+
+                            <input class='showFileName' type='text' readonly style="border: none;" />&nbsp;&nbsp;
+                            <input class='hiddenFile' type='file' style="display:none"
+                                onchange='ophiddenFile.bind(this)();' name="logo" />
+
+                        </td>
+                        <td>
+                            <input type="submit" value="提交" onclick='file_img.bind(this)();'>
+                        </td>
+
+                    </tr>
+                    <tr id="广西交通运输客货运企业复工情况表">
+                        <td> <span class="six" style="display: inline-block;">4</span>
+                            <a
+                                href="<%=  '/download/?name='+files.find((file)=>{return file.startsWith('广西交通运输客货运企业复工情况表') }) ||'' %>">&nbsp;&nbsp;广西交通运输客货运企业复工情况表</a>
+
+                        </td>
+                        <td>
+
+                            <input class="aload" type='button'
+                                value="<%=  files.find((file)=>{return file.startsWith('广西交通运输客货运企业复工情况表') }) ? '重新上传':'上传' %>"
+                                onClick='javascript:$(this).next().next().click();' />
+
+                            <input class='showFileName' type='text' readonly style="border: none;" />&nbsp;&nbsp;
+                            <input class='hiddenFile' type='file' style="display:none"
+                                onchange='ophiddenFile.bind(this)();' name="logo" />
+
+                        </td>
+                        <td>
+                            <input type="submit" value="提交" onclick='file_img.bind(this)();'>
+                        </td>
+
+                    </tr>
+                    <tr id="广西农业龙头企业复工情况表">
+                        <td> <span class="six" style="display: inline-block;">5</span>
+
+                            <a
+                                href="<%=  '/download/?name='+files.find((file)=>{return file.startsWith('广西农业龙头企业复工情况表') }) ||'' %>">&nbsp;&nbsp;广西农业龙头企业复工情况表</a>
+                        </td>
+                        <td>
+
+                            <input class="aload" type='button'
+                                value="<%=  files.find((file)=>{return file.startsWith('广西农业龙头企业复工情况表') }) ? '重新上传':'上传' %>"
+                                onClick='javascript:$(this).next().next().click();' />
+                            <input class='showFileName' type='text' readonly style="border: none;" />&nbsp;&nbsp;
+                            <input class='hiddenFile' type='file' style="display:none"
+                                onchange='ophiddenFile.bind(this)();' name="logo" />
+                        </td>
+
+                        <td>
+                            <input type="submit" value="提交" onclick='file_img.bind(this)();'>
+                        </td>
+
+                    </tr>
+                    <tr id="广西限额以上商贸服务业企业复工情况表">
+                        <td> <span class="six" style="display: inline-block;">6</span>
+                            <a
+                                href="<%=  '/download/?name='+files.find((file)=>{return file.startsWith('广西限额以上商贸服务业企业复工情况表') }) ||'' %>">&nbsp;&nbsp;广西限额以上商贸服务业企业复工情况表</a>
+
+                        </td>
+                        <td>
+                            <input class="aload" type='button'
+                                value="<%=  files.find((file)=>{return file.startsWith('广西限额以上商贸服务业企业复工情况表') }) ? '重新上传':'上传' %>"
+                                onClick='javascript:$(this).next().next().click();' />
+                            <input class='showFileName' type='text' readonly style="border: none;" />&nbsp;&nbsp;
+                            <input class='hiddenFile' type='file' style="display:none"
+                                onchange='ophiddenFile.bind(this)();' name="logo" />
+                        </td>
+
+                        <td>
+                            <input type="submit" value="提交" onclick='file_img.bind(this)();'>
+                        </td>
+
+                    </tr>
+                    <tr id="广西外资企业和外贸企业复工情况表">
+                        <td> <span class="six" style="display: inline-block;">7</span>
+                            <a
+                                href="<%=  '/download/?name='+files.find((file)=>{return file.startsWith('广西外资企业和外贸企业复工情况表') }) ||'' %>">&nbsp;&nbsp;广西外资企业和外贸企业复工情况表</a>
+
+                        </td>
+                        <td>
+
+                            <input class="aload" type='button'
+                                value="<%=  files.find((file)=>{return file.startsWith('广西外资企业和外贸企业复工情况表') }) ? '重新上传':'上传' %>"
+                                onClick='javascript:$(this).next().next().click();' />
+                            <input class='showFileName' type='text' readonly style="border: none;" />&nbsp;&nbsp;
+                            <input class='hiddenFile' type='file' style="display:none"
+                                onchange='ophiddenFile.bind(this)();' name="logo" />
+
+
+
+                        </td>
+                        <td>
+                            <input type="submit" value="提交" onclick='file_img.bind(this)();'>
+                        </td>
+
+                    </tr>
+                    <tr id="广西企业及项目复工复产情况表">
+                        <td> <span class="six" style="display: inline-block;">8</span>
+
+                            <a
+                                href="<%=  '/download/?name='+files.find((file)=>{return file.startsWith('广西企业及项目复工复产情况表') }) ||'' %>">&nbsp;&nbsp;广西企业及项目复工复产情况表</a>
+
+                        </td>
+                        <td>
+
+                            <input class="aload" type='button'
+                                value="<%=  files.find((file)=>{return file.startsWith('广西企业及项目复工复产情况表') }) ? '重新上传':'上传' %>"
+                                onClick='javascript:$(this).next().next().click();' />
+                            <input class='showFileName' type='text' readonly style="border: none;" />&nbsp;&nbsp;
+                            <input class='hiddenFile' type='file' style="display:none"
+                                onchange='ophiddenFile.bind(this)();' name="logo" />
+
+                        </td>
+
+                        <td>
+                            <input type="submit" value="提交" onclick='file_img.bind(this)();'>
+                        </td>
+
+                    </tr>
+
+                    <tr id="自治区层面统筹推进在建重大项目复工情况表">
+                        <td> <span class="six" style="display: inline-block;">9</span>
+                            <a
+                                href="<%=  '/download/?name='+files.find((file)=>{return file.startsWith('自治区层面统筹推进在建重大项目复工情况表') }) ||'' %>">&nbsp;&nbsp;自治区层面统筹推进在建重大项目复工情况表</a>
+
+                        </td>
+                        <td>
+
+                            <input class="aload" type='button'
+                                value="<%=  files.find((file)=>{return file.startsWith('自治区层面统筹推进在建重大项目复工情况表') }) ? '重新上传':'上传' %>"
+                                onClick='javascript:$(this).next().next().click();' />
+                            <input class='showFileName' type='text' readonly style="border: none;" />&nbsp;&nbsp;
+                            <input class='hiddenFile' type='file' style="display:none"
+                                onchange='ophiddenFile.bind(this)();' name="logo" />
+
+                        </td>
+
+                        <td>
+                            <input type="submit" value="提交" onclick='file_img.bind(this)();'>
+                        </td>
+
+                    </tr>
+
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+<script>
+    function ophiddenFile() {
+        // let dd = $("#hiddenFile").val().split("\\");
+        // $("#showFileName").val(dd[dd.length - 1]);
+        let dd = $(this).val().split("\\");
+        $(this).prev().val(dd[dd.length - 1]);
+    }
+
+    $(".search").bind("click", function () {
+        //console.log($(".date").val())
+        date = $(".date").val();
+        console.log(date)
+
+        window.location.href = `/index?date=${date}`
+    });
+
+    function file_img() {
+
+        let id = $(this).parent().parent().attr("id");
+        let file_type = $(this).parent().parent().find(".hiddenFile")[0].files[0].name
+        console.log($(this).parent().parent().attr("id"));
+        console.log(file_type.startsWith(id))
+        var formData = new FormData();
+
+        if ($(this).parent().parent().find(".hiddenFile")[0].files[0] !== undefined && file_type.startsWith(id)) {
+            //console.log($(".file_input")[0].files[0])
+            formData.append("logo", $(this).parent().parent().find(".hiddenFile")[0].files[0]);
+            //console.log(formData)
+            $.ajax({
+                type: "POST",
+                url: 'upload',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    console.log(data)
+                    if (data.status === "上传成功") {
+                        alert("上传成功")
+                    }
+
+                }
+            });
+        }else if($(this).parent().parent().find(".hiddenFile")[0].files[0] === undefined){
+            alert("请选择文件")
+        }else{
+            alert(`请选择文件类型为：${id}的文件`)
+        }
+
+
+    }
+
+</script>
+
+</html>
