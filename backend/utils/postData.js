@@ -42,7 +42,7 @@ function postData(filePath) {
 
             }).then((res) => {
                 console.log("*******************")
-                console.log(res)
+                //console.log(res)
                 data = {
                     "data": res,
                     // "key": String(dirs.indexOf(item)),
@@ -68,7 +68,7 @@ function postData(filePath) {
 
             }).then((res) => {
                 console.log("*******************")
-                console.log(res);
+                //console.log(res);
                 data = {
                     "data": res,
                     // "key": String(dirs.indexOf(item)),

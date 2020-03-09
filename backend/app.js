@@ -4,8 +4,7 @@ var express = require('express');
 var multer = require('multer');
 var ejs = require('ejs');
 var bodyParser = require('body-parser');
-var { readFile1, readFile2 } = require("./utils/readFile");
-var {postData} = require("./utils/postData");
+var { postData } = require("./utils/postData");
 
 
 
@@ -15,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
+app.use('/static', express.static(__dirname + '/static/'));
 
 //app.set('view cache', true);
 
@@ -27,8 +27,8 @@ var storage = multer.diskStorage({
     filename: function (req, file, cb) {
         //console.log(req.body.date);
         //date = req.body.date;
-        //console.log(req)
         
+        //console.log(date)
         var singfileArray = file.originalname.split('.');
         var fileExtension = singfileArray[singfileArray.length - 1];
 
@@ -47,10 +47,10 @@ var upload = multer({
 
 // 文件上传
 app.post('/upload', upload.single("logo"), function (req, res, next) {
-    //console.log(req.file.path);
-    //console.log(readFile1(req.file.path))
-    postData(req.file.path) //向后台发送数据
     
+    //console.log(req.body);
+    postData(req.file.path) //向后台发送数据
+
     res.send({
         "status": "上传成功"
     });
@@ -58,40 +58,34 @@ app.post('/upload', upload.single("logo"), function (req, res, next) {
 });
 // 表单页面
 app.get('/index', function (req, res, next) {
+
+    //获取当日的日期
+    myDate = new Date();
+    Y = myDate .getFullYear() + '-';
+    M = (myDate .getMonth() + 1 < 10 ? '0' + (myDate .getMonth() + 1) : myDate.getMonth() + 1) + '-';
+    D = (myDate.getDate()  < 10 ? '0' + (myDate.getDate()) : myDate.getMonth() );
+    today = Y + M + D;
+
     
-    //获取传进的日期
-    date = req.query.date || "2020-11-01";
+    date = req.query.date || today;
+
     //读取upload 文件夹下的所有上传文件
-    const dirInfo = fs.readdirSync("./upload/").filter((item)=>item.endsWith(`${date}.xlsx`));
+    const dirInfo = fs.readdirSync("./upload/").filter((item) => item.endsWith(`${date}.xlsx`));
+    //读取表格模板文件
+    const excelTemplate = fs.readdirSync("./upload/excel-template/");
+    
     let data = {
         files: dirInfo,
-        date
+        date,
+        excelTemplate
     }
     //console.log(data)
     //res.send({"s":"dvs"})
-    
+
     res.render("form.ejs", data);
 });
 
-//获取上传文件列表
-app.get('/file', function (req, res, next) {
 
-    //读取upload文件下上传的文件
-    const dirInfo = fs.readdirSync("./upload/").filter((item)=>item.endsWith("xlsx"));
-    //console.log(dirInfo)
-    let pageNum = 5
-    let pageSum = Math.ceil(dirInfo.length / pageNum);
-
-    let pageIndex = Math.floor((req.query.pageIndex || 1));
-    
-    let list = dirInfo.slice((pageIndex - 1) * pageNum, pageIndex * pageNum);
-    var data = {
-        files: list,
-        pageIndex,
-        pageSum,
-    }
-    res.render("filelist.ejs", data);
-});
 
 //下载页面
 app.get('/download', function (req, res) {
@@ -109,7 +103,7 @@ app.get('/download', function (req, res) {
             // res.send({
             //     "status": "下载成功"
             // })
-            
+
         }
         if (!exists) {
             res.send({

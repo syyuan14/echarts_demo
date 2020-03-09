@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="/jquery/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/cxCalendar/css/jquery.cxcalendar.css" />
     <style>
         body {
             margin: 0;
@@ -124,14 +125,20 @@
 <body>
     <div class="wrapper">
         <h1>文件上传</h1>
-        <div>选择日期:<input type="date" name="date" class="date" value="<%= date %>"> <button class="search">查询</button>
+        <div style="margin-left: 20px;">
+            <label for="date_b">选择日期：</label>
+            <input id="date_b" type="text" value="<%= date %>" readonly>
+            <input type="button" class="search" value="查询">
         </div>
+        <!-- <div>选择日期:<input type="date" name="date" class="date" value="<%= date %>"> <button class="search">查询</button>
+        </div> -->
 
         <div class="table-wrapper">
             <table class="imagetable">
 
                 <thead style="text-align: left;">
                     <th>文件名称</th>
+                    <th>表格模板</th>
                     <th style="white-space: nowrap;">上传</th>
                     <th style="white-space: nowrap;">提交</th>
                 </thead>
@@ -143,6 +150,10 @@
                         <td> <span class="six" style="display: inline-block;">1</span>
                             <a
                                 href="<%=  '/download/?name='+files.find((file)=>{return file.startsWith('广西规模以上工业企业复工情况表') }) ||'' %>">&nbsp;&nbsp;广西规模以上工业企业复工情况表</a>
+                        </td>
+                        <td>
+                            <a
+                                href="<%=  '/download/?name=excel-template/'+excelTemplate.find((file)=>{return file.startsWith('广西规模以上工业企业复工情况表') }) ||'' %>">广西规模以上工业企业复工情况表模版</a>
                         </td>
                         <td>
                             <input class="aload" type='button'
@@ -164,9 +175,13 @@
 
                         </td>
                         <td>
+                            <a
+                                href="<%=  '/download/?name=excel-template/'+excelTemplate.find((file)=>{return file.startsWith('广西规模以上服务业企业复工情况表') }) ||'' %>">广西规模以上服务业企业复工情况表模版</a>
+                        </td>
+                        <td>
 
                             <input class="aload" type='button'
-                                value="<%=  files.find((file)=>{return file.startsWith('广西规模以上工业企业复工情况表') }) ? '重新上传':'上传' %>"
+                                value="<%=  files.find((file)=>{return file.startsWith('广西规模以上服务业企业复工情况表') }) ? '重新上传':'上传' %>"
                                 onClick='javascript:$(this).next().next().click();' />
 
                             <input class='showFileName' type='text' readonly style="border: none;" />&nbsp;&nbsp;
@@ -185,6 +200,11 @@
                         <td> <span class="six" style="display: inline-block;">3</span>
                             <a
                                 href="<%=  '/download/?name='+files.find((file)=>{return file.startsWith('广西建筑业项目和房地产企业复工情况表') }) ||'' %>">&nbsp;&nbsp;广西建筑业项目和房地产企业复工情况表</a>
+
+                        </td>
+                        <td>
+                            <a
+                                href="<%=  '/download/?name=excel-template/'+excelTemplate.find((file)=>{return file.startsWith('广西建筑业项目和房地产企业复工情况表') }) ||'' %>">广西建筑业项目和房地产企业复工情况表模版</a>
 
                         </td>
                         <td>
@@ -210,6 +230,11 @@
 
                         </td>
                         <td>
+                            <a
+                                href="<%=  '/download/?name=excel-template/'+excelTemplate.find((file)=>{return file.startsWith('广西交通运输客货运企业复工情况表') }) ||'' %>">广西交通运输客货运企业复工情况表模版</a>
+
+                        </td>
+                        <td>
 
                             <input class="aload" type='button'
                                 value="<%=  files.find((file)=>{return file.startsWith('广西交通运输客货运企业复工情况表') }) ? '重新上传':'上传' %>"
@@ -230,6 +255,11 @@
 
                             <a
                                 href="<%=  '/download/?name='+files.find((file)=>{return file.startsWith('广西农业龙头企业复工情况表') }) ||'' %>">&nbsp;&nbsp;广西农业龙头企业复工情况表</a>
+                        </td>
+                        <td>
+                            <a
+                                href="<%=  '/download/?name=excel-template/'+excelTemplate.find((file)=>{return file.startsWith('广西农业龙头企业复工情况表') }) ||'' %>">广西农业龙头企业复工情况表模板</a>
+
                         </td>
                         <td>
 
@@ -253,6 +283,11 @@
 
                         </td>
                         <td>
+                            <a
+                                href="<%=  '/download/?name=excel-template/'+excelTemplate.find((file)=>{return file.startsWith('广西限额以上商贸服务业企业复工情况表') }) ||'' %>">广西限额以上商贸服务业企业复工情况表模板</a>
+
+                        </td>
+                        <td>
                             <input class="aload" type='button'
                                 value="<%=  files.find((file)=>{return file.startsWith('广西限额以上商贸服务业企业复工情况表') }) ? '重新上传':'上传' %>"
                                 onClick='javascript:$(this).next().next().click();' />
@@ -270,6 +305,11 @@
                         <td> <span class="six" style="display: inline-block;">7</span>
                             <a
                                 href="<%=  '/download/?name='+files.find((file)=>{return file.startsWith('广西外资企业和外贸企业复工情况表') }) ||'' %>">&nbsp;&nbsp;广西外资企业和外贸企业复工情况表</a>
+
+                        </td>
+                        <td>
+                            <a
+                                href="<%=  '/download/?name=excel-template/'+excelTemplate.find((file)=>{return file.startsWith('广西外资企业和外贸企业复工情况表') }) ||'' %>">广西外资企业和外贸企业复工情况表模板</a>
 
                         </td>
                         <td>
@@ -298,6 +338,12 @@
                         </td>
                         <td>
 
+                            <a
+                                href="<%=  '/download/?name=excel-template/'+excelTemplate.find((file)=>{return file.startsWith('广西企业及项目复工复产情况表') }) ||'' %>">广西企业及项目复工复产情况表模板</a>
+
+                        </td>
+                        <td>
+
                             <input class="aload" type='button'
                                 value="<%=  files.find((file)=>{return file.startsWith('广西企业及项目复工复产情况表') }) ? '重新上传':'上传' %>"
                                 onClick='javascript:$(this).next().next().click();' />
@@ -317,6 +363,11 @@
                         <td> <span class="six" style="display: inline-block;">9</span>
                             <a
                                 href="<%=  '/download/?name='+files.find((file)=>{return file.startsWith('自治区层面统筹推进在建重大项目复工情况表') }) ||'' %>">&nbsp;&nbsp;自治区层面统筹推进在建重大项目复工情况表</a>
+
+                        </td>
+                        <td>
+                            <a
+                                href="<%=  '/download/?name=excel-template/'+excelTemplate.find((file)=>{return file.startsWith('自治区层面统筹推进在建重大项目复工情况表') }) ||'' %>">自治区层面统筹推进在建重大项目复工情况表模板</a>
 
                         </td>
                         <td>
@@ -356,7 +407,7 @@
 
     $(".search").bind("click", function () {
         //console.log($(".date").val())
-        date = $(".date").val();
+        date = $("#date_b").val();
         console.log(date)
 
         window.location.href = `/index?date=${date}`
@@ -373,6 +424,7 @@
         if ($(this).parent().parent().find(".hiddenFile")[0].files[0] !== undefined && file_type.startsWith(id)) {
             //console.log($(".file_input")[0].files[0])
             formData.append("logo", $(this).parent().parent().find(".hiddenFile")[0].files[0]);
+            formData.append("date","sfhj")
             //console.log(formData)
             $.ajax({
                 type: "POST",
@@ -388,15 +440,22 @@
 
                 }
             });
-        }else if($(this).parent().parent().find(".hiddenFile")[0].files[0] === undefined){
+        } else if ($(this).parent().parent().find(".hiddenFile")[0].files[0] === undefined) {
             alert("请选择文件")
-        }else{
+        } else {
             alert(`请选择文件类型为：${id}的文件`)
         }
 
 
     }
 
+</script>
+<script src="/static/cxCalendar/js/jquery.cxcalendar.js"></script>
+<!-- <script src="/static/cxCalendar/js/jquery.cxcalendar.languages.js"></script> -->
+
+<script>
+    // 日期选择器组件在 value 中有默认值
+    $('#date_b').cxCalendar();
 </script>
 
 </html>
